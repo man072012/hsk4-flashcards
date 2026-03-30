@@ -231,13 +231,13 @@ body::before {
 const words = [
   {zh:"尝",py:"cháng",ar:"يُجرّب / يتذوّق",cat:"verb",topic:"التصرفات",sentence:{zh:"你尝一下这个菜，味道很好。",py:"Nǐ cháng yíxià zhège cài, wèidào hěn hǎo.",ar:"جرّب هذا الطبق، طعمه لذيذ جداً."}},
   {zh:"讨论",py:"tǎolùn",ar:"يُناقش",cat:"verb",topic:"التصرفات",sentence:{zh:"我们一起讨论这个问题吧。",py:"Wǒmen yìqǐ tǎolùn zhège wèntí ba.",ar:"لنناقش هذه المشكلة معاً."}},
-  {zh:"商量",py:"shāngliáng",ar:"يتشاور",cat:"verb",topic:"التصرفات",sentence:{zh:"这件事我们商量一下再决定。",py:"Zhè jiàn shì wǒmen shāngliáng yíxià zài juédìng.",ar:"لنتشاور حول هذا الأمر قبل أن نقرر."}},
+  {zh:"商量",py:"shāngliang",ar:"يتشاور",cat:"verb",topic:"التصرفات",sentence:{zh:"这件事我们商量一下再决定。",py:"Zhè jiàn shì wǒmen shāngliang yíxià zài juédìng.",ar:"لنتشاور حول هذا الأمر قبل أن نقرر."}},
   {zh:"猜",py:"cāi",ar:"يُخمّن",cat:"verb",topic:"التصرفات",sentence:{zh:"你猜猜这个东西多少钱？",py:"Nǐ cāi cāi zhège dōngxi duōshao qián?",ar:"خمّن كم سعر هذا الشيء؟"}},
   {zh:"收拾",py:"shōushi",ar:"يُرتّب / يُنظّف",cat:"verb",topic:"التصرفات",sentence:{zh:"请你收拾一下房间。",py:"Qǐng nǐ shōushi yíxià fángjiān.",ar:"رجاءً رتّب الغرفة."}},
   {zh:"整理",py:"zhěnglǐ",ar:"يُرتّب / يُنظّم",cat:"verb",topic:"التصرفات",sentence:{zh:"我需要整理一下我的东西。",py:"Wǒ xūyào zhěnglǐ yíxià wǒ de dōngxi.",ar:"أحتاج أن أرتّب أغراضي."}},
   {zh:"修",py:"xiū",ar:"يُصلح / يُصوّن",cat:"verb",topic:"التصرفات",sentence:{zh:"这个手机坏了，需要修一修。",py:"Zhège shǒujī huài le, xūyào xiū yì xiū.",ar:"هذا الهاتف خربان، يحتاج إصلاح."}},
   {zh:"弹",py:"tán",ar:"يعزف على آلة موسيقية",cat:"verb",topic:"التصرفات",sentence:{zh:"她会弹钢琴，弹得很好。",py:"Tā huì tán gāngqín, tán de hěn hǎo.",ar:"هي تعرف تعزف بيانو، وتعزف بشكل ممتاز."}},
-  {zh:"打扮",py:"dǎbàn",ar:"يتزيّن / يتأنّق",cat:"verb",topic:"التصرفات",sentence:{zh:"她今天打扮得很漂亮。",py:"Tā jīntiān dǎbàn de hěn piàoliang.",ar:"هي اليوم تزيّنت بشكل جميل جداً."}},
+  {zh:"打扮",py:"dǎban",ar:"يتزيّن / يتأنّق",cat:"verb",topic:"التصرفات",sentence:{zh:"她今天打扮得很漂亮。",py:"Tā jīntiān dǎban de hěn piàoliang.",ar:"هي اليوم تزيّنت بشكل جميل جداً."}},
   {zh:"脱",py:"tuō",ar:"يخلع (ملابس)",cat:"verb",topic:"التصرفات",sentence:{zh:"进门以前请脱鞋。",py:"Jìn mén yǐqián qǐng tuō xié.",ar:"قبل الدخول رجاءً اخلع حذاءك."}},
   {zh:"抱",py:"bào",ar:"يُعانق / يحمل",cat:"verb",topic:"التصرفات",sentence:{zh:"妈妈抱着孩子走了。",py:"Māma bào zhe háizi zǒu le.",ar:"الأم حملت الطفل ومشت."}},
   {zh:"敲",py:"qiāo",ar:"يطرق",cat:"verb",topic:"التصرفات",sentence:{zh:"有人在敲门，你去开门吧。",py:"Yǒu rén zài qiāo mén, nǐ qù kāi mén ba.",ar:"أحد يطرق الباب، اذهب وافتح."}},
@@ -316,7 +316,10 @@ let currentMode='cards',currentFilter='all',currentTopic='all',filteredWords=[..
 let quizWords=[],quizIndex=0,quizCorrect=0,quizWrong=0,quizMistakes=[],quizAnswered=false;
 try{const s=localStorage.getItem('hsk4_known');if(s)known=new Set(JSON.parse(s));const u=localStorage.getItem('hsk4_unknown');if(u)unknown=new Set(JSON.parse(u));}catch(e){}
 function saveState(){try{localStorage.setItem('hsk4_known',JSON.stringify([...known]));localStorage.setItem('hsk4_unknown',JSON.stringify([...unknown]));}catch(e){}}
-function speak(text,lang='zh-CN'){if('speechSynthesis' in window){window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=0.85;u.pitch=1;const voices=window.speechSynthesis.getVoices();const p=voices.find(v=>v.lang.startsWith('zh')&&(v.name.includes('Microsoft')||v.name.includes('Huihui')||v.name.includes('Xiaoxiao')||v.name.includes('Google')))||voices.find(v=>v.lang.startsWith('zh'));if(p)u.voice=p;window.speechSynthesis.speak(u);}}
+// Audio: try pre-generated mp3 first, fallback to Web Speech API
+function getWordIndex(text){for(let i=0;i<words.length;i++){if(words[i].zh===text)return{type:'w',idx:i};if(words[i].sentence.zh===text)return{type:'s',idx:i};}return null;}
+function speak(text,lang='zh-CN'){const match=getWordIndex(text);if(match){const src='audio/'+match.type+'_'+match.idx+'.mp3';const audio=new Audio(src);audio.playbackRate=1;audio.onerror=()=>speakFallback(text,lang);audio.play().catch(()=>speakFallback(text,lang));return;}speakFallback(text,lang);}
+function speakFallback(text,lang){if('speechSynthesis' in window){window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=0.85;u.pitch=1;const voices=window.speechSynthesis.getVoices();const p=voices.find(v=>v.lang.startsWith('zh')&&(v.name.includes('Microsoft')||v.name.includes('Huihui')||v.name.includes('Xiaoxiao')||v.name.includes('Google')))||voices.find(v=>v.lang.startsWith('zh'));if(p)u.voice=p;window.speechSynthesis.speak(u);}}
 if('speechSynthesis' in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();}
 
 function setMode(mode){currentMode=mode;document.getElementById('modeCards').classList.toggle('active',mode==='cards');document.getElementById('modeQuiz').classList.toggle('active',mode==='quiz');document.getElementById('statsBar').classList.toggle('hidden',mode==='quiz');document.getElementById('quizStatsBar').classList.toggle('hidden',mode==='cards');document.getElementById('navArea').classList.toggle('hidden',mode==='quiz');document.getElementById('shuffleBtn').classList.toggle('hidden',mode==='quiz');if(mode==='quiz'){startQuiz();}else{renderCard();updateProgress();}}
