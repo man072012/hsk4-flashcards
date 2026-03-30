@@ -87,13 +87,13 @@ body::before {
 .progress-bar { height: 4px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #f97316); border-radius: 4px; transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1); width: 0%; }
 .progress-text { text-align: center; font-size: 0.7rem; color: var(--text-dim); margin-top: 6px; }
-.card-area { position: relative; z-index: 10; display: flex; justify-content: center; align-items: center; padding: 0 20px; min-height: 360px; }
+.card-area { position: relative; z-index: 10; display: flex; justify-content: center; align-items: flex-start; padding: 0 20px; min-height: 340px; }
 .card-container { perspective: 1200px; width: 100%; max-width: 400px; }
-.card { position: relative; width: 100%; min-height: 340px; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; }
+.card { position: relative; width: 100%; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; }
 .card.flipped { transform: rotateY(180deg); }
-.card-face { position: absolute; top: 0; left: 0; width: 100%; min-height: 340px; backface-visibility: hidden; border-radius: var(--radius); padding: 28px 24px; display: flex; flex-direction: column; border: 1px solid #ffffff08; }
-.card-front { background: var(--card-front); justify-content: center; align-items: center; text-align: center; }
-.card-back { background: var(--card-back); transform: rotateY(180deg); direction: rtl; }
+.card-face { backface-visibility: hidden; border-radius: var(--radius); padding: 28px 24px; display: flex; flex-direction: column; border: 1px solid #ffffff08; }
+.card-front { position: relative; background: var(--card-front); justify-content: center; align-items: center; text-align: center; min-height: 340px; }
+.card-back { position: absolute; top: 0; left: 0; width: 100%; min-height: 100%; background: var(--card-back); transform: rotateY(180deg); direction: rtl; }
 .card-cat-badge { position: absolute; top: 16px; right: 16px; padding: 4px 12px; border-radius: 20px; font-size: 0.65rem; font-weight: 700; }
 .card-cat-badge.verb { background: var(--verb); color: #fff; }
 .card-cat-badge.noun { background: var(--noun); color: #fff; }
@@ -184,7 +184,7 @@ body::before {
 @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
 .shake { animation: shake 0.4s ease; }
 .hidden { display: none !important; }
-@media (max-width: 420px) { .chinese-char, .quiz-chinese { font-size: 3.5rem; } .card-face { padding: 24px 18px; min-height: 310px; } .card { min-height: 310px; } .quiz-card { padding: 24px 18px; } }
+@media (max-width: 420px) { .chinese-char, .quiz-chinese { font-size: 3.5rem; } .card-face { padding: 24px 18px; } .card-front { min-height: 310px; } .quiz-card { padding: 24px 18px; } }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 4px; }
@@ -343,7 +343,7 @@ function getCatLabel(c){return{verb:'فعل',noun:'اسم',adj:'صفة'}[c]||c;}
 function renderCard(){const a=document.getElementById('cardArea');if(filteredWords.length===0){a.innerHTML='<div class="empty-state"><div class="emoji">📭</div><p>لا توجد بطاقات لهذا التصنيف</p></div>';return;}
 const w=filteredWords[currentIndex];
 const speakerSVG='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
-a.innerHTML='<div class="card-container"><div class="card card-enter" id="theCard" onclick="flipCard()"><div class="card-face card-front"><span class="card-cat-badge '+w.cat+'">'+getCatLabel(w.cat)+'</span><span class="card-topic-badge">'+w.topic+'</span><div class="chinese-char">'+w.zh+'</div><div class="pinyin">'+w.py+'</div><div class="arabic-meaning">'+w.ar+'</div><div class="tts-row" onclick="event.stopPropagation()"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+speakerSVG+' الكلمة</button></div><span class="tap-hint">اضغط للقلب ↻</span><span class="card-number">'+(currentIndex+1)+' / '+filteredWords.length+'</span></div><div class="card-face card-back" onclick="event.stopPropagation()"><div class="back-section"><div class="back-label">الكلمة</div><div class="back-chinese">'+w.zh+'</div><div class="back-pinyin-line">'+w.py+'</div><div class="back-arabic">'+w.ar+' — <span style="color:var(--'+(w.cat==='verb'?'verb':w.cat==='noun'?'noun':'adj')+')">'+getCatLabel(w.cat)+'</span></div></div><div class="back-section"><div class="back-label">جملة تطبيقية</div><div class="sentence-box"><div class="sentence-chinese">'+w.sentence.zh+'</div><div class="sentence-pinyin">'+w.sentence.py+'</div><div class="sentence-arabic">'+w.sentence.ar+'</div></div><div class="tts-row"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+speakerSVG+' الكلمة</button><button class="tts-btn" onclick="speak(\''+w.sentence.zh.replace(/'/g,"\\'")+'\')">'+speakerSVG+' الجملة</button></div></div></div></div></div>';}
+a.innerHTML='<div class="card-container"><div class="card card-enter" id="theCard" onclick="flipCard()"><div class="card-face card-front"><span class="card-cat-badge '+w.cat+'">'+getCatLabel(w.cat)+'</span><span class="card-topic-badge">'+w.topic+'</span><div class="chinese-char">'+w.zh+'</div><div class="pinyin">'+w.py+'</div><div class="arabic-meaning">'+w.ar+'</div><div class="tts-row" onclick="event.stopPropagation()"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+speakerSVG+' الكلمة</button></div><span class="tap-hint">اضغط للقلب ↻</span><span class="card-number">'+(currentIndex+1)+' / '+filteredWords.length+'</span></div><div class="card-face card-back"><div class="back-section"><div class="back-label">الكلمة</div><div class="back-chinese">'+w.zh+'</div><div class="back-pinyin-line">'+w.py+'</div><div class="back-arabic">'+w.ar+' — <span style="color:var(--'+(w.cat==='verb'?'verb':w.cat==='noun'?'noun':'adj')+')">'+getCatLabel(w.cat)+'</span></div></div><div class="back-section"><div class="back-label">جملة تطبيقية</div><div class="sentence-box"><div class="sentence-chinese">'+w.sentence.zh+'</div><div class="sentence-pinyin">'+w.sentence.py+'</div><div class="sentence-arabic">'+w.sentence.ar+'</div></div><div class="tts-row" onclick="event.stopPropagation()"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+speakerSVG+' الكلمة</button><button class="tts-btn" onclick="speak(\''+w.sentence.zh.replace(/'/g,"\\'")+'\')">'+speakerSVG+' الجملة</button></div></div><div style="text-align:center;margin-top:12px"><span class="tap-hint" style="position:static;opacity:0.5">اضغط للقلب ↻</span></div></div></div></div>';}
 
 function flipCard(){const c=document.getElementById('theCard');if(c){isFlipped=!isFlipped;c.classList.toggle('flipped',isFlipped);}}
 function goNext(){if(!filteredWords.length)return;currentIndex=(currentIndex+1)%filteredWords.length;isFlipped=false;renderCard();updateProgress();}
