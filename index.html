@@ -53,16 +53,16 @@ body::before {
 .mode-btn:hover { color: var(--ink-dark); }
 .mode-btn.active { background: var(--vermillion); color: #fff; box-shadow: 0 2px 8px rgba(194,58,43,0.3); }
 .mode-btn svg { width: 18px; height: 18px; }
-.stats-bar { position: relative; z-index: 10; display: flex; justify-content: center; gap: 12px; padding: 0 20px 12px; flex-wrap: wrap; }
+.stats-bar { position: relative; z-index: 10; display: flex; justify-content: center; gap: 12px; padding: 0 20px 12px; flex-wrap: wrap; max-width: 460px; margin: 0 auto; }
 .stat { background: var(--parchment-light); border: 1px solid rgba(0,0,0,0.05); border-radius: 6px; padding: 8px 14px; text-align: center; min-width: 70px; box-shadow: 0 1px 4px var(--shadow-ink); }
 .stat-num { font-size: 1.3rem; font-weight: 700; color: var(--gold); font-family: sans-serif; }
 .stat-label { font-size: 0.65rem; color: var(--ink-light); margin-top: 2px; }
-.filters { position: relative; z-index: 10; display: flex; justify-content: center; gap: 8px; padding: 8px 20px 16px; flex-wrap: wrap; }
+.filters { position: relative; z-index: 10; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding: 8px 20px 16px; max-width: 460px; margin: 0 auto; }
 .filter-btn {
-  background: var(--parchment-light); border: 1px solid rgba(0,0,0,0.06); border-radius: 4px; padding: 8px 18px;
-  color: var(--ink-medium); font-family: inherit; font-size: 0.8rem; font-weight: 600;
-  cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 6px;
-  box-shadow: 0 1px 3px var(--shadow-ink);
+  background: var(--parchment-light); border: 1px solid rgba(0,0,0,0.06); border-radius: 4px; padding: 8px 6px;
+  color: var(--ink-medium); font-family: inherit; font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 4px;
+  box-shadow: 0 1px 3px var(--shadow-ink); white-space: nowrap;
 }
 .filter-btn:hover { border-color: var(--gold); color: var(--ink-dark); }
 .filter-btn.active { background: var(--gold); color: #fff; border-color: var(--gold); }
@@ -70,15 +70,15 @@ body::before {
 .filter-btn[data-cat="noun"].active { background: var(--noun); border-color: var(--noun); }
 .filter-btn[data-cat="adj"].active { background: var(--jade); border-color: var(--jade); }
 .filter-btn .count { opacity: 0.7; font-weight: 400; }
-.category-filters { position: relative; z-index: 10; display: flex; justify-content: center; gap: 6px; padding: 0 20px 12px; flex-wrap: wrap; }
-.cat-btn { background: transparent; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 4px; padding: 5px 14px; font-family: inherit; font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all 0.3s; color: var(--ink-light); }
+.category-filters { position: relative; z-index: 10; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 0 20px 12px; max-width: 460px; margin: 0 auto; }
+.cat-btn { background: transparent; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 4px; padding: 6px 4px; font-family: inherit; font-size: 0.7rem; font-weight: 600; cursor: pointer; transition: all 0.3s; color: var(--ink-light); text-align: center; white-space: nowrap; }
 .cat-btn:hover { border-color: var(--gold); color: var(--ink-dark); }
 .cat-btn.active { background: rgba(184,148,62,0.1); border-color: var(--gold); color: var(--gold); }
 .progress-wrap { position: relative; z-index: 10; padding: 0 24px 16px; max-width: 460px; margin: 0 auto; }
 .progress-bar { height: 3px; background: var(--parchment-deep); border-radius: 2px; overflow: hidden; }
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--vermillion), var(--gold)); border-radius: 2px; transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1); width: 0%; }
 .progress-text { text-align: center; font-size: 0.7rem; color: var(--ink-light); margin-top: 6px; }
-.card-area { position: relative; z-index: 10; display: flex; justify-content: center; align-items: flex-start; padding: 0 20px; min-height: 340px; }
+.card-area { position: relative; z-index: 10; display: flex; justify-content: center; align-items: flex-start; padding: 0 20px; min-height: 340px; max-width: 460px; margin: 0 auto; }
 .card-container { perspective: 1200px; width: 100%; max-width: 420px; }
 .card { position: relative; width: 100%; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); cursor: pointer; }
 .card.flipped { transform: rotateY(180deg); }
@@ -104,19 +104,19 @@ body::before {
 .sentence-chinese { font-family: 'LXGW WenKai TC', 'Noto Sans SC', sans-serif; font-size: 1.1rem; font-weight: 500; color: var(--ink-black); direction: ltr; text-align: left; line-height: 1.6; margin-bottom: 4px; }
 .sentence-pinyin { font-size: 0.75rem; color: var(--gold); font-style: italic; direction: ltr; text-align: left; margin-bottom: 6px; opacity: 0.8; }
 .sentence-arabic { font-size: 0.85rem; color: var(--ink-medium); line-height: 1.5; }
-.tts-row { display: flex; gap: 8px; margin-top: 10px; direction: ltr; }
+.tts-row { display: flex; gap: 8px; margin-top: 10px; direction: ltr; justify-content: center; }
 .tts-btn { background: var(--vermillion); border: none; border-radius: 4px; padding: 8px 14px; color: #fff; font-family: inherit; font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
 .tts-btn:hover { transform: scale(1.05); background: var(--vermillion-soft); }
 .tts-btn:active { transform: scale(0.95); }
 .tts-btn svg { width: 14px; height: 14px; }
-.nav-area { position: relative; z-index: 10; display: flex; justify-content: center; align-items: center; gap: 20px; padding: 20px; }
-.nav-btn { width: 48px; height: 48px; border-radius: 50%; background: var(--parchment-light); border: 1px solid rgba(0,0,0,0.08); color: var(--ink-dark); font-size: 1.2rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px var(--shadow-ink); }
+.nav-area { position: relative; z-index: 10; display: flex; justify-content: center; align-items: center; gap: 12px; padding: 16px 20px; max-width: 460px; margin: 0 auto; }
+.nav-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--parchment-light); border: 1px solid rgba(0,0,0,0.08); color: var(--ink-dark); font-size: 1.1rem; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px var(--shadow-ink); flex-shrink: 0; }
 .nav-btn:hover { border-color: var(--gold); background: var(--parchment-deep); }
-.know-btn, .dont-know-btn { padding: 10px 22px; border-radius: 4px; border: none; font-family: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.know-btn, .dont-know-btn { padding: 10px 16px; border-radius: 4px; border: none; font-family: inherit; font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: all 0.2s; flex: 1; max-width: 130px; text-align: center; }
 .know-btn { background: var(--jade); color: #fff; }
 .dont-know-btn { background: var(--vermillion); color: #fff; }
 .know-btn:hover, .dont-know-btn:hover { transform: scale(1.05); }
-.shuffle-btn { position: relative; z-index: 10; display: block; margin: 0 auto 24px; background: transparent; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px; padding: 8px 20px; color: var(--ink-light); font-family: inherit; font-size: 0.75rem; cursor: pointer; transition: all 0.3s; }
+.shuffle-btn { position: relative; z-index: 10; display: block; margin: 0 auto 24px; background: transparent; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px; padding: 8px 20px; color: var(--ink-light); font-family: inherit; font-size: 0.75rem; cursor: pointer; transition: all 0.3s; max-width: 460px; }
 .shuffle-btn:hover { border-color: var(--gold); color: var(--gold); }
 .empty-state { text-align: center; padding: 60px 20px; color: var(--ink-light); }
 .empty-state .emoji { font-size: 3rem; margin-bottom: 12px; }
@@ -175,7 +175,7 @@ body::before {
 @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
 .shake { animation: shake 0.4s ease; }
 .hidden { display: none !important; }
-@media (max-width: 420px) { .chinese-char, .quiz-chinese { font-size: 3.5rem; } .card-face { padding: 24px 18px; } .card-front { min-height: 310px; } .quiz-card { padding: 24px 18px; } }
+@media (max-width: 420px) { .chinese-char, .quiz-chinese { font-size: 3.5rem; } .card-face { padding: 24px 18px; } .card-front { min-height: 310px; } .quiz-card { padding: 24px 18px; } .category-filters { grid-template-columns: repeat(3, 1fr); } .nav-area { gap: 8px; padding: 12px 16px; } .know-btn, .dont-know-btn { padding: 10px 10px; font-size: 0.75rem; } }
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--parchment-deep); }
 ::-webkit-scrollbar-thumb { background: var(--ink-light); border-radius: 4px; }
@@ -337,7 +337,7 @@ function getCatLabel(c){return{verb:'فعل',noun:'اسم',adj:'صفة'}[c]||c;}
 function renderCard(){const a=document.getElementById('cardArea');if(filteredWords.length===0){a.innerHTML='<div class="empty-state"><div class="emoji">📭</div><p>لا توجد بطاقات لهذا التصنيف</p></div>';return;}
 const w=filteredWords[currentIndex];
 const speakerSVG='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
-a.innerHTML='<div class="card-container"><div class="card card-enter" id="theCard" onclick="flipCard()"><div class="card-face card-front"><span class="card-cat-badge '+w.cat+'">'+getCatLabel(w.cat)+'</span><span class="card-topic-badge">'+w.topic+'</span><div class="chinese-char">'+w.zh+'</div><div class="pinyin">'+w.py+'</div><div class="arabic-meaning">'+w.ar+'</div><div class="tts-row" onclick="event.stopPropagation()"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+speakerSVG+' الكلمة</button></div><div onclick="event.stopPropagation()" style="margin-top:14px;width:100%;max-width:220px"><div style="font-size:0.65rem;color:var(--text-dim);margin-bottom:5px">جرّب كتابة الحرف:</div><div style="display:flex;gap:6px;direction:ltr;align-items:center"><input type="text" id="practiceInput_'+currentIndex+'" class="quiz-input" style="font-family:LXGW WenKai TC,Noto Sans SC,sans-serif;font-size:1.5rem;padding:8px 12px;border-radius:10px;flex:1" placeholder="汉字" autocomplete="off" dir="ltr" oninput="checkPractice(this,\''+w.zh+'\')" /><span id="practiceIcon_'+currentIndex+'" style="font-size:1.3rem;min-width:24px"></span></div></div><span class="card-number">'+(currentIndex+1)+' / '+filteredWords.length+'</span></div><div class="card-face card-back"><div class="back-section"><div class="back-label">الكلمة</div><div class="back-chinese">'+w.zh+'</div><div class="back-pinyin-line">'+w.py+'</div><div class="back-arabic">'+w.ar+' — <span style="color:var(--'+(w.cat==='verb'?'verb':w.cat==='noun'?'noun':'adj')+')">'+getCatLabel(w.cat)+'</span></div></div><div class="back-section"><div class="back-label">جملة تطبيقية</div><div class="sentence-box"><div class="sentence-chinese">'+w.sentence.zh+'</div><div class="sentence-pinyin">'+w.sentence.py+'</div><div class="sentence-arabic">'+w.sentence.ar+'</div></div><div class="tts-row" onclick="event.stopPropagation()"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+speakerSVG+' الكلمة</button><button class="tts-btn" onclick="speak(\''+w.sentence.zh.replace(/'/g,"\\'")+'\')">'+speakerSVG+' الجملة</button></div></div></div></div></div>';}
+a.innerHTML='<div class="card-container"><div class="card card-enter" id="theCard" onclick="flipCard()"><div class="card-face card-front"><span class="card-cat-badge '+w.cat+'">'+getCatLabel(w.cat)+'</span><span class="card-topic-badge">'+w.topic+'</span><div class="chinese-char">'+w.zh+'</div><div class="pinyin">'+w.py+'</div><div class="arabic-meaning">'+w.ar+'</div><div class="tts-row" style="justify-content:center" onclick="event.stopPropagation()"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+speakerSVG+' الكلمة</button></div><div onclick="event.stopPropagation()" style="margin-top:14px;width:100%;max-width:240px;text-align:center"><div style="font-size:0.65rem;color:var(--ink-light);margin-bottom:5px">جرّب كتابة الحرف:</div><div style="display:flex;gap:6px;direction:ltr;align-items:center;justify-content:center"><input type="text" id="practiceInput_'+currentIndex+'" class="quiz-input" style="font-family:LXGW WenKai TC,Noto Sans SC,sans-serif;font-size:1.5rem;padding:8px 12px;border-radius:4px;flex:1;background:#fff" placeholder="汉字" autocomplete="off" dir="ltr" oninput="checkPractice(this,\''+w.zh+'\')" /><span id="practiceIcon_'+currentIndex+'" style="font-size:1.3rem;min-width:24px"></span></div></div><span class="card-number">'+(currentIndex+1)+' / '+filteredWords.length+'</span></div><div class="card-face card-back"><div class="back-section"><div class="back-label">الكلمة</div><div class="back-chinese">'+w.zh+'</div><div class="back-pinyin-line">'+w.py+'</div><div class="back-arabic">'+w.ar+' — <span style="color:var(--'+(w.cat==='verb'?'verb':w.cat==='noun'?'noun':'adj')+')">'+getCatLabel(w.cat)+'</span></div></div><div class="back-section"><div class="back-label">جملة تطبيقية</div><div class="sentence-box"><div class="sentence-chinese">'+w.sentence.zh+'</div><div class="sentence-pinyin">'+w.sentence.py+'</div><div class="sentence-arabic">'+w.sentence.ar+'</div></div><div class="tts-row" style="justify-content:center" onclick="event.stopPropagation()"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+speakerSVG+' الكلمة</button><button class="tts-btn" onclick="speak(\''+w.sentence.zh.replace(/'/g,"\\'")+'\')">'+speakerSVG+' الجملة</button></div></div></div></div></div>';}
 
 function flipCard(){const c=document.getElementById('theCard');if(c){isFlipped=!isFlipped;c.classList.toggle('flipped',isFlipped);}}
 function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.parentElement.querySelector('span');if(!v){inp.style.borderColor='rgba(0,0,0,0.1)';inp.style.boxShadow='none';inp.style.background='#fff';icon.textContent='';return;}if(v===correct.trim()){inp.style.borderColor='var(--jade)';inp.style.boxShadow='0 0 10px rgba(74,124,111,0.2)';inp.style.background='rgba(74,124,111,0.06)';icon.textContent='✓';icon.style.color='var(--jade)';}else{inp.style.borderColor='var(--vermillion)';inp.style.boxShadow='0 0 10px rgba(194,58,43,0.15)';inp.style.background='rgba(194,58,43,0.04)';icon.textContent='✗';icon.style.color='var(--vermillion)';}}
