@@ -907,7 +907,7 @@ function openFromList(idx){currentIndex=idx;isFlipped=false;setMode('cards');}
 function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.parentElement.querySelector('span');if(!v){inp.style.borderColor='rgba(0,0,0,0.08)';inp.style.boxShadow='none';inp.style.background='#fff';icon.textContent='';return;}if(v===correct.trim()){inp.style.borderColor='var(--jade)';inp.style.boxShadow='0 0 10px rgba(74,124,111,0.2)';inp.style.background='rgba(74,124,111,0.05)';icon.textContent='✓';icon.style.color='var(--jade)';}else{inp.style.borderColor='var(--red)';inp.style.boxShadow='0 0 10px rgba(194,58,43,0.12)';inp.style.background='rgba(194,58,43,0.03)';icon.textContent='✗';icon.style.color='var(--red)';}}
 
 // === Gemini Sentence Evaluation ===
-const GEMINI_KEY='AIzaSyANxGqmq56e2ObhQq7frmtu9DJoVcDjSM8';
+const GEMINI_KEY='AIzaSyDT_bln86Cdby9LuXOsvqTEbzxi3DCnxWI';
 const GEMINI_MODELS=['gemini-2.0-flash-lite','gemini-2.0-flash','gemini-1.5-flash-latest'];
 async function callGemini(prompt,attempt=0){
   const model=GEMINI_MODELS[attempt % GEMINI_MODELS.length];
