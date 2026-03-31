@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Ø¨Ø·Ø§ÙØ§Øª HSK4 Ø§ÙØªØ¹ÙÙÙÙØ©</title>
+<title>بطاقات HSK4 التعليمية</title>
 <!-- Fonts: try Google first, fallback handled by CSS -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Amiri:wght@400;700&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -440,33 +440,33 @@ body{
 <!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-row1">
-    <div class="logo"><span class="seal">å</span> HSK4</div>
+    <div class="logo"><span class="seal">四</span> HSK4</div>
     <div class="topbar-stats" id="statsBar">
-      <div><span class="s-known" id="knownCount">0</span> Ø£Ø¹Ø±Ù</div>
-      <div><span class="s-unknown" id="unknownCount">0</span> Ø£Ø±Ø§Ø¬Ø¹</div>
+      <div><span class="s-known" id="knownCount">0</span> أعرف</div>
+      <div><span class="s-unknown" id="unknownCount">0</span> أراجع</div>
     </div>
     <div class="topbar-stats hidden" id="quizStatsBar">
-      <div><span class="s-known" id="quizCorrectStat">0</span>â</div>
-      <div><span class="s-unknown" id="quizWrongStat">0</span>â</div>
+      <div><span class="s-known" id="quizCorrectStat">0</span>✓</div>
+      <div><span class="s-unknown" id="quizWrongStat">0</span>✗</div>
       <div id="quizTotal">0</div>
     </div>
   
   </div>
   <div class="topbar-row2">
     <div class="mode-toggle">
-      <button class="active" id="modeCards" onclick="setMode('cards')">Ø¨Ø·Ø§ÙØ§Øª</button>
-      <button id="modeList" onclick="setMode('list')">ÙØ§Ø¦ÙØ©</button>
-      <button id="modeQuiz" onclick="setMode('quiz')">Ø§Ø®ØªØ¨Ø§Ø±</button>
+      <button class="active" id="modeCards" onclick="setMode('cards')">بطاقات</button>
+      <button id="modeList" onclick="setMode('list')">قائمة</button>
+      <button id="modeQuiz" onclick="setMode('quiz')">اختبار</button>
     </div>
   </div>
 </div>
 
 <!-- FILTERS -->
 <div class="filters-strip">
-  <button class="fbtn active" data-cat="all">Ø§ÙÙÙ <span id="countAll"></span></button>
-  <button class="fbtn" data-cat="verb">Ø£ÙØ¹Ø§Ù <span id="countVerb"></span></button>
-  <button class="fbtn" data-cat="noun">Ø£Ø³ÙØ§Ø¡ <span id="countNoun"></span></button>
-  <button class="fbtn" data-cat="adj">ØµÙØ§Øª <span id="countAdj"></span></button>
+  <button class="fbtn active" data-cat="all">الكل <span id="countAll"></span></button>
+  <button class="fbtn" data-cat="verb">أفعال <span id="countVerb"></span></button>
+  <button class="fbtn" data-cat="noun">أسماء <span id="countNoun"></span></button>
+  <button class="fbtn" data-cat="adj">صفات <span id="countAdj"></span></button>
 </div>
 <div class="topics-strip" id="topicFilters"></div>
 
@@ -482,146 +482,146 @@ body{
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav" id="navArea">
-  <button class="bn-shuffle" id="shuffleBtn">ð Ø®ÙØ·</button>
-  <button class="bn-action bn-know" id="knowBtn">â Ø£Ø¹Ø±Ù</button>
-  <button class="bn-arrow" id="prevBtn">â</button>
-  <button class="bn-arrow" id="nextBtn">â</button>
-  <button class="bn-action bn-dont" id="dontKnowBtn">â ÙØ§ Ø£Ø¹Ø±Ù</button>
+  <button class="bn-shuffle" id="shuffleBtn">🔀 خلط</button>
+  <button class="bn-action bn-know" id="knowBtn">✓ أعرف</button>
+  <button class="bn-arrow" id="prevBtn">→</button>
+  <button class="bn-arrow" id="nextBtn">←</button>
+  <button class="bn-action bn-dont" id="dontKnowBtn">✗ لا أعرف</button>
 </div>
 
 <script>
 const words = [
-  {zh:"å°",py:"chÃ¡ng",ar:"ÙÙØ¬Ø±ÙØ¨ / ÙØªØ°ÙÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"ä½ å°ä¸ä¸è¿ä¸ªèï¼å³éå¾å¥½ã",py:"NÇ chÃ¡ng yÃ­xiÃ  zhÃ¨ge cÃ i, wÃ¨idÃ o hÄn hÇo.",ar:"Ø¬Ø±ÙØ¨ ÙØ°Ø§ Ø§ÙØ·Ø¨ÙØ Ø·Ø¹ÙÙ ÙØ°ÙØ° Ø¬Ø¯Ø§Ù."}},
-  {zh:"è®¨è®º",py:"tÇolÃ¹n",ar:"ÙÙÙØ§ÙØ´",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"æä»¬ä¸èµ·è®¨è®ºè¿ä¸ªé®é¢å§ã",py:"WÇmen yÃ¬qÇ tÇolÃ¹n zhÃ¨ge wÃ¨ntÃ­ ba.",ar:"ÙÙÙØ§ÙØ´ ÙØ°Ù Ø§ÙÙØ´ÙÙØ© ÙØ¹Ø§Ù."}},
-  {zh:"åé",py:"shÄngliang",ar:"ÙØªØ´Ø§ÙØ±",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"è¿ä»¶äºæä»¬åéä¸ä¸åå³å®ã",py:"ZhÃ¨ jiÃ n shÃ¬ wÇmen shÄngliang yÃ­xiÃ  zÃ i juÃ©dÃ¬ng.",ar:"ÙÙØªØ´Ø§ÙØ± Ø­ÙÙ ÙØ°Ø§ Ø§ÙØ£ÙØ± ÙØ¨Ù Ø£Ù ÙÙØ±Ø±."}},
-  {zh:"ç",py:"cÄi",ar:"ÙÙØ®ÙÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"ä½ ççè¿ä¸ªä¸è¥¿å¤å°é±ï¼",py:"NÇ cÄi cÄi zhÃ¨ge dÅngxi duÅshao qiÃ¡n?",ar:"Ø®ÙÙÙ ÙÙ Ø³Ø¹Ø± ÙØ°Ø§ Ø§ÙØ´ÙØ¡Ø"}},
-  {zh:"æ¶æ¾",py:"shÅushi",ar:"ÙÙØ±ØªÙØ¨ / ÙÙÙØ¸ÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"è¯·ä½ æ¶æ¾ä¸ä¸æ¿é´ã",py:"QÇng nÇ shÅushi yÃ­xiÃ  fÃ¡ngjiÄn.",ar:"Ø±Ø¬Ø§Ø¡Ù Ø±ØªÙØ¨ Ø§ÙØºØ±ÙØ©."}},
-  {zh:"æ´ç",py:"zhÄnglÇ",ar:"ÙÙØ±ØªÙØ¨ / ÙÙÙØ¸ÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"æéè¦æ´çä¸ä¸æçä¸è¥¿ã",py:"WÇ xÅ«yÃ o zhÄnglÇ yÃ­xiÃ  wÇ de dÅngxi.",ar:"Ø£Ø­ØªØ§Ø¬ Ø£Ù Ø£Ø±ØªÙØ¨ Ø£ØºØ±Ø§Ø¶Ù."}},
-  {zh:"ä¿®",py:"xiÅ«",ar:"ÙÙØµÙØ­ / ÙÙØµÙÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"è¿ä¸ªææºåäºï¼éè¦ä¿®ä¸ä¿®ã",py:"ZhÃ¨ge shÇujÄ« huÃ i le, xÅ«yÃ o xiÅ« yÃ¬ xiÅ«.",ar:"ÙØ°Ø§ Ø§ÙÙØ§ØªÙ Ø®Ø±Ø¨Ø§ÙØ ÙØ­ØªØ§Ø¬ Ø¥ØµÙØ§Ø­."}},
-  {zh:"å¼¹",py:"tÃ¡n",ar:"ÙØ¹Ø²Ù Ø¹ÙÙ Ø¢ÙØ© ÙÙØ³ÙÙÙØ©",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"å¥¹ä¼å¼¹é¢ç´ï¼å¼¹å¾å¾å¥½ã",py:"TÄ huÃ¬ tÃ¡n gÄngqÃ­n, tÃ¡n de hÄn hÇo.",ar:"ÙÙ ØªØ¹Ø±Ù ØªØ¹Ø²Ù Ø¨ÙØ§ÙÙØ ÙØªØ¹Ø²Ù Ø¨Ø´ÙÙ ÙÙØªØ§Ø²."}},
-  {zh:"ææ®",py:"dÇban",ar:"ÙØªØ²ÙÙÙ / ÙØªØ£ÙÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"å¥¹ä»å¤©ææ®å¾å¾æ¼äº®ã",py:"TÄ jÄ«ntiÄn dÇban de hÄn piÃ oliang.",ar:"ÙÙ Ø§ÙÙÙÙ ØªØ²ÙÙÙØª Ø¨Ø´ÙÙ Ø¬ÙÙÙ Ø¬Ø¯Ø§Ù."}},
-  {zh:"è±",py:"tuÅ",ar:"ÙØ®ÙØ¹ (ÙÙØ§Ø¨Ø³)",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"è¿é¨ä»¥åè¯·è±éã",py:"JÃ¬n mÃ©n yÇqiÃ¡n qÇng tuÅ xiÃ©.",ar:"ÙØ¨Ù Ø§ÙØ¯Ø®ÙÙ Ø±Ø¬Ø§Ø¡Ù Ø§Ø®ÙØ¹ Ø­Ø°Ø§Ø¡Ù."}},
-  {zh:"æ±",py:"bÃ o",ar:"ÙÙØ¹Ø§ÙÙ / ÙØ­ÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"å¦å¦æ±çå­©å­èµ°äºã",py:"MÄma bÃ o zhe hÃ¡izi zÇu le.",ar:"Ø§ÙØ£Ù Ø­ÙÙØª Ø§ÙØ·ÙÙ ÙÙØ´Øª."}},
-  {zh:"æ²",py:"qiÄo",ar:"ÙØ·Ø±Ù",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"æäººå¨æ²é¨ï¼ä½ å»å¼é¨å§ã",py:"YÇu rÃ©n zÃ i qiÄo mÃ©n, nÇ qÃ¹ kÄi mÃ©n ba.",ar:"Ø£Ø­Ø¯ ÙØ·Ø±Ù Ø§ÙØ¨Ø§Ø¨Ø Ø§Ø°ÙØ¨ ÙØ§ÙØªØ­."}},
-  {zh:"å¯",py:"jÃ¬",ar:"ÙÙØ±Ø³Ù (Ø¨Ø±ÙØ¯)",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"ææ³å¯ä¸å°ä¿¡ç»æåã",py:"WÇ xiÇng jÃ¬ yÃ¬ fÄng xÃ¬n gÄi pÃ©ngyou.",ar:"Ø£Ø±ÙØ¯ Ø£Ù Ø£Ø±Ø³Ù Ø±Ø³Ø§ÙØ© ÙØµØ¯ÙÙÙ."}},
-  {zh:"å³å½",py:"kÃ©sou",ar:"ÙØ³Ø¹Ù",cat:"verb",topic:"Ø§ÙØµØ­Ø©",sentence:{zh:"ææåäºï¼ä¸ç´å³å½ã",py:"WÇ gÇnmÃ o le, yÃ¬zhÃ­ kÃ©sou.",ar:"Ø£ØµØ¨Øª Ø¨Ø²ÙØ§ÙØ ÙØ£Ø³Ø¹Ù Ø¨Ø§Ø³ØªÙØ±Ø§Ø±."}},
-  {zh:"åè¥",py:"jiÇnfÃ©i",ar:"ÙÙÙØ¯ ÙØ²ÙØ§Ù",cat:"verb",topic:"Ø§ÙØµØ­Ø©",sentence:{zh:"ä»æ¯å¤©è·æ­¥æ¯ä¸ºäºåè¥ã",py:"TÄ mÄitiÄn pÇobÃ¹ shÃ¬ wÃ¨ile jiÇnfÃ©i.",ar:"ÙÙ ÙØ±ÙØ¶ ÙÙ ÙÙÙ ÙÙ Ø£Ø¬Ù ØªØ®ÙÙÙ Ø§ÙÙØ²Ù."}},
-  {zh:"é",py:"xÇng",ar:"ÙØ³ØªÙÙØ¸",cat:"verb",topic:"Ø§ÙØµØ­Ø©",sentence:{zh:"æä»å¤©æ©ä¸å­ç¹å°±éäºã",py:"WÇ jÄ«ntiÄn zÇoshang liÃ¹ diÇn jiÃ¹ xÇng le.",ar:"Ø§ÙÙÙÙ Ø§Ø³ØªÙÙØ¸Øª Ø§ÙØ³Ø§Ø¹Ø© Ø§ÙØ³Ø§Ø¯Ø³Ø© ØµØ¨Ø§Ø­Ø§Ù."}},
-  {zh:"éè½",py:"jiÃ ngluÃ²",ar:"ØªÙØ¨Ø· (Ø§ÙØ·Ø§Ø¦Ø±Ø©)",cat:"verb",topic:"Ø§ÙØ³ÙØ±",sentence:{zh:"é£æºå·²ç»å®å¨éè½äºã",py:"FÄijÄ« yÇjÄ«ng ÄnquÃ¡n jiÃ ngluÃ² le.",ar:"Ø§ÙØ·Ø§Ø¦Ø±Ø© ÙØ¨Ø·Øª Ø¨Ø³ÙØ§ÙØ©."}},
-  {zh:"èµ·é£",py:"qÇfÄi",ar:"ØªÙÙÙØ¹ (Ø§ÙØ·Ø§Ø¦Ø±Ø©)",cat:"verb",topic:"Ø§ÙØ³ÙØ±",sentence:{zh:"é£æºä»ä¹æ¶åèµ·é£ï¼",py:"FÄijÄ« shÃ©nme shÃ­hou qÇfÄi?",ar:"ÙØªÙ ØªÙÙØ¹ Ø§ÙØ·Ø§Ø¦Ø±Ø©Ø"}},
-  {zh:"ä¹å",py:"chÃ©ngzuÃ²",ar:"ÙØ³ØªÙÙÙ (ÙÙØ§ØµÙØ§Øª)",cat:"verb",topic:"Ø§ÙØ³ÙØ±",sentence:{zh:"ä½ å¯ä»¥ä¹åå°éå»é£éã",py:"NÇ kÄyÇ chÃ©ngzuÃ² dÃ¬tiÄ qÃ¹ nÃ lÇ.",ar:"ÙÙÙÙÙ Ø£Ù ØªØ³ØªÙÙ Ø§ÙÙØªØ±Ù ÙÙØ°ÙØ§Ø¨ Ø¥ÙÙ ÙÙØ§Ù."}},
-  {zh:"æ´",py:"dÃ i",ar:"ÙØ±ØªØ¯Ù (Ø¥ÙØ³Ø³ÙØ§Ø±Ø§Øª)",cat:"verb",topic:"Ø§ÙÙØ¸ÙØ±",sentence:{zh:"ä»å¤©å¾å·ï¼ä½ æ´ä¸å¸½å­å§ã",py:"JÄ«ntiÄn hÄn lÄng, nÇ dÃ i shÃ ng mÃ ozi ba.",ar:"Ø§ÙÙÙÙ Ø¨Ø§Ø±Ø¯ Ø¬Ø¯Ø§ÙØ Ø§ÙØ¨Ø³ Ø§ÙÙØ¨Ø¹Ø©."}},
-  {zh:"çå",py:"lÇfÃ ",ar:"ÙØµÙ Ø§ÙØ´Ø¹Ø±",cat:"verb",topic:"Ø§ÙÙØ¸ÙØ±",sentence:{zh:"æçå¤´åå¤ªé¿äºï¼è¦å»çåã",py:"WÇ de tÃ³ufa tÃ i chÃ¡ng le, yÃ o qÃ¹ lÇfÃ .",ar:"Ø´Ø¹Ø±Ù Ø·ÙÙÙ Ø¬Ø¯Ø§ÙØ ÙØ§Ø²Ù Ø£Ø±ÙØ­ Ø£ÙØµÙÙ."}},
-  {zh:"ææ",py:"dÇzhÃ©",ar:"ÙÙØ®ÙÙØ¶ Ø§ÙØ³Ø¹Ø±",cat:"verb",topic:"Ø§ÙÙØ§Ù",sentence:{zh:"è¿ä»¶è¡£ææå«æã",py:"ZhÃ¨ jiÃ n yÄ«fu dÇ bÄ zhÃ©.",ar:"ÙØ°Ø§ Ø§ÙØ«ÙØ¨ Ø¹ÙÙÙ Ø®ØµÙ 20%."}},
-  {zh:"åè®¸",py:"yÇnxÇ",ar:"ÙØ³ÙØ­",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿éä¸åè®¸æ½çã",py:"ZhÃ¨lÇ bÃ¹ yÇnxÇ chÅuyÄn.",ar:"ÙÙØ§ ÙØ§ ÙÙØ³ÙØ­ Ø¨Ø§ÙØªØ¯Ø®ÙÙ."}},
-  {zh:"ä¼¤å®³",py:"shÄnghÃ i",ar:"ÙØ¤Ø°Ù / ÙØ¬Ø±Ø­",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"æä¸æ³ä¼¤å®³ä½ çææã",py:"WÇ bÃ¹ xiÇng shÄnghÃ i nÇ de gÇnqÃ­ng.",ar:"ÙØ§ Ø£Ø±ÙØ¯ Ø£Ù Ø£Ø¬Ø±Ø­ ÙØ´Ø§Ø¹Ø±Ù."}},
-  {zh:"å ç­",py:"jiÄbÄn",ar:"ÙØ¹ÙÙ Ø³Ø§Ø¹Ø§Øª Ø¥Ø¶Ø§ÙÙØ©",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ä»æ¯å¤©é½è¦å ç­å°å¾æã",py:"TÄ mÄitiÄn dÅu yÃ o jiÄbÄn dÃ o hÄn wÇn.",ar:"ÙÙ ÙÙ ÙÙÙ ÙØ¹ÙÙ Ø³Ø§Ø¹Ø§Øª Ø¥Ø¶Ø§ÙÙØ© ÙÙÙØª ÙØªØ£Ø®Ø±."}},
-  {zh:"ç¦æ­¢",py:"jÃ¬nzhÇ",ar:"ÙÙÙØ¹",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ç¦æ­¢å¨å¾ä¹¦é¦éå¤§å£°è¯´è¯ã",py:"JÃ¬nzhÇ zÃ i tÃºshÅ«guÇn lÇ dÃ shÄng shuÅhuÃ .",ar:"ÙÙÙÙØ¹ Ø§ÙØªØ­Ø¯Ø« Ø¨ØµÙØª Ø¹Ø§ÙÙ ÙÙ Ø§ÙÙÙØªØ¨Ø©."}},
-  {zh:"æ±",py:"hÃ n",ar:"Ø¹Ø±Ù",cat:"noun",topic:"Ø§ÙØµØ­Ø©",sentence:{zh:"è¿å¨ä»¥åä»åºäºå¾å¤æ±ã",py:"YÃ¹ndÃ²ng yÇhÃ²u tÄ chÅ« le hÄn duÅ hÃ n.",ar:"Ø¨Ø¹Ø¯ Ø§ÙØ±ÙØ§Ø¶Ø© Ø·ÙØ¹ ÙÙÙ Ø¹Ø±Ù ÙØ«ÙØ±."}},
-  {zh:"åæ°",py:"lÃ¬qi",ar:"ÙÙØ© / Ø·Ø§ÙØ©",cat:"noun",topic:"Ø§ÙØµØ­Ø©",sentence:{zh:"ä»çåæ°å¾å¤§ã",py:"TÄ de lÃ¬qi hÄn dÃ .",ar:"ÙÙØªÙ ÙØ¨ÙØ±Ø© Ø¬Ø¯Ø§Ù."}},
-  {zh:"èªç­",py:"hÃ¡ngbÄn",ar:"Ø±Ø­ÙØ© Ø¬ÙÙØ©",cat:"noun",topic:"Ø§ÙØ³ÙØ±",sentence:{zh:"ä½ çèªç­æ¯å ç¹çï¼",py:"NÇ de hÃ¡ngbÄn shÃ¬ jÇ diÇn de?",ar:"Ø±Ø­ÙØªÙ Ø§ÙØ¬ÙÙØ© Ø§ÙØ³Ø§Ø¹Ø© ÙÙØ"}},
-  {zh:"è¿·è·¯",py:"mÃ­lÃ¹",ar:"Ø¶Ø§Ø¦Ø¹ / ÙØ¶ÙØ¹",cat:"noun",topic:"Ø§ÙØ³ÙØ±",sentence:{zh:"æå¨åäº¬è¿·è·¯äºã",py:"WÇ zÃ i BÄijÄ«ng mÃ­lÃ¹ le.",ar:"Ø¶Ø¹Øª ÙÙ Ø¨ÙÙÙ."}},
-  {zh:"å³é",py:"wÃ¨idÃ o",ar:"Ø·Ø¹Ù / ÙÙÙØ©",cat:"noun",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"è¿ä¸ªæ±¤çå³éå¾å¥½ã",py:"ZhÃ¨ge tÄng de wÃ¨idÃ o hÄn hÇo.",ar:"Ø·Ø¹Ù ÙØ°Ø§ Ø§ÙØ­Ø³Ø§Ø¡ ÙØ°ÙØ° Ø¬Ø¯Ø§Ù."}},
-  {zh:"é¥¼å¹²",py:"bÇnggÄn",ar:"Ø¨Ø³ÙÙÙØª",cat:"noun",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"æä¹°äºä¸çé¥¼å¹²ã",py:"WÇ mÇi le yÃ¬ hÃ© bÇnggÄn.",ar:"Ø§Ø´ØªØ±ÙØª Ø¹ÙØ¨Ø© Ø¨Ø³ÙÙÙØª."}},
-  {zh:"æ±¤",py:"tÄng",ar:"Ø­Ø³Ø§Ø¡",cat:"noun",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"å¬å¤©åæ±¤å¾èæã",py:"DÅngtiÄn hÄ tÄng hÄn shÅ«fu.",ar:"Ø´Ø±Ø¨ Ø§ÙØ­Ø³Ø§Ø¡ ÙÙ Ø§ÙØ´ØªØ§Ø¡ ÙØ±ÙØ­ Ø¬Ø¯Ø§Ù."}},
-  {zh:"ææ±",py:"guÇzhÄ«",ar:"Ø¹ØµÙØ±",cat:"noun",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"ä½ æ³åææ±è¿æ¯åæ°´ï¼",py:"NÇ xiÇng hÄ guÇzhÄ« hÃ¡ishi hÄ shuÇ?",ar:"ØªØ¨Ù ØªØ´Ø±Ø¨ Ø¹ØµÙØ± ÙÙØ§ ÙØ§Ø¡Ø"}},
-  {zh:"å·§åå",py:"qiÇokÃ¨lÃ¬",ar:"Ø´ÙÙÙÙØ§ØªØ©",cat:"noun",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"å¥¹æåæ¬¢åå·§ååã",py:"TÄ zuÃ¬ xÇhuan chÄ« qiÇokÃ¨lÃ¬.",ar:"ÙÙ ØªØ­Ø¨ Ø§ÙØ´ÙÙÙÙØ§ØªØ© Ø£ÙØ«Ø± Ø´ÙØ¡."}},
-  {zh:"è¢å­",py:"wÃ zi",ar:"Ø¬ÙØ§Ø±Ø¨",cat:"noun",topic:"Ø§ÙÙØ¸ÙØ±",sentence:{zh:"æéè¦ä¹°ä¸åæ°è¢å­ã",py:"WÇ xÅ«yÃ o mÇi yÃ¬ shuÄng xÄ«n wÃ zi.",ar:"Ø£Ø­ØªØ§Ø¬ Ø£Ø´ØªØ±Ù Ø¬ÙØ§Ø±Ø¨ Ø¬Ø¯ÙØ¯Ø©."}},
-  {zh:"å¸½å­",py:"mÃ ozi",ar:"ÙØ¨Ø¹Ø©",cat:"noun",topic:"Ø§ÙÙØ¸ÙØ±",sentence:{zh:"è¿é¡¶å¸½å­å¾å¥½çã",py:"ZhÃ¨ dÇng mÃ ozi hÄn hÇokÃ n.",ar:"ÙØ°Ù Ø§ÙÙØ¨Ø¹Ø© Ø­ÙÙØ©."}},
-  {zh:"æ¯å·¾",py:"mÃ¡ojÄ«n",ar:"ÙÙØ´ÙØ©",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"è¯·ç»æä¸æ¡æ¯å·¾ã",py:"QÇng gÄi wÇ yÃ¬ tiÃ¡o mÃ¡ojÄ«n.",ar:"Ø£Ø¹Ø·ÙÙ ÙÙØ´ÙØ© ÙÙ ÙØ¶ÙÙ."}},
-  {zh:"åå¾æ¡¶",py:"lÄjÄ«tÇng",ar:"Ø³ÙØ© Ø§ÙÙÙÙÙØ§Øª",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"æåå¾æå°åå¾æ¡¶éã",py:"BÇ lÄjÄ« rÄng dÃ o lÄjÄ«tÇng lÇ.",ar:"Ø§Ø±ÙÙ Ø§ÙØ²Ø¨Ø§ÙØ© ÙÙ Ø³ÙØ© Ø§ÙÙÙÙÙØ§Øª."}},
-  {zh:"æ²å",py:"shÄfÄ",ar:"Ø£Ø±ÙÙØ© / ÙÙØ¨Ø©",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"ä»å¨æ²åä¸ç¡çäºã",py:"TÄ zÃ i shÄfÄ shÃ ng shuÃ¬zhÃ¡o le.",ar:"ÙØ§Ù Ø¹ÙÙ Ø§ÙÙÙØ¨Ø©."}},
-  {zh:"çå­",py:"hÃ©zi",ar:"ØµÙØ¯ÙÙ / Ø¹ÙØ¨Ø©",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"è¿ä¸ªçå­éé¢æä»ä¹ï¼",py:"ZhÃ¨ge hÃ©zi lÇmiÃ n yÇu shÃ©nme?",ar:"Ø¥ÙØ´ ÙÙ Ø¯Ø§Ø®Ù ÙØ°Ø§ Ø§ÙØµÙØ¯ÙÙØ"}},
-  {zh:"é¥å",py:"yÃ oshi",ar:"ÙÙØªØ§Ø­",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"ææ¾ä¸å°æçé¥åäºã",py:"WÇ zhÇo bÃº dÃ o wÇ de yÃ oshi le.",ar:"ÙØ§ ÙÙÙØª ÙÙØªØ§Ø­Ù."}},
-  {zh:"éå­",py:"jÃ¬ngzi",ar:"ÙØ±Ø¢Ø©",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"å¥¹åæ¬¢ç§éå­ã",py:"TÄ xÇhuan zhÃ o jÃ¬ngzi.",ar:"ÙÙ ØªØ­Ø¨ ØªØ·Ø§ÙØ¹ Ø§ÙÙØ±Ø¢Ø©."}},
-  {zh:"ä¼ ç",py:"chuÃ¡nzhÄn",ar:"Ø§ÙÙØ§ÙØ³",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"è¯·ä½ æè¿ä¸ªæä»¶ç¨ä¼ çåè¿æ¥ã",py:"QÇng nÇ bÇ zhÃ¨ge wÃ©njiÃ n yÃ²ng chuÃ¡nzhÄn fÄ guÃ²lai.",ar:"Ø£Ø±Ø³Ù ÙÙ ÙØ°Ø§ Ø§ÙÙÙÙ Ø¨Ø§ÙÙØ§ÙØ³ ÙÙ ÙØ¶ÙÙ."}},
-  {zh:"ç°é",py:"xiÃ njÄ«n",ar:"ÙÙÙØ¯ ÙÙØ¯ÙØ©",cat:"noun",topic:"Ø§ÙÙØ§Ù",sentence:{zh:"å¯¹ä¸èµ·ï¼ææ²¡å¸¦ç°éã",py:"DuÃ¬buqÇ, wÇ mÃ©i dÃ i xiÃ njÄ«n.",ar:"Ø¢Ø³ÙØ ÙØ§ Ø¬Ø¨Øª ÙØ§Ø´ ÙØ¹Ù."}},
-  {zh:"ä¿¡ç¨å¡",py:"xÃ¬nyÃ²ngkÇ",ar:"Ø¨Ø·Ø§ÙØ© Ø§Ø¦ØªÙØ§Ù",cat:"noun",topic:"Ø§ÙÙØ§Ù",sentence:{zh:"å¯ä»¥ç¨ä¿¡ç¨å¡ä»é±åï¼",py:"KÄyÇ yÃ²ng xÃ¬nyÃ²ngkÇ fÃ¹ qiÃ¡n ma?",ar:"Ø£ÙØ¯Ø± Ø£Ø¯ÙØ¹ Ø¨Ø¨Ø·Ø§ÙØ© Ø§ÙØ§Ø¦ØªÙØ§ÙØ"}},
-  {zh:"ä»·æ ¼",py:"jiÃ gÃ©",ar:"Ø³Ø¹Ø±",cat:"noun",topic:"Ø§ÙÙØ§Ù",sentence:{zh:"è¿ä¸ªä¸è¥¿çä»·æ ¼å¤ªè´µäºã",py:"ZhÃ¨ge dÅngxi de jiÃ gÃ© tÃ i guÃ¬ le.",ar:"Ø³Ø¹Ø± ÙØ°Ø§ Ø§ÙØ´ÙØ¡ ØºØ§ÙÙ ÙØ±Ø©."}},
-  {zh:"é¶é±",py:"lÃ­ngqiÃ¡n",ar:"ÙÙÙØ© / ÙÙÙØ¯ ØµØºÙØ±Ø©",cat:"noun",topic:"Ø§ÙÙØ§Ù",sentence:{zh:"ä½ æé¶é±åï¼",py:"NÇ yÇu lÃ­ngqiÃ¡n ma?",ar:"Ø¹ÙØ¯Ù ÙÙÙØ©Ø"}},
-  {zh:"æ¶æ¯",py:"xiÄoxi",ar:"Ø®Ø¨Ø± / Ø±Ø³Ø§ÙØ©",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"æåæ¶å°ä¸ä¸ªå¥½æ¶æ¯ã",py:"WÇ gÄng shÅudÃ o yÃ­ gÃ¨ hÇo xiÄoxi.",ar:"ÙÙØªÙ ÙØµÙÙÙ Ø®Ø¨Ø± Ø­ÙÙ."}},
-  {zh:"ç»å",py:"jÄ«nglÃ¬",ar:"ØªØ¬Ø±Ø¨Ø©",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿æ¯ä¸æ¬¡é¾å¿çç»åã",py:"ZhÃ¨ shÃ¬ yÃ­ cÃ¬ nÃ¡nwÃ ng de jÄ«nglÃ¬.",ar:"ÙØ°Ù ØªØ¬Ø±Ø¨Ø© ÙØ§ ØªÙÙØ³Ù."}},
-  {zh:"åºå«",py:"qÅ«biÃ©",ar:"Ø§Ø®ØªÙØ§Ù / ÙØ±Ù",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿ä¸¤ä¸ªè¯æä»ä¹åºå«ï¼",py:"ZhÃ¨ liÇng gÃ¨ cÃ­ yÇu shÃ©nme qÅ«biÃ©?",ar:"Ø¥ÙØ´ Ø§ÙÙØ±Ù Ø¨ÙÙ ÙØ§ÙÙÙÙØªÙÙØ"}},
-  {zh:"ç­æ¡",py:"dÃ¡'Ã n",ar:"Ø¥Ø¬Ø§Ø¨Ø©",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ä½ ç¥éè¿éé¢çç­æ¡åï¼",py:"NÇ zhÄ«dÃ o zhÃ¨ dÃ o tÃ­ de dÃ¡'Ã n ma?",ar:"ØªØ¹Ø±Ù Ø¥Ø¬Ø§Ø¨Ø© ÙØ°Ø§ Ø§ÙØ³Ø¤Ø§ÙØ"}},
-  {zh:"ä¿¡å°",py:"xÃ¬nfÄng",ar:"Ø¸Ø±Ù Ø±Ø³Ø§ÙØ©",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¯·æä¿¡æ¾å¨ä¿¡å°éã",py:"QÇng bÇ xÃ¬n fÃ ng zÃ i xÃ¬nfÄng lÇ.",ar:"Ø­Ø· Ø§ÙØ±Ø³Ø§ÙØ© ÙÙ Ø§ÙØ¸Ø±Ù ÙÙ ÙØ¶ÙÙ."}},
-  {zh:"æ¹å",py:"fÄngxiÃ ng",ar:"Ø§ØªØ¬Ø§Ù",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ä½ èµ°éæ¹åäºã",py:"NÇ zÇu cuÃ² fÄngxiÃ ng le.",ar:"Ø£ÙØª Ø±Ø­Øª Ø¨Ø§ÙØ§ØªØ¬Ø§Ù Ø§ÙØºÙØ·."}},
-  {zh:"æ¥è®°",py:"rÃ¬jÃ¬",ar:"ÙØ°ÙÙØ±Ø§Øª / ÙÙÙÙØ§Øª",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"å¥¹æ¯å¤©é½åæ¥è®°ã",py:"TÄ mÄitiÄn dÅu xiÄ rÃ¬jÃ¬.",ar:"ÙÙ ÙÙ ÙÙÙ ØªÙØªØ¨ ÙØ°ÙÙØ±Ø§ØªÙØ§."}},
-  {zh:"é£æ¯",py:"fÄngjÇng",ar:"ÙÙØ¸Ø± Ø·Ø¨ÙØ¹Ù",cat:"noun",topic:"Ø§ÙØ·Ø¨ÙØ¹Ø©",sentence:{zh:"è¿éçé£æ¯å¤ªç¾äºã",py:"ZhÃ¨lÇ de fÄngjÇng tÃ i mÄi le.",ar:"Ø§ÙÙÙØ¸Ø± ÙÙØ§ Ø¬ÙÙÙ ÙØ±Ø©."}},
-  {zh:"ä¼¤å¿",py:"shÄngxÄ«n",ar:"Ø­Ø²ÙÙ",cat:"adj",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"å¬å°è¿ä¸ªæ¶æ¯ï¼ä»å¾ä¼¤å¿ã",py:"TÄ«ng dÃ o zhÃ¨ge xiÄoxi, tÄ hÄn shÄngxÄ«n.",ar:"ÙÙØ§ Ø³ÙØ¹ ÙØ°Ø§ Ø§ÙØ®Ø¨Ø±Ø Ø­Ø²Ù ÙØ«ÙØ±."}},
-  {zh:"å¤±æ",py:"shÄ«wÃ ng",ar:"Ø®Ø§Ø¦Ø¨ Ø§ÙØ£ÙÙ",cat:"adj",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"èè¯æ²¡èå¥½ï¼æå¾å¤±æã",py:"KÇoshÃ¬ mÃ©i kÇo hÇo, wÇ hÄn shÄ«wÃ ng.",ar:"Ø§ÙØ§Ø®ØªØ¨Ø§Ø± ÙØ§ Ø·ÙØ¹ Ø²ÙÙØ Ø£ÙØ§ ÙØ­Ø¨Ø·."}},
-  {zh:"åæ",py:"chÄ«jÄ«ng",ar:"ÙÙØ¯ÙØ´",cat:"adj",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"ä»çè¯è®©æå¾åæã",py:"TÄ de huÃ  rÃ ng wÇ hÄn chÄ«jÄ«ng.",ar:"ÙÙØ§ÙÙ ÙØ§Ø¬Ø£ÙÙ Ø¬Ø¯Ø§Ù."}},
-  {zh:"é¾å",py:"nÃ¡nshÃ²u",ar:"ÙØ±ÙØ¶ / Ø­Ø²ÙÙ",cat:"adj",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"æä»å¤©èº«ä½ä¸èæï¼å¾é¾åã",py:"WÇ jÄ«ntiÄn shÄntÇ bÃ¹ shÅ«fu, hÄn nÃ¡nshÃ²u.",ar:"Ø¬Ø³ÙÙ Ø§ÙÙÙÙ ØªØ¹Ø¨Ø§ÙØ Ø­Ø§Ø³Ø³ Ø¨Ø¶ÙÙ."}},
-  {zh:"å®³ç¾",py:"hÃ ixiÅ«",ar:"Ø®Ø¬ÙÙ",cat:"adj",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"å¥¹æ¯ä¸ä¸ªå®³ç¾çå¥³å­©ã",py:"TÄ shÃ¬ yÃ­ gÃ¨ hÃ ixiÅ« de nÇhÃ¡i.",ar:"ÙÙ Ø¨ÙØª Ø®Ø¬ÙÙØ©."}},
-  {zh:"æç",py:"huÃ¡iyÃ­",ar:"ÙØ´ÙÙÙ",cat:"adj",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"ææçä»è¯´çä¸æ¯ççã",py:"WÇ huÃ¡iyÃ­ tÄ shuÅ de bÃº shÃ¬ zhÄn de.",ar:"Ø£Ø´Ù Ø¥Ù Ø§ÙÙÙ ÙØ§ÙÙ ÙÙ ØµØ­ÙØ­."}},
-  {zh:"ä¿¡å¿",py:"xÃ¬nxÄ«n",ar:"Ø«ÙØ© Ø¨Ø§ÙÙÙØ³",cat:"noun",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"ä½ è¦å¯¹èªå·±æä¿¡å¿ã",py:"NÇ yÃ o duÃ¬ zÃ¬jÇ yÇu xÃ¬nxÄ«n.",ar:"ÙØ§Ø²Ù ØªØ«Ù Ø¨ÙÙØ³Ù."}},
-  {zh:"å´å¥",py:"xÄ«ngfÃ¨n",ar:"ÙØªØ­ÙÙØ³ / ÙÙØ«Ø§Ø±",cat:"adj",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"æå¤©è¦å»ææ¸¸ï¼æå¾å´å¥ã",py:"MÃ­ngtiÄn yÃ o qÃ¹ lÇyÃ³u, wÇ hÄn xÄ«ngfÃ¨n.",ar:"Ø¨ÙØ±Ø© Ø¨ÙØ±ÙØ­ Ø±Ø­ÙØ©Ø Ø£ÙØ§ ÙØªØ­ÙÙØ³ Ø¬Ø¯Ø§Ù."}},
-  {zh:"å°",py:"kÃ¹n",ar:"ÙØ¹Ø³Ø§Ù / ØªØ¹Ø¨Ø§Ù",cat:"adj",topic:"Ø§ÙØµØ­Ø©",sentence:{zh:"æ¨å¤©æ²¡ç¡å¥½ï¼ä»å¤©å¾å°ã",py:"ZuÃ³tiÄn mÃ©i shuÃ¬ hÇo, jÄ«ntiÄn hÄn kÃ¹n.",ar:"Ø£ÙØ³ ÙØ§ ÙÙØª Ø²ÙÙØ Ø§ÙÙÙÙ ÙØ¹Ø³Ø§Ù."}},
-  {zh:"å¸",py:"xiÃ¡n",ar:"ÙØ§ÙØ­",cat:"adj",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"è¿ä¸ªèå¤ªå¸äºã",py:"ZhÃ¨ge cÃ i tÃ i xiÃ¡n le.",ar:"ÙØ°Ø§ Ø§ÙØ·Ø¨Ù ÙØ§ÙØ­ ÙØ±Ø©."}},
-  {zh:"è¦",py:"kÇ",ar:"ÙÙØ±Ù",cat:"adj",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"è¿ä¸ªè¯å¾è¦ã",py:"ZhÃ¨ge yÃ o hÄn kÇ.",ar:"ÙØ°Ø§ Ø§ÙØ¯ÙØ§Ø¡ ÙÙØ±Ù."}},
-  {zh:"æå",py:"nuÇnhuo",ar:"Ø¯Ø§ÙØ¦",cat:"adj",topic:"Ø§ÙØ·Ø¨ÙØ¹Ø©",sentence:{zh:"ä»å¤©å¤©æ°å¾æåã",py:"JÄ«ntiÄn tiÄnqÃ¬ hÄn nuÇnhuo.",ar:"Ø§ÙØ¬Ù Ø§ÙÙÙÙ Ø¯Ø§ÙØ¦."}},
-  {zh:"å¼å¾",py:"zhÃ­dÃ©",ar:"ÙØ³ØªØ­ÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿é¨çµå½±å¼å¾çã",py:"ZhÃ¨ bÃ¹ diÃ nyÇng zhÃ­dÃ© kÃ n.",ar:"ÙØ°Ø§ Ø§ÙÙÙÙ ÙØ³ØªØ§ÙÙ Ø§ÙÙØ´Ø§ÙØ¯Ø©."}},
-  {zh:"ç²¾å½©",py:"jÄ«ngcÇi",ar:"Ø±Ø§Ø¦Ø¹ / ÙØ°ÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"æ¨å¤©çæ¯èµéå¸¸ç²¾å½©ã",py:"ZuÃ³tiÄn de bÇsÃ i fÄichÃ¡ng jÄ«ngcÇi.",ar:"ÙØ¨Ø§Ø±Ø§Ø© Ø£ÙØ³ ÙØ§ÙØª Ø±Ø§Ø¦Ø¹Ø© Ø¬Ø¯Ø§Ù."}},
-  {zh:"æè¶£",py:"yÇuqÃ¹",ar:"ÙÙØªØ¹ / ÙØ³ÙÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿æ¬ä¹¦å¾æè¶£ã",py:"ZhÃ¨ bÄn shÅ« hÄn yÇuqÃ¹.",ar:"ÙØ°Ø§ Ø§ÙÙØªØ§Ø¨ ÙÙØªØ¹."}},
-  {zh:"è",py:"zÄng",ar:"ÙØªÙØ³Ø®",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ä½ çè¡£æå¤ªèäºï¼å»æ´ä¸ä¸ã",py:"NÇ de yÄ«fu tÃ i zÄng le, qÃ¹ xÇ yÃ­xiÃ .",ar:"ÙÙØ§Ø¨Ø³Ù ÙØ³Ø®Ø© ÙØ±Ø©Ø Ø±ÙØ­ Ø§ØºØ³ÙÙØ§."}},
-  {zh:"è½»",py:"qÄ«ng",ar:"Ø®ÙÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿ä¸ªç®±å­å¾è½»ã",py:"ZhÃ¨ge xiÄngzi hÄn qÄ«ng.",ar:"ÙØ°Ø§ Ø§ÙØµÙØ¯ÙÙ Ø®ÙÙÙ."}},
-  {zh:"å",py:"hÃ²u",ar:"Ø³ÙÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"å¬å¤©è¦ç©¿åä¸ç¹çè¡£æã",py:"DÅngtiÄn yÃ o chuÄn hÃ²u yÃ¬diÇn de yÄ«fu.",ar:"ÙÙ Ø§ÙØ´ØªØ§Ø¡ ÙØ§Ø²Ù ØªÙØ¨Ø³ ÙÙØ§Ø¨Ø³ Ø£Ø³ÙÙ."}},
-  {zh:"ç ´",py:"pÃ²",ar:"ÙÙØ³ÙØ± / ÙÙØ²ÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿åéå·²ç»ç ´äºã",py:"ZhÃ¨ shuÄng xiÃ© yÇjÄ«ng pÃ² le.",ar:"ÙØ°Ø§ Ø§ÙØ­Ø°Ø§Ø¡ Ø®ÙØ§Øµ Ø®Ø±Ø¨."}},
-  {zh:"ä¹±",py:"luÃ n",ar:"ÙÙØ¶ÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ä½ çæ¿é´å¤ªä¹±äºã",py:"NÇ de fÃ¡ngjiÄn tÃ i luÃ n le.",ar:"ØºØ±ÙØªÙ ÙÙØ¶Ù ÙØ±Ø©."}},
-  {zh:"é",py:"zhÃ²ng",ar:"Ø«ÙÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿ä¸ªåå¤ªéäºï¼ææ¿ä¸å¨ã",py:"ZhÃ¨ge bÄo tÃ i zhÃ²ng le, wÇ nÃ¡ bÃ¹ dÃ²ng.",ar:"ÙØ°Ù Ø§ÙØ´ÙØ·Ø© Ø«ÙÙÙØ© ÙØ±Ø©Ø ÙØ§ Ø£ÙØ¯Ø± Ø£Ø´ÙÙÙØ§."}},
-  {zh:"ç©º",py:"kÅng",ar:"ÙØ§Ø±Øº",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"å°ç®±æ¯ç©ºçï¼éè¦å»ä¹°ä¸è¥¿ã",py:"BÄ«ngxiÄng shÃ¬ kÅng de, xÅ«yÃ o qÃ¹ mÇi dÅngxi.",ar:"Ø§ÙØ«ÙØ§Ø¬Ø© ÙØ§Ø¶ÙØ©Ø ÙØ§Ø²Ù ÙØ±ÙØ­ ÙØªØ³ÙÙÙ."}},
-  {zh:"å",py:"xiÇng",ar:"ÙØµØ¯Ø± ØµÙØªØ§Ù Ø¹Ø§ÙÙØ§Ù",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ææºçªç¶åäºã",py:"ShÇujÄ« tÅ«rÃ¡n xiÇng le.",ar:"Ø§ÙØ¬ÙØ§Ù Ø±ÙÙ ÙØ¬Ø£Ø©."}},
-  {zh:"å çº¿",py:"zhÃ nxiÃ n",ar:"Ø§ÙØ®Ø· ÙØ´ØºÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ææçµè¯ç»ä»ï¼ä½æ¯å çº¿ã",py:"WÇ dÇ diÃ nhuÃ  gÄi tÄ, dÃ nshÃ¬ zhÃ nxiÃ n.",ar:"Ø§ØªØµÙØª Ø¹ÙÙÙ Ø¨Ø³ Ø§ÙØ®Ø· ÙØ´ØºÙÙ."}},
-  {zh:"æ¥å¾å",py:"lÃ¡idejÃ­",ar:"ÙÙØ§Ù ÙÙØª ÙØ§ÙÙ",cat:"adj",topic:"Ø§ÙÙÙØª",sentence:{zh:"å«çæ¥ï¼æ¥å¾åã",py:"BiÃ© zhÄojÃ­, lÃ¡idejÃ­.",ar:"ÙØ§ ØªØ³ØªØ¹Ø¬ÙØ Ø§ÙÙÙØª ÙÙÙÙ."}},
-  {zh:"æ¥ä¸å",py:"lÃ¡ibujÃ­",ar:"ÙØ§ ÙÙØ¬Ø¯ ÙÙØª ÙØ§ÙÙ",cat:"adj",topic:"Ø§ÙÙÙØª",sentence:{zh:"å¿«èµ°å§ï¼æ¥ä¸åäºï¼",py:"KuÃ i zÇu ba, lÃ¡ibujÃ­ le!",ar:"ÙÙØ§ Ø§ÙØ´Ù Ø¨Ø³Ø±Ø¹Ø©Ø Ø§ÙÙÙØª ÙØ§ ÙÙÙÙ!"}},
-  // ===== ÙÙÙØ§Øª Ø¥Ø¶Ø§ÙÙØ© ÙÙ Ø§ÙØ§Ø®ØªØ¨Ø§Ø±Ø§Øª (48 ÙÙÙØ©) =====
-  {zh:"æ",py:"guÃ ",ar:"ÙØ¹ÙÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"ä»æ³æç»æå¨å¢ä¸ã",py:"TÄ xiÇng bÇ huÃ  guÃ  zÃ i qiÃ¡ng shÃ ng.",ar:"ÙØ¨Ù ÙØ¹ÙÙÙ Ø§ÙÙÙØ­Ø© Ø¹ÙÙ Ø§ÙØ¬Ø¯Ø§Ø±."}},
-  {zh:"èºº",py:"tÇng",ar:"ÙØ³ØªÙÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"å¥¹å¨æ²åä¸èººçã",py:"TÄ zÃ i shÄfÄ shÃ ng tÇngzhe.",ar:"ÙÙ ÙØ³ØªÙÙÙØ© Ø¹ÙÙ Ø§ÙÙÙØ¨Ø©."}},
-  {zh:"è¯",py:"shÃ¬",ar:"ÙØ¬Ø±ÙØ¨ / ÙÙØ­Ø§ÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"ä½ è¦ä¸è¦è¯è¯è¿æ¡è£å­ï¼",py:"NÇ yÃ o bÃºyÃ o shÃ¬ shi zhÃ¨ tiÃ¡o qÃºnzi?",ar:"ØªØ¨Ù ØªØ¬Ø±ÙØ¨ ÙØ°Ø§ Ø§ÙÙØ³ØªØ§ÙØ"}},
-  {zh:"ç®",py:"suÃ n",ar:"ÙØ­Ø³Ø¨",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"ææ¥ç®ä¸ä¸ä¸å±è±äºå¤å°é±ã",py:"WÇ lÃ¡i suÃ n yÃ­xiÃ  yÃ­gÃ²ng huÄ le duÅshao qiÃ¡n.",ar:"Ø®ÙÙÙÙ Ø£Ø­Ø³Ø¨ ÙÙ ØµØ±ÙÙØ§ Ø¨Ø§ÙÙØ¬ÙÙØ¹."}},
-  {zh:"æ¦",py:"cÄ",ar:"ÙÙØ³Ø­",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"çï¼ææçå­æ¦å¹²åäºã",py:"KÃ n, wÇ bÇ pÃ¡nzi cÄ gÄnjÃ¬ngle.",ar:"Ø´ÙÙØ ÙØ³Ø­Øª Ø§ÙØµØ­Ù ÙÙØ¸ÙÙØªÙ."}},
-  {zh:"æ¬",py:"tÃ¡i",ar:"ÙØ±ÙØ¹ / ÙØ´ÙÙ",cat:"verb",topic:"Ø§ÙØªØµØ±ÙØ§Øª",sentence:{zh:"æä»¬ææ²åæ¬å°å®¢åå»å§ã",py:"WÇmen bÇ shÄfÄ tÃ¡i dÃ o kÃ¨tÄ«ng qÃ¹ ba.",ar:"ÙÙØ§ ÙØ´ÙÙ Ø§ÙÙÙØ¨Ø© ÙÙØµØ§ÙØ©."}},
-  {zh:"èµ¢",py:"yÃ­ng",ar:"ÙÙÙØ²",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿æ¬¡æ¯èµæä»¬èµ¢äºï¼",py:"ZhÃ¨ cÃ¬ bÇsÃ i wÇmen yÃ­ng le!",ar:"ÙØ²ÙØ§ ÙÙ ÙØ°Ù Ø§ÙÙØ¨Ø§Ø±Ø§Ø©!"}},
-  {zh:"ç¥",py:"zhÃ¹",ar:"ÙÙÙÙÙØ¦ / ÙØªÙÙÙ",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ç¥ä½ çæ¥å¿«ä¹ï¼",py:"ZhÃ¹ nÇ shÄngrÃ¬ kuÃ ilÃ¨!",ar:"Ø¹ÙØ¯ ÙÙÙØ§Ø¯ Ø³Ø¹ÙØ¯!"}},
-  {zh:"å»æ",py:"yÇngchÃ©ng",ar:"ÙÙØªØ³Ø¨ (Ø¹Ø§Ø¯Ø©)",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"åºè¯¥å»ææ¯å¤©å·ççå¥½ä¹ æ¯ã",py:"YÄ«nggÄi yÇngchÃ©ng mÄitiÄn shuÄyÃ¡ de hÇo xÃ­guÃ n.",ar:"ÙØ§Ø²Ù ØªÙØªØ³Ø¨ Ø¹Ø§Ø¯Ø© ØªÙØ¸ÙÙ Ø§ÙØ£Ø³ÙØ§Ù ÙÙ ÙÙÙ."}},
-  {zh:"ä¼°è®¡",py:"gÅ«jÃ¬",ar:"ÙÙÙØ¯ÙØ± / ÙØªÙÙØ¹",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ä¼°è®¡åå°æ¶åå°ã",py:"GÅ«jÃ¬ bÃ n xiÇoshÃ­ hÃ²u dÃ o.",ar:"Ø£ØªÙÙØ¹ Ø¨ÙÙØµÙ Ø¨Ø¹Ø¯ ÙØµ Ø³Ø§Ø¹Ø©."}},
-  {zh:"ç­",py:"dÄng",ar:"ÙÙØªØ¸Ø±",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"å¥¹å¨ç­æåççµè¯ã",py:"TÄ zÃ i dÄng pÃ©ngyou de diÃ nhuÃ .",ar:"ÙÙ ØªÙØªØ¸Ø± Ø§ØªØµØ§Ù ØµØ¯ÙÙØªÙØ§."}},
-  {zh:"æ¯ä¸",py:"bÃ¬yÃ¨",ar:"ÙØªØ®Ø±ÙØ¬",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ç¥è´ºä½ é¡ºå©æ¯ä¸ï¼",py:"ZhÃ¹hÃ¨ nÇ shÃ¹nlÃ¬ bÃ¬yÃ¨!",ar:"ÙØ¨Ø±ÙÙ Ø§ÙØªØ®Ø±ÙØ¬!"}},
-  {zh:"èå¤©å¿",py:"liÃ¡otiÄnr",ar:"ÙØ¯Ø±Ø¯Ø´",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"å¥¹ä»¬ä¸è¾¹åè¶ä¸è¾¹èå¤©å¿ã",py:"TÄmen yÃ¬biÄn hÄ chÃ¡ yÃ¬biÄn liÃ¡otiÄnr.",ar:"ÙÙ ÙØ´Ø±Ø¨ÙÙ Ø´Ø§Ù ÙÙØ³ÙÙÙÙÙ."}},
-  {zh:"åæ",py:"hÃ²uhuÇ",ar:"ÙÙØ¯Ù",cat:"verb",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"æçåæåè¯ä»è¿ä»¶äºã",py:"WÇ zhÄn hÃ²uhuÇ gÃ osu tÄ zhÃ¨ jiÃ n shÃ¬.",ar:"ÙØ¯ÙØ§Ù Ø¥ÙÙ ÙÙØª ÙÙ Ø¹Ù ÙØ§ÙÙÙØ¶ÙØ¹."}},
-  {zh:"å¹²æ¯",py:"gÄnbÄi",ar:"ÙÙ ØµØ­ØªÙ",cat:"verb",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"æ¥ï¼ä¸ºæä»¬çå¥åº·å¹²æ¯ï¼",py:"LÃ¡i, wÃ©i wÇmen de jiÃ nkÄng gÄnbÄi!",ar:"ÙÙØ§Ø ÙÙ ØµØ­ØªÙØ§!"}},
-  {zh:"èç³»",py:"liÃ¡nxÃ¬",ar:"ÙØªÙØ§ØµÙ",cat:"verb",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"æä¸æä»¬åçµè¯èç³»ã",py:"WÇnshÃ ng wÇmen zÃ i diÃ nhuÃ  liÃ¡nxÃ¬.",ar:"Ø¨Ø§ÙÙÙÙ ÙØªÙØ§ØµÙ Ø¨Ø§ÙØªÙÙÙÙ."}},
-  {zh:"èå­",py:"dÃ¹zi",ar:"Ø¨Ø·Ù",cat:"noun",topic:"Ø§ÙØµØ­Ø©",sentence:{zh:"ä½ æä¹äºï¼èå­ç¼ã",py:"NÇ zÄnme le, dÃ¹zi tÃ©ng.",ar:"ÙØ´ ÙÙÙØ Ø¨Ø·ÙÙ ÙØ¹ÙØ±ÙØ"}},
-  {zh:"å¯ç ",py:"mÃ¬mÇ",ar:"ÙÙÙØ© Ø³Ø±",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"ä½ å¥½ï¼æçå¯ç å¿äºæä¹åï¼",py:"NÇ hÇo, wÇ de mÃ¬mÇ wÃ ng le zÄnme bÃ n?",ar:"ÙØ±Ø­Ø¨Ø§ÙØ ÙØ³ÙØª ÙÙÙØ© Ø§ÙØ³Ø± ÙØ´ Ø£Ø³ÙÙØ"}},
-  {zh:"ç¬è¯",py:"xiÃ ohua",ar:"ÙÙØªØ©",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ä»è®²çç¬è¯çæææã",py:"TÄ jiÇng de xiÃ ohua zhÄn yÇuyÃ¬si.",ar:"Ø§ÙÙÙØªØ© Ø§ÙÙÙ ÙØ§ÙÙØ§ ÙØ¶Ø­ÙØ© ÙØ±Ø©."}},
-  {zh:"æå¿",py:"zÃ¡zhÃ¬",ar:"ÙØ¬ÙØ©",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"ä»åå¨æ²åä¸çæå¿ã",py:"TÄ zuÃ² zÃ i shÄfÄ shÃ ng kÃ n zÃ¡zhÃ¬.",ar:"ÙÙ ÙØ§Ø¹Ø¯ Ø¹ÙÙ Ø§ÙÙÙØ¨Ø© ÙÙØ±Ø£ ÙØ¬ÙØ©."}},
-  {zh:"äº¬å§",py:"jÄ«ngjÃ¹",ar:"Ø£ÙØ¨Ø±Ø§ Ø¨ÙÙÙ",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"äº¬å§ä¸ç´å¾åæ¬¢è¿ã",py:"JÄ«ngjÃ¹ yÃ¬zhÃ­ hÄn shÃ²u huÄnyÃ­ng.",ar:"Ø£ÙØ¨Ø±Ø§ Ø¨ÙÙÙ Ø¯Ø§Ø¦ÙØ§Ù Ø´Ø¹Ø¨ÙØ©."}},
-  {zh:"æ¤å£«",py:"hÃ¹shi",ar:"ÙÙØ±Ø¶Ø©",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"æå§å§å¨å»é¢ä¸ç­ï¼å¥¹æ¯æ¤å£«ã",py:"WÇ jiÄjie zÃ i yÄ«yuÃ n shÃ ngbÄn, tÄ shÃ¬ hÃ¹shi.",ar:"Ø£Ø®ØªÙ ØªØ´ØªØºÙ ÙÙ Ø§ÙÙØ³ØªØ´ÙÙØ ÙÙ ÙÙØ±Ø¶Ø©."}},
-  {zh:"æ´è¡£æº",py:"xÇyÄ«jÄ«",ar:"ØºØ³Ø§ÙØ© ÙÙØ§Ø¨Ø³",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"ä»çæ´è¡£æºå¥½ååºé®é¢äºã",py:"TÄ de xÇyÄ«jÄ« hÇoxiÃ ng chÅ« wÃ¨ntÃ­ le.",ar:"ØºØ³Ø§ÙØªÙ ÙØ¨Ø¯Ù ÙÙÙØ§ ÙØ´ÙÙØ©."}},
-  {zh:"é¥®æ",py:"yÇnliÃ o",ar:"ÙØ´Ø±ÙØ¨",cat:"noun",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"ä»è¿å¨çæ¶ååæ¬¢åè¿ç§é¥®æã",py:"TÄ yÃ¹ndÃ²ng de shÃ­hou xÇhuan hÄ zhÃ¨ zhÇng yÇnliÃ o.",ar:"ÙÙ ÙØ­Ø¨ ÙØ´Ø±Ø¨ ÙØ§ÙÙØ´Ø±ÙØ¨ ÙÙØª Ø§ÙØ±ÙØ§Ø¶Ø©."}},
-  {zh:"åå­",py:"bÄozi",ar:"Ø¨Ø§ÙØ²Ù (ÙØ·ÙØ±Ø© ÙØ­Ø´ÙØ©)",cat:"noun",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"è¿å®¶åºçåå­éå¸¸å¥½åã",py:"ZhÃ¨ jiÄ diÃ n de bÄozi fÄichÃ¡ng hÇo chÄ«.",ar:"Ø¨Ø§ÙØ²Ù ÙØ§ÙÙØ­Ù ÙØ°ÙØ° ÙØ±Ø©."}},
-  {zh:"é¿å",py:"ChÃ¡ngchÃ©ng",ar:"Ø³ÙØ± Ø§ÙØµÙÙ Ø§ÙØ¹Ø¸ÙÙ",cat:"noun",topic:"Ø§ÙØ³ÙØ±",sentence:{zh:"ä¸å¨æ«æåå¤å»ç¬é¿åã",py:"XiÃ  zhÅumÃ² wÇ zhÇnbÃ¨i qÃ¹ pÃ¡ ChÃ¡ngchÃ©ng.",ar:"ÙÙØ§ÙØ© Ø§ÙØ£Ø³Ø¨ÙØ¹ Ø§ÙØ¬Ø§Ù Ø¨Ø±ÙØ­ Ø£Ø·ÙØ¹ Ø³ÙØ± Ø§ÙØµÙÙ."}},
-  {zh:"ç­ä¿¡",py:"duÇnxÃ¬n",ar:"Ø±Ø³Ø§ÙØ© ÙØµÙØ©",cat:"noun",topic:"Ø§ÙØ£Ø´ÙØ§Ø¡",sentence:{zh:"ä½ ç»ä»åæ¡ç­ä¿¡å§ã",py:"NÇ gÄi tÄ fÄ tiÃ¡o duÇnxÃ¬n ba.",ar:"Ø£Ø±Ø³Ù ÙÙ Ø±Ø³Ø§ÙØ© ÙØµÙØ©."}},
-  {zh:"è³è",py:"gÄbo",ar:"Ø°Ø±Ø§Ø¹",cat:"noun",topic:"Ø§ÙØµØ­Ø©",sentence:{zh:"æçè³èæç¹å¿ç¼ã",py:"WÇ de gÄbo yÇudiÇnr tÃ©ng.",ar:"Ø°Ø±Ø§Ø¹Ù ÙØ¹ÙØ±ÙÙ Ø´ÙÙ."}},
-  {zh:"çæ³",py:"kÃ nfÇ",ar:"ÙØ¬ÙØ© ÙØ¸Ø± / Ø±Ø£Ù",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"å¯¹äºè¿ä»¶äºï¼æ¨æä»ä¹çæ³ï¼",py:"DuÃ¬yÃº zhÃ¨ jiÃ n shÃ¬, nÃ­n yÇu shÃ©nme kÃ nfÇ?",ar:"Ø¥ÙØ´ Ø±Ø£ÙÙ ÙÙ ÙØ§ÙÙÙØ¶ÙØ¹Ø"}},
-  {zh:"å¬é",py:"gÅnglÇ",ar:"ÙÙÙÙÙØªØ±",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ä»æ¯å¤©æ©ä¸é½è¦è·ä¸¤å¬éã",py:"TÄ mÄitiÄn zÇoshang dÅu yÃ o pÇo liÇng gÅnglÇ.",ar:"ÙÙ ÙÙ ÙÙÙ Ø§ÙØµØ¨Ø­ ÙØ±ÙØ¶ ÙÙÙÙÙØªØ±ÙÙ."}},
-  {zh:"è¥¿çº¢æ¿",py:"xÄ«hÃ³ngshÃ¬",ar:"Ø·ÙØ§Ø·Ù",cat:"noun",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"è¥¿çº¢æ¿æ¯æ°´æåï¼",py:"XÄ«hÃ³ngshÃ¬ shÃ¬ shuÇguÇ ma?",ar:"Ø§ÙØ·ÙØ§Ø·Ù ÙØ§ÙÙØ©Ø"}},
-  {zh:"é¡µ",py:"yÃ¨",ar:"ØµÙØ­Ø© (ÙÙÙØ© Ø¹Ø¯Ù)",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿æ¬ä¹¦ä¸å±æå¤å°é¡µï¼",py:"ZhÃ¨ bÄn shÅ« yÃ­gÃ²ng yÇu duÅshao yÃ¨?",ar:"ÙÙ ØµÙØ­Ø© ÙÙ ÙØ§ÙÙØªØ§Ø¨Ø"}},
-  {zh:"é",py:"biÃ n",ar:"ÙØ±Ø© (ÙÙÙØ© Ø¹Ø¯Ù)",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿æ¬ä¹¦å¥¹è¯»è¿å¾å¤éäºã",py:"ZhÃ¨ bÄn shÅ« tÄ dÃºguÃ² hÄnduÅ biÃ nle.",ar:"ÙÙ ÙØ±Ø£Øª ÙØ§ÙÙØªØ§Ø¨ ÙØ±Ø§Øª ÙØ«ÙØ±."}},
-  {zh:"æ¿å¨",py:"jÄ«dÃ²ng",ar:"ÙØªØ£Ø«ÙØ± / ÙÙØ«Ø§Ø±",cat:"adj",topic:"Ø§ÙÙØ´Ø§Ø¹Ø±",sentence:{zh:"æ¯ä¸äºï¼ä»ä»¬å¾æ¿å¨ã",py:"BÃ¬yÃ¨ le, tÄmen hÄn jÄ«dÃ²ng.",ar:"ØªØ®Ø±ÙØ¬ÙØ§Ø ÙÙØ§ÙÙØ§ ÙØªØ£Ø«Ø±ÙÙ Ø¬Ø¯Ø§Ù."}},
-  {zh:"é¦",py:"xiÄng",ar:"Ø¹Ø·Ø± / Ø°Ù Ø±Ø§Ø¦Ø­Ø© Ø·ÙØ¨Ø©",cat:"adj",topic:"Ø§ÙØ·Ø¹Ø§Ù",sentence:{zh:"è¿äºè±é»èµ·æ¥å¾é¦ã",py:"ZhÃ¨xiÄ huÄ wÃ©n qÇlÃ¡i hÄn xiÄng.",ar:"ÙØ§ÙÙØ±ÙØ¯ Ø±ÙØ­ØªÙØ§ Ø­ÙÙØ©."}},
-  {zh:"åå¿«",py:"liÃ¡ngkuai",ar:"ÙÙØ¹Ø´ / Ø¨Ø§Ø±Ø¯ ÙØ·ÙÙ",cat:"adj",topic:"Ø§ÙØ·Ø¨ÙØ¹Ø©",sentence:{zh:"èµ°å¨æµ·è¾¹ï¼æè§å¾åå¿«ã",py:"ZÇu zÃ i hÇibiÄn, gÇnjuÃ© hÄn liÃ¡ngkuai.",ar:"Ø§ÙÙØ´Ù Ø¹ÙÙ Ø§ÙØ¨Ø­Ø±Ø Ø­Ø§Ø³Ø³ Ø¨ÙØ³ÙØ© Ø­ÙÙØ©."}},
-  {zh:"æ´»æ³¼",py:"huÃ³pÅ",ar:"ÙØ´ÙØ· / Ø­ÙÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿ä¸ªå°å¥³å­©å¿å¾æ´»æ³¼ã",py:"ZhÃ¨ge xiÇonÇhÃ¡i'er hÄn huÃ³pÅ.",ar:"ÙØ§ÙØ¨ÙØª Ø§ÙØµØºÙØ±Ø© ÙØ´ÙØ·Ø© ÙØ±Ø©."}},
-  {zh:"ä»ç»",py:"zÇxÃ¬",ar:"Ø¯ÙÙÙ / Ø¨Ø¹ÙØ§ÙØ©",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ä½ åä»ç»æ¾æ¾ã",py:"NÇ zÃ i zÇxÃ¬ zhÇo zhao.",ar:"Ø¯ÙÙØ± ÙØ±Ø© Ø«Ø§ÙÙØ© Ø¨Ø¹ÙØ§ÙØ©."}},
-  {zh:"æµå©",py:"liÃºlÃ¬",ar:"Ø·ÙÙ / ÙØµÙØ­",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"å¥¹æ±è¯­è¯´å¾å¾æµå©ã",py:"TÄ hÃ nyÇ shuÅ de hÄn liÃºlÃ¬.",ar:"ÙÙ ØªØªÙÙÙ ØµÙÙÙ Ø¨Ø·ÙØ§ÙØ©."}},
-  {zh:"ä¸¥é",py:"yÃ¡nzhÃ²ng",ar:"Ø®Ø·ÙØ± / Ø­Ø§Ø¯",cat:"adj",topic:"Ø§ÙØµØ­Ø©",sentence:{zh:"æå°±æ¯æç¹å¿æåï¼ä¸å¤ªä¸¥éã",py:"WÇ jiÃ¹shÃ¬ yÇudiÇnr gÇnmÃ o, bÃº tÃ i yÃ¡nzhÃ²ng.",ar:"Ø¨Ø³ Ø²ÙÙØ© Ø®ÙÙÙØ©Ø ÙÙ Ø®Ø·ÙØ±Ø©."}},
-  {zh:"åå®³",py:"lÃ¬hai",ar:"ÙØ§ÙØ± / ÙÙÙ",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"å¨é½ç­å¯¹äºï¼ä½ çåå®³ï¼",py:"QuÃ¡n dÅu dÃ¡duÃ¬ le, nÇ zhÄn lÃ¬hai!",ar:"ÙÙÙØ§ ØµØ­Ø Ø£ÙØª Ø´Ø§Ø·Ø± ÙØ±Ø©!"}},
-  {zh:"æ­£å¼",py:"zhÃ¨ngshÃ¬",ar:"Ø±Ø³ÙÙ",cat:"adj",topic:"Ø§ÙÙØ¸ÙØ±",sentence:{zh:"ä»ä»å¤©ç©¿å¾ååæ­£å¼ã",py:"TÄ jÄ«ntiÄn chuÄn de shÃ­fÄn zhÃ¨ngshÃ¬.",ar:"ÙÙ Ø§ÙÙÙÙ ÙØ§Ø¨Ø³ Ø±Ø³ÙÙ."}},
-  {zh:"å",py:"yuÃ¡n",ar:"ÙØ³ØªØ¯ÙØ±",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"è¿ä¸ªè¥¿çåå¤§ååã",py:"ZhÃ¨ge xÄ«guÄ yÃ²u dÃ  yÃ²u yuÃ¡n.",ar:"ÙØ§ÙØ¨Ø·ÙØ®Ø© ÙØ¨ÙØ±Ø© ÙÙØ¯ÙÙØ±Ø©."}},
-  {zh:"ä¿©",py:"liÇ",ar:"Ø§Ø«ÙØ§Ù (Ø¹Ø§ÙÙØ©)",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"æä¿©éè¡ä¹°äºå¾å¤ä¸è¥¿ã",py:"WÇ liÇ guÃ ngjiÄ mÇile hÄnduÅ dÅngxi.",ar:"Ø£ÙØ§ ÙÙØ§Ù ØªØ³ÙÙÙÙØ§ ÙØ§Ø´ØªØ±ÙÙØ§ Ø£Ø´ÙØ§Ø¡ ÙØ«ÙØ±."}},
-  {zh:"åª",py:"zhÄ«",ar:"(ÙÙÙØ© Ø¹Ø¯Ù ÙÙØ­ÙÙØ§ÙØ§Øª)",cat:"noun",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"å±±ä¸æä¸åªèèã",py:"ShÄnshÃ ng yÇu yÃ¬ zhÄ« lÇohÇ.",ar:"ÙÙ Ø§ÙØ¬Ø¨Ù ÙÙÙ ÙÙØ±."}},
-  {zh:"æµ",py:"duÇ",ar:"(ÙÙÙØ© Ø¹Ø¯Ù ÙÙØ²ÙÙØ±)",cat:"noun",topic:"Ø§ÙØ·Ø¨ÙØ¹Ø©",sentence:{zh:"è¿æµè±åå¤§åæ¼äº®ã",py:"ZhÃ¨ duÇ huÄ yÃ²u dÃ  yÃ²u piÃ oliang.",ar:"ÙØ§ÙÙØ±Ø¯Ø© ÙØ¨ÙØ±Ø© ÙØ­ÙÙØ©."}},
-  {zh:"æ£µ",py:"kÄ",ar:"(ÙÙÙØ© Ø¹Ø¯Ù ÙÙØ£Ø´Ø¬Ø§Ø±)",cat:"noun",topic:"Ø§ÙØ·Ø¨ÙØ¹Ø©",sentence:{zh:"é£æ£µæ çå¶å­æåäºã",py:"NÃ  kÄ shÃ¹ de yÃ¨zi diÃ oguÄng le.",ar:"ÙØ§ÙØ´Ø¬Ø±Ø© Ø·Ø§Ø­Øª ÙÙ Ø£ÙØ±Ø§ÙÙØ§."}},
-  {zh:"å°åº",py:"dÃ odÇ",ar:"ÙÙ Ø§ÙÙÙØ§ÙØ© / Ø¨Ø§ÙØ¶Ø¨Ø·",cat:"adj",topic:"ÙØªÙÙØ¹Ø©",sentence:{zh:"ç­æ¡å°åºæ¯ä»ä¹å¢ï¼",py:"DÃ¡'Ã n dÃ odÇ shÃ¬ shÃ©nme ne?",ar:"Ø§ÙØ¥Ø¬Ø§Ø¨Ø© Ø¨Ø§ÙØ¶Ø¨Ø· Ø¥ÙØ´ ÙÙØ"}},
+  {zh:"尝",py:"cháng",ar:"يُجرّب / يتذوّق",cat:"verb",topic:"التصرفات",sentence:{zh:"你尝一下这个菜，味道很好。",py:"Nǐ cháng yíxià zhège cài, wèidào hěn hǎo.",ar:"جرّب هذا الطبق، طعمه لذيذ جداً."}},
+  {zh:"讨论",py:"tǎolùn",ar:"يُناقش",cat:"verb",topic:"التصرفات",sentence:{zh:"我们一起讨论这个问题吧。",py:"Wǒmen yìqǐ tǎolùn zhège wèntí ba.",ar:"لنناقش هذه المشكلة معاً."}},
+  {zh:"商量",py:"shāngliang",ar:"يتشاور",cat:"verb",topic:"التصرفات",sentence:{zh:"这件事我们商量一下再决定。",py:"Zhè jiàn shì wǒmen shāngliang yíxià zài juédìng.",ar:"لنتشاور حول هذا الأمر قبل أن نقرر."}},
+  {zh:"猜",py:"cāi",ar:"يُخمّن",cat:"verb",topic:"التصرفات",sentence:{zh:"你猜猜这个东西多少钱？",py:"Nǐ cāi cāi zhège dōngxi duōshao qián?",ar:"خمّن كم سعر هذا الشيء؟"}},
+  {zh:"收拾",py:"shōushi",ar:"يُرتّب / يُنظّف",cat:"verb",topic:"التصرفات",sentence:{zh:"请你收拾一下房间。",py:"Qǐng nǐ shōushi yíxià fángjiān.",ar:"رجاءً رتّب الغرفة."}},
+  {zh:"整理",py:"zhěnglǐ",ar:"يُرتّب / يُنظّم",cat:"verb",topic:"التصرفات",sentence:{zh:"我需要整理一下我的东西。",py:"Wǒ xūyào zhěnglǐ yíxià wǒ de dōngxi.",ar:"أحتاج أن أرتّب أغراضي."}},
+  {zh:"修",py:"xiū",ar:"يُصلح / يُصوّن",cat:"verb",topic:"التصرفات",sentence:{zh:"这个手机坏了，需要修一修。",py:"Zhège shǒujī huài le, xūyào xiū yì xiū.",ar:"هذا الهاتف خربان، يحتاج إصلاح."}},
+  {zh:"弹",py:"tán",ar:"يعزف على آلة موسيقية",cat:"verb",topic:"التصرفات",sentence:{zh:"她会弹钢琴，弹得很好。",py:"Tā huì tán gāngqín, tán de hěn hǎo.",ar:"هي تعرف تعزف بيانو، وتعزف بشكل ممتاز."}},
+  {zh:"打扮",py:"dǎban",ar:"يتزيّن / يتأنّق",cat:"verb",topic:"التصرفات",sentence:{zh:"她今天打扮得很漂亮。",py:"Tā jīntiān dǎban de hěn piàoliang.",ar:"هي اليوم تزيّنت بشكل جميل جداً."}},
+  {zh:"脱",py:"tuō",ar:"يخلع (ملابس)",cat:"verb",topic:"التصرفات",sentence:{zh:"进门以前请脱鞋。",py:"Jìn mén yǐqián qǐng tuō xié.",ar:"قبل الدخول رجاءً اخلع حذاءك."}},
+  {zh:"抱",py:"bào",ar:"يُعانق / يحمل",cat:"verb",topic:"التصرفات",sentence:{zh:"妈妈抱着孩子走了。",py:"Māma bào zhe háizi zǒu le.",ar:"الأم حملت الطفل ومشت."}},
+  {zh:"敲",py:"qiāo",ar:"يطرق",cat:"verb",topic:"التصرفات",sentence:{zh:"有人在敲门，你去开门吧。",py:"Yǒu rén zài qiāo mén, nǐ qù kāi mén ba.",ar:"أحد يطرق الباب، اذهب وافتح."}},
+  {zh:"寄",py:"jì",ar:"يُرسل (بريد)",cat:"verb",topic:"التصرفات",sentence:{zh:"我想寄一封信给朋友。",py:"Wǒ xiǎng jì yì fēng xìn gěi péngyou.",ar:"أريد أن أرسل رسالة لصديقي."}},
+  {zh:"咳嗽",py:"késou",ar:"يسعل",cat:"verb",topic:"الصحة",sentence:{zh:"我感冒了，一直咳嗽。",py:"Wǒ gǎnmào le, yìzhí késou.",ar:"أصبت بزكام، وأسعل باستمرار."}},
+  {zh:"减肥",py:"jiǎnféi",ar:"يفقد وزناً",cat:"verb",topic:"الصحة",sentence:{zh:"他每天跑步是为了减肥。",py:"Tā měitiān pǎobù shì wèile jiǎnféi.",ar:"هو يركض كل يوم من أجل تخفيف الوزن."}},
+  {zh:"醒",py:"xǐng",ar:"يستيقظ",cat:"verb",topic:"الصحة",sentence:{zh:"我今天早上六点就醒了。",py:"Wǒ jīntiān zǎoshang liù diǎn jiù xǐng le.",ar:"اليوم استيقظت الساعة السادسة صباحاً."}},
+  {zh:"降落",py:"jiàngluò",ar:"تهبط (الطائرة)",cat:"verb",topic:"السفر",sentence:{zh:"飞机已经安全降落了。",py:"Fēijī yǐjīng ānquán jiàngluò le.",ar:"الطائرة هبطت بسلامة."}},
+  {zh:"起飞",py:"qǐfēi",ar:"تُقلع (الطائرة)",cat:"verb",topic:"السفر",sentence:{zh:"飞机什么时候起飞？",py:"Fēijī shénme shíhou qǐfēi?",ar:"متى تقلع الطائرة؟"}},
+  {zh:"乘坐",py:"chéngzuò",ar:"يستقلّ (مواصلات)",cat:"verb",topic:"السفر",sentence:{zh:"你可以乘坐地铁去那里。",py:"Nǐ kěyǐ chéngzuò dìtiě qù nàlǐ.",ar:"يمكنك أن تستقل المترو للذهاب إلى هناك."}},
+  {zh:"戴",py:"dài",ar:"يرتدي (إكسسوارات)",cat:"verb",topic:"المظهر",sentence:{zh:"今天很冷，你戴上帽子吧。",py:"Jīntiān hěn lěng, nǐ dài shàng màozi ba.",ar:"اليوم بارد جداً، البس القبعة."}},
+  {zh:"理发",py:"lǐfà",ar:"قصّ الشعر",cat:"verb",topic:"المظهر",sentence:{zh:"我的头发太长了，要去理发。",py:"Wǒ de tóufa tài cháng le, yào qù lǐfà.",ar:"شعري طويل جداً، لازم أروح أقصّه."}},
+  {zh:"打折",py:"dǎzhé",ar:"يُخفّض السعر",cat:"verb",topic:"المال",sentence:{zh:"这件衣服打八折。",py:"Zhè jiàn yīfu dǎ bā zhé.",ar:"هذا الثوب عليه خصم 20%."}},
+  {zh:"允许",py:"yǔnxǔ",ar:"يسمح",cat:"verb",topic:"متنوعة",sentence:{zh:"这里不允许抽烟。",py:"Zhèlǐ bù yǔnxǔ chōuyān.",ar:"هنا لا يُسمح بالتدخين."}},
+  {zh:"伤害",py:"shānghài",ar:"يؤذي / يجرح",cat:"verb",topic:"متنوعة",sentence:{zh:"我不想伤害你的感情。",py:"Wǒ bù xiǎng shānghài nǐ de gǎnqíng.",ar:"لا أريد أن أجرح مشاعرك."}},
+  {zh:"加班",py:"jiābān",ar:"يعمل ساعات إضافية",cat:"verb",topic:"متنوعة",sentence:{zh:"他每天都要加班到很晚。",py:"Tā měitiān dōu yào jiābān dào hěn wǎn.",ar:"هو كل يوم يعمل ساعات إضافية لوقت متأخر."}},
+  {zh:"禁止",py:"jìnzhǐ",ar:"يمنع",cat:"verb",topic:"متنوعة",sentence:{zh:"禁止在图书馆里大声说话。",py:"Jìnzhǐ zài túshūguǎn lǐ dàshēng shuōhuà.",ar:"ممنوع التحدث بصوت عالٍ في المكتبة."}},
+  {zh:"汗",py:"hàn",ar:"عرق",cat:"noun",topic:"الصحة",sentence:{zh:"运动以后他出了很多汗。",py:"Yùndòng yǐhòu tā chū le hěn duō hàn.",ar:"بعد الرياضة طلع منه عرق كثير."}},
+  {zh:"力气",py:"lìqi",ar:"قوة / طاقة",cat:"noun",topic:"الصحة",sentence:{zh:"他的力气很大。",py:"Tā de lìqi hěn dà.",ar:"قوته كبيرة جداً."}},
+  {zh:"航班",py:"hángbān",ar:"رحلة جوية",cat:"noun",topic:"السفر",sentence:{zh:"你的航班是几点的？",py:"Nǐ de hángbān shì jǐ diǎn de?",ar:"رحلتك الجوية الساعة كم؟"}},
+  {zh:"迷路",py:"mílù",ar:"ضائع / يضيع",cat:"noun",topic:"السفر",sentence:{zh:"我在北京迷路了。",py:"Wǒ zài Běijīng mílù le.",ar:"ضعت في بكين."}},
+  {zh:"味道",py:"wèidào",ar:"طعم / نكهة",cat:"noun",topic:"الطعام",sentence:{zh:"这个汤的味道很好。",py:"Zhège tāng de wèidào hěn hǎo.",ar:"طعم هذا الحساء لذيذ جداً."}},
+  {zh:"饼干",py:"bǐnggān",ar:"بسكويت",cat:"noun",topic:"الطعام",sentence:{zh:"我买了一盒饼干。",py:"Wǒ mǎi le yì hé bǐnggān.",ar:"اشتريت علبة بسكويت."}},
+  {zh:"汤",py:"tāng",ar:"حساء",cat:"noun",topic:"الطعام",sentence:{zh:"冬天喝汤很舒服。",py:"Dōngtiān hē tāng hěn shūfu.",ar:"شرب الحساء في الشتاء مريح جداً."}},
+  {zh:"果汁",py:"guǒzhī",ar:"عصير",cat:"noun",topic:"الطعام",sentence:{zh:"你想喝果汁还是喝水？",py:"Nǐ xiǎng hē guǒzhī háishi hē shuǐ?",ar:"تبي تشرب عصير ولا ماء؟"}},
+  {zh:"巧克力",py:"qiǎokèlì",ar:"شوكولاتة",cat:"noun",topic:"الطعام",sentence:{zh:"她最喜欢吃巧克力。",py:"Tā zuì xǐhuan chī qiǎokèlì.",ar:"هي تحب الشوكولاتة أكثر شيء."}},
+  {zh:"袜子",py:"wàzi",ar:"جوارب",cat:"noun",topic:"المظهر",sentence:{zh:"我需要买一双新袜子。",py:"Wǒ xūyào mǎi yì shuāng xīn wàzi.",ar:"أحتاج أشتري جوارب جديدة."}},
+  {zh:"帽子",py:"màozi",ar:"قبعة",cat:"noun",topic:"المظهر",sentence:{zh:"这顶帽子很好看。",py:"Zhè dǐng màozi hěn hǎokàn.",ar:"هذه القبعة حلوة."}},
+  {zh:"毛巾",py:"máojīn",ar:"منشفة",cat:"noun",topic:"الأشياء",sentence:{zh:"请给我一条毛巾。",py:"Qǐng gěi wǒ yì tiáo máojīn.",ar:"أعطني منشفة من فضلك."}},
+  {zh:"垃圾桶",py:"lājītǒng",ar:"سلة المهملات",cat:"noun",topic:"الأشياء",sentence:{zh:"把垃圾扔到垃圾桶里。",py:"Bǎ lājī rēng dào lājītǒng lǐ.",ar:"ارمِ الزبالة في سلة المهملات."}},
+  {zh:"沙发",py:"shāfā",ar:"أريكة / كنبة",cat:"noun",topic:"الأشياء",sentence:{zh:"他在沙发上睡着了。",py:"Tā zài shāfā shàng shuìzháo le.",ar:"نام على الكنبة."}},
+  {zh:"盒子",py:"hézi",ar:"صندوق / علبة",cat:"noun",topic:"الأشياء",sentence:{zh:"这个盒子里面有什么？",py:"Zhège hézi lǐmiàn yǒu shénme?",ar:"إيش في داخل هذا الصندوق؟"}},
+  {zh:"钥匙",py:"yàoshi",ar:"مفتاح",cat:"noun",topic:"الأشياء",sentence:{zh:"我找不到我的钥匙了。",py:"Wǒ zhǎo bú dào wǒ de yàoshi le.",ar:"ما لقيت مفتاحي."}},
+  {zh:"镜子",py:"jìngzi",ar:"مرآة",cat:"noun",topic:"الأشياء",sentence:{zh:"她喜欢照镜子。",py:"Tā xǐhuan zhào jìngzi.",ar:"هي تحب تطالع المرآة."}},
+  {zh:"传真",py:"chuánzhēn",ar:"الفاكس",cat:"noun",topic:"الأشياء",sentence:{zh:"请你把这个文件用传真发过来。",py:"Qǐng nǐ bǎ zhège wénjiàn yòng chuánzhēn fā guòlai.",ar:"أرسل لي هذا الملف بالفاكس من فضلك."}},
+  {zh:"现金",py:"xiànjīn",ar:"نقود نقدية",cat:"noun",topic:"المال",sentence:{zh:"对不起，我没带现金。",py:"Duìbuqǐ, wǒ méi dài xiànjīn.",ar:"آسف، ما جبت كاش معي."}},
+  {zh:"信用卡",py:"xìnyòngkǎ",ar:"بطاقة ائتمان",cat:"noun",topic:"المال",sentence:{zh:"可以用信用卡付钱吗？",py:"Kěyǐ yòng xìnyòngkǎ fù qián ma?",ar:"أقدر أدفع ببطاقة الائتمان؟"}},
+  {zh:"价格",py:"jiàgé",ar:"سعر",cat:"noun",topic:"المال",sentence:{zh:"这个东西的价格太贵了。",py:"Zhège dōngxi de jiàgé tài guì le.",ar:"سعر هذا الشيء غالي مرة."}},
+  {zh:"零钱",py:"língqián",ar:"فكّة / نقود صغيرة",cat:"noun",topic:"المال",sentence:{zh:"你有零钱吗？",py:"Nǐ yǒu língqián ma?",ar:"عندك فكّة؟"}},
+  {zh:"消息",py:"xiāoxi",ar:"خبر / رسالة",cat:"noun",topic:"متنوعة",sentence:{zh:"我刚收到一个好消息。",py:"Wǒ gāng shōudào yí gè hǎo xiāoxi.",ar:"للتو وصلني خبر حلو."}},
+  {zh:"经历",py:"jīnglì",ar:"تجربة",cat:"noun",topic:"متنوعة",sentence:{zh:"这是一次难忘的经历。",py:"Zhè shì yí cì nánwàng de jīnglì.",ar:"هذه تجربة لا تُنسى."}},
+  {zh:"区别",py:"qūbié",ar:"اختلاف / فرق",cat:"noun",topic:"متنوعة",sentence:{zh:"这两个词有什么区别？",py:"Zhè liǎng gè cí yǒu shénme qūbié?",ar:"إيش الفرق بين هالكلمتين؟"}},
+  {zh:"答案",py:"dá'àn",ar:"إجابة",cat:"noun",topic:"متنوعة",sentence:{zh:"你知道这道题的答案吗？",py:"Nǐ zhīdào zhè dào tí de dá'àn ma?",ar:"تعرف إجابة هذا السؤال؟"}},
+  {zh:"信封",py:"xìnfēng",ar:"ظرف رسالة",cat:"noun",topic:"متنوعة",sentence:{zh:"请把信放在信封里。",py:"Qǐng bǎ xìn fàng zài xìnfēng lǐ.",ar:"حط الرسالة في الظرف من فضلك."}},
+  {zh:"方向",py:"fāngxiàng",ar:"اتجاه",cat:"noun",topic:"متنوعة",sentence:{zh:"你走错方向了。",py:"Nǐ zǒu cuò fāngxiàng le.",ar:"أنت رحت بالاتجاه الغلط."}},
+  {zh:"日记",py:"rìjì",ar:"مذكّرات / يوميات",cat:"noun",topic:"متنوعة",sentence:{zh:"她每天都写日记。",py:"Tā měitiān dōu xiě rìjì.",ar:"هي كل يوم تكتب مذكّراتها."}},
+  {zh:"风景",py:"fēngjǐng",ar:"منظر طبيعي",cat:"noun",topic:"الطبيعة",sentence:{zh:"这里的风景太美了。",py:"Zhèlǐ de fēngjǐng tài měi le.",ar:"المنظر هنا جميل مرة."}},
+  {zh:"伤心",py:"shāngxīn",ar:"حزين",cat:"adj",topic:"المشاعر",sentence:{zh:"听到这个消息，他很伤心。",py:"Tīng dào zhège xiāoxi, tā hěn shāngxīn.",ar:"لما سمع هذا الخبر، حزن كثير."}},
+  {zh:"失望",py:"shīwàng",ar:"خائب الأمل",cat:"adj",topic:"المشاعر",sentence:{zh:"考试没考好，我很失望。",py:"Kǎoshì méi kǎo hǎo, wǒ hěn shīwàng.",ar:"الاختبار ما طلع زين، أنا محبط."}},
+  {zh:"吃惊",py:"chījīng",ar:"مندهش",cat:"adj",topic:"المشاعر",sentence:{zh:"他的话让我很吃惊。",py:"Tā de huà ràng wǒ hěn chījīng.",ar:"كلامه فاجأني جداً."}},
+  {zh:"难受",py:"nánshòu",ar:"مريض / حزين",cat:"adj",topic:"المشاعر",sentence:{zh:"我今天身体不舒服，很难受。",py:"Wǒ jīntiān shēntǐ bù shūfu, hěn nánshòu.",ar:"جسمي اليوم تعبان، حاسس بضيق."}},
+  {zh:"害羞",py:"hàixiū",ar:"خجول",cat:"adj",topic:"المشاعر",sentence:{zh:"她是一个害羞的女孩。",py:"Tā shì yí gè hàixiū de nǚhái.",ar:"هي بنت خجولة."}},
+  {zh:"怀疑",py:"huáiyí",ar:"مشكّك",cat:"adj",topic:"المشاعر",sentence:{zh:"我怀疑他说的不是真的。",py:"Wǒ huáiyí tā shuō de bú shì zhēn de.",ar:"أشك إن اللي قاله مو صحيح."}},
+  {zh:"信心",py:"xìnxīn",ar:"ثقة بالنفس",cat:"noun",topic:"المشاعر",sentence:{zh:"你要对自己有信心。",py:"Nǐ yào duì zìjǐ yǒu xìnxīn.",ar:"لازم تثق بنفسك."}},
+  {zh:"兴奋",py:"xīngfèn",ar:"متحمّس / مُثار",cat:"adj",topic:"المشاعر",sentence:{zh:"明天要去旅游，我很兴奋。",py:"Míngtiān yào qù lǚyóu, wǒ hěn xīngfèn.",ar:"بكرة بنروح رحلة، أنا متحمّس جداً."}},
+  {zh:"困",py:"kùn",ar:"نعسان / تعبان",cat:"adj",topic:"الصحة",sentence:{zh:"昨天没睡好，今天很困。",py:"Zuótiān méi shuì hǎo, jīntiān hěn kùn.",ar:"أمس ما نمت زين، اليوم نعسان."}},
+  {zh:"咸",py:"xián",ar:"مالح",cat:"adj",topic:"الطعام",sentence:{zh:"这个菜太咸了。",py:"Zhège cài tài xián le.",ar:"هذا الطبق مالح مرة."}},
+  {zh:"苦",py:"kǔ",ar:"مُرّ",cat:"adj",topic:"الطعام",sentence:{zh:"这个药很苦。",py:"Zhège yào hěn kǔ.",ar:"هذا الدواء مُرّ."}},
+  {zh:"暖和",py:"nuǎnhuo",ar:"دافئ",cat:"adj",topic:"الطبيعة",sentence:{zh:"今天天气很暖和。",py:"Jīntiān tiānqì hěn nuǎnhuo.",ar:"الجو اليوم دافئ."}},
+  {zh:"值得",py:"zhídé",ar:"يستحقّ",cat:"adj",topic:"متنوعة",sentence:{zh:"这部电影值得看。",py:"Zhè bù diànyǐng zhídé kàn.",ar:"هذا الفلم يستاهل المشاهدة."}},
+  {zh:"精彩",py:"jīngcǎi",ar:"رائع / مذهل",cat:"adj",topic:"متنوعة",sentence:{zh:"昨天的比赛非常精彩。",py:"Zuótiān de bǐsài fēicháng jīngcǎi.",ar:"مباراة أمس كانت رائعة جداً."}},
+  {zh:"有趣",py:"yǒuqù",ar:"ممتع / مسلّي",cat:"adj",topic:"متنوعة",sentence:{zh:"这本书很有趣。",py:"Zhè běn shū hěn yǒuqù.",ar:"هذا الكتاب ممتع."}},
+  {zh:"脏",py:"zāng",ar:"متّسخ",cat:"adj",topic:"متنوعة",sentence:{zh:"你的衣服太脏了，去洗一下。",py:"Nǐ de yīfu tài zāng le, qù xǐ yíxià.",ar:"ملابسك وسخة مرة، روح اغسلها."}},
+  {zh:"轻",py:"qīng",ar:"خفيف",cat:"adj",topic:"متنوعة",sentence:{zh:"这个箱子很轻。",py:"Zhège xiāngzi hěn qīng.",ar:"هذا الصندوق خفيف."}},
+  {zh:"厚",py:"hòu",ar:"سميك",cat:"adj",topic:"متنوعة",sentence:{zh:"冬天要穿厚一点的衣服。",py:"Dōngtiān yào chuān hòu yìdiǎn de yīfu.",ar:"في الشتاء لازم تلبس ملابس أسمك."}},
+  {zh:"破",py:"pò",ar:"مكسور / ممزّق",cat:"adj",topic:"متنوعة",sentence:{zh:"这双鞋已经破了。",py:"Zhè shuāng xié yǐjīng pò le.",ar:"هذا الحذاء خلاص خرب."}},
+  {zh:"乱",py:"luàn",ar:"فوضوي",cat:"adj",topic:"متنوعة",sentence:{zh:"你的房间太乱了。",py:"Nǐ de fángjiān tài luàn le.",ar:"غرفتك فوضى مرة."}},
+  {zh:"重",py:"zhòng",ar:"ثقيل",cat:"adj",topic:"متنوعة",sentence:{zh:"这个包太重了，我拿不动。",py:"Zhège bāo tài zhòng le, wǒ ná bù dòng.",ar:"هذي الشنطة ثقيلة مرة، ما أقدر أشيلها."}},
+  {zh:"空",py:"kōng",ar:"فارغ",cat:"adj",topic:"متنوعة",sentence:{zh:"冰箱是空的，需要去买东西。",py:"Bīngxiāng shì kōng de, xūyào qù mǎi dōngxi.",ar:"الثلاجة فاضية، لازم نروح نتسوّق."}},
+  {zh:"响",py:"xiǎng",ar:"يصدر صوتاً عالياً",cat:"adj",topic:"متنوعة",sentence:{zh:"手机突然响了。",py:"Shǒujī tūrán xiǎng le.",ar:"الجوال رنّ فجأة."}},
+  {zh:"占线",py:"zhànxiàn",ar:"الخط مشغول",cat:"adj",topic:"متنوعة",sentence:{zh:"我打电话给他，但是占线。",py:"Wǒ dǎ diànhuà gěi tā, dànshì zhànxiàn.",ar:"اتصلت عليه بس الخط مشغول."}},
+  {zh:"来得及",py:"láidejí",ar:"هناك وقت كافٍ",cat:"adj",topic:"الوقت",sentence:{zh:"别着急，来得及。",py:"Bié zhāojí, láidejí.",ar:"لا تستعجل، الوقت يكفي."}},
+  {zh:"来不及",py:"láibují",ar:"لا يوجد وقت كافٍ",cat:"adj",topic:"الوقت",sentence:{zh:"快走吧，来不及了！",py:"Kuài zǒu ba, láibují le!",ar:"يلا امشِ بسرعة، الوقت ما يكفي!"}},
+  // ===== كلمات إضافية من الاختبارات (48 كلمة) =====
+  {zh:"挂",py:"guà",ar:"يعلّق",cat:"verb",topic:"التصرفات",sentence:{zh:"他想把画挂在墙上。",py:"Tā xiǎng bǎ huà guà zài qiáng shàng.",ar:"يبي يعلّق اللوحة على الجدار."}},
+  {zh:"躺",py:"tǎng",ar:"يستلقي",cat:"verb",topic:"التصرفات",sentence:{zh:"她在沙发上躺着。",py:"Tā zài shāfā shàng tǎngzhe.",ar:"هي مستلقية على الكنبة."}},
+  {zh:"试",py:"shì",ar:"يجرّب / يُحاول",cat:"verb",topic:"التصرفات",sentence:{zh:"你要不要试试这条裙子？",py:"Nǐ yào búyào shì shi zhè tiáo qúnzi?",ar:"تبي تجرّب هذا الفستان؟"}},
+  {zh:"算",py:"suàn",ar:"يحسب",cat:"verb",topic:"التصرفات",sentence:{zh:"我来算一下一共花了多少钱。",py:"Wǒ lái suàn yíxià yígòng huā le duōshao qián.",ar:"خلّني أحسب كم صرفنا بالمجموع."}},
+  {zh:"擦",py:"cā",ar:"يمسح",cat:"verb",topic:"التصرفات",sentence:{zh:"看，我把盘子擦干净了。",py:"Kàn, wǒ bǎ pánzi cā gānjìngle.",ar:"شوف، مسحت الصحن ونظّفته."}},
+  {zh:"抬",py:"tái",ar:"يرفع / يشيل",cat:"verb",topic:"التصرفات",sentence:{zh:"我们把沙发抬到客厅去吧。",py:"Wǒmen bǎ shāfā tái dào kètīng qù ba.",ar:"يلا نشيل الكنبة للصالة."}},
+  {zh:"赢",py:"yíng",ar:"يفوز",cat:"verb",topic:"متنوعة",sentence:{zh:"这次比赛我们赢了！",py:"Zhè cì bǐsài wǒmen yíng le!",ar:"فزنا في هذي المباراة!"}},
+  {zh:"祝",py:"zhù",ar:"يُهنّئ / يتمنى",cat:"verb",topic:"متنوعة",sentence:{zh:"祝你生日快乐！",py:"Zhù nǐ shēngrì kuàilè!",ar:"عيد ميلاد سعيد!"}},
+  {zh:"养成",py:"yǎngchéng",ar:"يكتسب (عادة)",cat:"verb",topic:"متنوعة",sentence:{zh:"应该养成每天刷牙的好习惯。",py:"Yīnggāi yǎngchéng měitiān shuāyá de hǎo xíguàn.",ar:"لازم تكتسب عادة تنظيف الأسنان كل يوم."}},
+  {zh:"估计",py:"gūjì",ar:"يُقدّر / يتوقع",cat:"verb",topic:"متنوعة",sentence:{zh:"估计半小时后到。",py:"Gūjì bàn xiǎoshí hòu dào.",ar:"أتوقع بنوصل بعد نص ساعة."}},
+  {zh:"等",py:"děng",ar:"ينتظر",cat:"verb",topic:"متنوعة",sentence:{zh:"她在等朋友的电话。",py:"Tā zài děng péngyou de diànhuà.",ar:"هي تنتظر اتصال صديقتها."}},
+  {zh:"毕业",py:"bìyè",ar:"يتخرّج",cat:"verb",topic:"متنوعة",sentence:{zh:"祝贺你顺利毕业！",py:"Zhùhè nǐ shùnlì bìyè!",ar:"مبروك التخرّج!"}},
+  {zh:"聊天儿",py:"liáotiānr",ar:"يدردش",cat:"verb",topic:"متنوعة",sentence:{zh:"她们一边喝茶一边聊天儿。",py:"Tāmen yìbiān hē chá yìbiān liáotiānr.",ar:"هم يشربون شاي ويسولفون."}},
+  {zh:"后悔",py:"hòuhuǐ",ar:"يندم",cat:"verb",topic:"المشاعر",sentence:{zh:"我真后悔告诉他这件事。",py:"Wǒ zhēn hòuhuǐ gàosu tā zhè jiàn shì.",ar:"ندمان إني قلت له عن هالموضوع."}},
+  {zh:"干杯",py:"gānbēi",ar:"في صحتك",cat:"verb",topic:"الطعام",sentence:{zh:"来，为我们的健康干杯！",py:"Lái, wéi wǒmen de jiànkāng gānbēi!",ar:"يلا، في صحتنا!"}},
+  {zh:"联系",py:"liánxì",ar:"يتواصل",cat:"verb",topic:"متنوعة",sentence:{zh:"晚上我们再电话联系。",py:"Wǎnshàng wǒmen zài diànhuà liánxì.",ar:"بالليل نتواصل بالتلفون."}},
+  {zh:"肚子",py:"dùzi",ar:"بطن",cat:"noun",topic:"الصحة",sentence:{zh:"你怎么了，肚子疼。",py:"Nǐ zěnme le, dùzi téng.",ar:"وش فيك؟ بطنك يعورك؟"}},
+  {zh:"密码",py:"mìmǎ",ar:"كلمة سر",cat:"noun",topic:"الأشياء",sentence:{zh:"你好，我的密码忘了怎么办？",py:"Nǐ hǎo, wǒ de mìmǎ wàng le zěnme bàn?",ar:"مرحباً، نسيت كلمة السر وش أسوي؟"}},
+  {zh:"笑话",py:"xiàohua",ar:"نكتة",cat:"noun",topic:"متنوعة",sentence:{zh:"他讲的笑话真有意思。",py:"Tā jiǎng de xiàohua zhēn yǒuyìsi.",ar:"النكتة اللي قالها مضحكة مرة."}},
+  {zh:"杂志",py:"zázhì",ar:"مجلة",cat:"noun",topic:"الأشياء",sentence:{zh:"他坐在沙发上看杂志。",py:"Tā zuò zài shāfā shàng kàn zázhì.",ar:"هو قاعد على الكنبة يقرأ مجلة."}},
+  {zh:"京剧",py:"jīngjù",ar:"أوبرا بكين",cat:"noun",topic:"متنوعة",sentence:{zh:"京剧一直很受欢迎。",py:"Jīngjù yìzhí hěn shòu huānyíng.",ar:"أوبرا بكين دائماً شعبية."}},
+  {zh:"护士",py:"hùshi",ar:"ممرضة",cat:"noun",topic:"متنوعة",sentence:{zh:"我姐姐在医院上班，她是护士。",py:"Wǒ jiějie zài yīyuàn shàngbān, tā shì hùshi.",ar:"أختي تشتغل في المستشفى، هي ممرضة."}},
+  {zh:"洗衣机",py:"xǐyījī",ar:"غسالة ملابس",cat:"noun",topic:"الأشياء",sentence:{zh:"他的洗衣机好像出问题了。",py:"Tā de xǐyījī hǎoxiàng chū wèntí le.",ar:"غسالته يبدو فيها مشكلة."}},
+  {zh:"饮料",py:"yǐnliào",ar:"مشروب",cat:"noun",topic:"الطعام",sentence:{zh:"他运动的时候喜欢喝这种饮料。",py:"Tā yùndòng de shíhou xǐhuan hē zhè zhǒng yǐnliào.",ar:"هو يحب يشرب هالمشروب وقت الرياضة."}},
+  {zh:"包子",py:"bāozi",ar:"باوزي (فطيرة محشوة)",cat:"noun",topic:"الطعام",sentence:{zh:"这家店的包子非常好吃。",py:"Zhè jiā diàn de bāozi fēicháng hǎo chī.",ar:"باوزي هالمحل لذيذ مرة."}},
+  {zh:"长城",py:"Chángchéng",ar:"سور الصين العظيم",cat:"noun",topic:"السفر",sentence:{zh:"下周末我准备去爬长城。",py:"Xià zhōumò wǒ zhǔnbèi qù pá Chángchéng.",ar:"نهاية الأسبوع الجاي بروح أطلع سور الصين."}},
+  {zh:"短信",py:"duǎnxìn",ar:"رسالة نصية",cat:"noun",topic:"الأشياء",sentence:{zh:"你给他发条短信吧。",py:"Nǐ gěi tā fā tiáo duǎnxìn ba.",ar:"أرسل له رسالة نصية."}},
+  {zh:"胳膊",py:"gēbo",ar:"ذراع",cat:"noun",topic:"الصحة",sentence:{zh:"我的胳膊有点儿疼。",py:"Wǒ de gēbo yǒudiǎnr téng.",ar:"ذراعي يعورني شوي."}},
+  {zh:"看法",py:"kànfǎ",ar:"وجهة نظر / رأي",cat:"noun",topic:"متنوعة",sentence:{zh:"对于这件事，您有什么看法？",py:"Duìyú zhè jiàn shì, nín yǒu shénme kànfǎ?",ar:"إيش رأيك في هالموضوع؟"}},
+  {zh:"公里",py:"gōnglǐ",ar:"كيلومتر",cat:"noun",topic:"متنوعة",sentence:{zh:"他每天早上都要跑两公里。",py:"Tā měitiān zǎoshang dōu yào pǎo liǎng gōnglǐ.",ar:"هو كل يوم الصبح يركض كيلومترين."}},
+  {zh:"西红柿",py:"xīhóngshì",ar:"طماطم",cat:"noun",topic:"الطعام",sentence:{zh:"西红柿是水果吗？",py:"Xīhóngshì shì shuǐguǒ ma?",ar:"الطماطم فاكهة؟"}},
+  {zh:"页",py:"yè",ar:"صفحة (كلمة عدّ)",cat:"noun",topic:"متنوعة",sentence:{zh:"这本书一共有多少页？",py:"Zhè běn shū yígòng yǒu duōshao yè?",ar:"كم صفحة في هالكتاب؟"}},
+  {zh:"遍",py:"biàn",ar:"مرة (كلمة عدّ)",cat:"noun",topic:"متنوعة",sentence:{zh:"这本书她读过很多遍了。",py:"Zhè běn shū tā dúguò hěnduō biànle.",ar:"هي قرأت هالكتاب مرات كثير."}},
+  {zh:"激动",py:"jīdòng",ar:"متأثّر / مُثار",cat:"adj",topic:"المشاعر",sentence:{zh:"毕业了，他们很激动。",py:"Bìyè le, tāmen hěn jīdòng.",ar:"تخرّجوا، وكانوا متأثرين جداً."}},
+  {zh:"香",py:"xiāng",ar:"عطر / ذو رائحة طيبة",cat:"adj",topic:"الطعام",sentence:{zh:"这些花闻起来很香。",py:"Zhèxiē huā wén qǐlái hěn xiāng.",ar:"هالورود ريحتها حلوة."}},
+  {zh:"凉快",py:"liángkuai",ar:"منعش / بارد لطيف",cat:"adj",topic:"الطبيعة",sentence:{zh:"走在海边，感觉很凉快。",py:"Zǒu zài hǎibiān, gǎnjué hěn liángkuai.",ar:"المشي على البحر، حاسس بنسمة حلوة."}},
+  {zh:"活泼",py:"huópō",ar:"نشيط / حيوي",cat:"adj",topic:"متنوعة",sentence:{zh:"这个小女孩儿很活泼。",py:"Zhège xiǎonǚhái'er hěn huópō.",ar:"هالبنت الصغيرة نشيطة مرة."}},
+  {zh:"仔细",py:"zǐxì",ar:"دقيق / بعناية",cat:"adj",topic:"متنوعة",sentence:{zh:"你再仔细找找。",py:"Nǐ zài zǐxì zhǎo zhao.",ar:"دوّر مرة ثانية بعناية."}},
+  {zh:"流利",py:"liúlì",ar:"طلق / فصيح",cat:"adj",topic:"متنوعة",sentence:{zh:"她汉语说得很流利。",py:"Tā hànyǔ shuō de hěn liúlì.",ar:"هي تتكلم صيني بطلاقة."}},
+  {zh:"严重",py:"yánzhòng",ar:"خطير / حاد",cat:"adj",topic:"الصحة",sentence:{zh:"我就是有点儿感冒，不太严重。",py:"Wǒ jiùshì yǒudiǎnr gǎnmào, bú tài yánzhòng.",ar:"بس زكمة خفيفة، مو خطيرة."}},
+  {zh:"厉害",py:"lìhai",ar:"ماهر / قوي",cat:"adj",topic:"متنوعة",sentence:{zh:"全都答对了，你真厉害！",py:"Quán dōu dáduì le, nǐ zhēn lìhai!",ar:"كلها صح، أنت شاطر مرة!"}},
+  {zh:"正式",py:"zhèngshì",ar:"رسمي",cat:"adj",topic:"المظهر",sentence:{zh:"他今天穿得十分正式。",py:"Tā jīntiān chuān de shífēn zhèngshì.",ar:"هو اليوم لابس رسمي."}},
+  {zh:"圆",py:"yuán",ar:"مستدير",cat:"adj",topic:"متنوعة",sentence:{zh:"这个西瓜又大又圆。",py:"Zhège xīguā yòu dà yòu yuán.",ar:"هالبطيخة كبيرة ومدوّرة."}},
+  {zh:"俩",py:"liǎ",ar:"اثنان (عامية)",cat:"noun",topic:"متنوعة",sentence:{zh:"我俩逛街买了很多东西。",py:"Wǒ liǎ guàngjiē mǎile hěnduō dōngxi.",ar:"أنا وياه تسوّقنا واشترينا أشياء كثير."}},
+  {zh:"只",py:"zhī",ar:"(كلمة عدّ للحيوانات)",cat:"noun",topic:"متنوعة",sentence:{zh:"山上有一只老虎。",py:"Shānshàng yǒu yì zhī lǎohǔ.",ar:"في الجبل فيه نمر."}},
+  {zh:"朵",py:"duǒ",ar:"(كلمة عدّ للزهور)",cat:"noun",topic:"الطبيعة",sentence:{zh:"这朵花又大又漂亮。",py:"Zhè duǒ huā yòu dà yòu piàoliang.",ar:"هالوردة كبيرة وحلوة."}},
+  {zh:"棵",py:"kē",ar:"(كلمة عدّ للأشجار)",cat:"noun",topic:"الطبيعة",sentence:{zh:"那棵树的叶子掉光了。",py:"Nà kē shù de yèzi diàoguāng le.",ar:"هالشجرة طاحت كل أوراقها."}},
+  {zh:"到底",py:"dàodǐ",ar:"في النهاية / بالضبط",cat:"adj",topic:"متنوعة",sentence:{zh:"答案到底是什么呢？",py:"Dá'àn dàodǐ shì shénme ne?",ar:"الإجابة بالضبط إيش هي؟"}},
 ];
 let currentMode='cards',currentFilter='all',currentTopic='all',filteredWords=[...words],currentIndex=0,isFlipped=false,known=new Set(),unknown=new Set();
 let quizWords=[],quizIndex=0,quizCorrect=0,quizWrong=0,quizMistakes=[],quizAnswered=false;
@@ -646,20 +646,20 @@ document.getElementById('progressStrip').classList.toggle('hidden',mode==='list'
 if(mode==='quiz'){startQuiz();}else if(mode==='list'){renderList();}else{renderCard();updateProgress();}}
 
 function getTopics(){const t=new Set();words.forEach(w=>t.add(w.topic));return[...t];}
-function buildTopicFilters(){const c=document.getElementById('topicFilters');const topics=getTopics();let h='<button class="tbtn active" data-topic="all" onclick="setTopic(\'all\')">Ø§ÙÙÙ</button>';topics.forEach(t=>{h+='<button class="tbtn" data-topic="'+t+'" onclick="setTopic(\''+t+'\')">'+t+'</button>';});c.innerHTML=h;}
+function buildTopicFilters(){const c=document.getElementById('topicFilters');const topics=getTopics();let h='<button class="tbtn active" data-topic="all" onclick="setTopic(\'all\')">الكل</button>';topics.forEach(t=>{h+='<button class="tbtn" data-topic="'+t+'" onclick="setTopic(\''+t+'\')">'+t+'</button>';});c.innerHTML=h;}
 function setTopic(topic){currentTopic=topic;document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));document.querySelector('.tbtn[data-topic="'+topic+'"]').classList.add('active');applyFilters();}
 function applyFilters(){filteredWords=words.filter(w=>{const c=currentFilter==='all'||w.cat===currentFilter;const t=currentTopic==='all'||w.topic===currentTopic;return c&&t;});currentIndex=0;isFlipped=false;updateCounts();if(currentMode==='cards'){renderCard();updateProgress();}else if(currentMode==='list'){renderList();}else{startQuiz();}}
 function setFilter(cat){currentFilter=cat;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));document.querySelector('.fbtn[data-cat="'+cat+'"]').classList.add('active');applyFilters();}
 function updateCounts(){document.getElementById('countAll').textContent='('+words.length+')';document.getElementById('countVerb').textContent='('+words.filter(w=>w.cat==='verb').length+')';document.getElementById('countNoun').textContent='('+words.filter(w=>w.cat==='noun').length+')';document.getElementById('countAdj').textContent='('+words.filter(w=>w.cat==='adj').length+')';document.getElementById('totalCount').textContent=filteredWords.length;document.getElementById('knownCount').textContent=known.size;document.getElementById('unknownCount').textContent=unknown.size;}
 function updateQuizStats(){document.getElementById('quizTotal').textContent=quizWords.length;document.getElementById('quizCorrectStat').textContent=quizCorrect;document.getElementById('quizWrongStat').textContent=quizWrong;}
-function getCatLabel(c){return{verb:'ÙØ¹Ù',noun:'Ø§Ø³Ù',adj:'ØµÙØ©'}[c]||c;}
+function getCatLabel(c){return{verb:'فعل',noun:'اسم',adj:'صفة'}[c]||c;}
 function updateProgress(){if(!filteredWords.length)return;const pct=((currentIndex+1)/filteredWords.length*100);document.getElementById('progressFill').style.width=pct+'%';document.getElementById('progressText').textContent=(currentIndex+1)+' / '+filteredWords.length;}
 
 const SVG_SPEAKER='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
 
 function renderCard(){
 const a=document.getElementById('cardArea');
-if(!filteredWords.length){a.innerHTML='<div class="empty-state"><div class="emoji">ð­</div><p>ÙØ§ ØªÙØ¬Ø¯ Ø¨Ø·Ø§ÙØ§Øª ÙÙØ°Ø§ Ø§ÙØªØµÙÙÙ</p></div>';return;}
+if(!filteredWords.length){a.innerHTML='<div class="empty-state"><div class="emoji">📭</div><p>لا توجد بطاقات لهذا التصنيف</p></div>';return;}
 const w=filteredWords[currentIndex];
 a.innerHTML=`<div class="card-container"><div class="card card-enter" id="theCard" onclick="flipCard()">
 <div class="card-face card-front">
@@ -669,12 +669,12 @@ a.innerHTML=`<div class="card-container"><div class="card card-enter" id="theCar
   <div class="py">${w.py}</div>
   <div class="ar">${w.ar}</div>
   <div class="tts-row" onclick="event.stopPropagation()">
-    <button class="tts-btn" onclick="speak('${w.zh}')">${SVG_SPEAKER} Ø§ÙÙÙÙØ©</button>
+    <button class="tts-btn" onclick="speak('${w.zh}')">${SVG_SPEAKER} الكلمة</button>
   </div>
   <div class="practice-wrap" onclick="event.stopPropagation()">
-    <div class="practice-label">Ø¬Ø±ÙØ¨ ÙØªØ§Ø¨Ø© Ø§ÙØ­Ø±Ù:</div>
+    <div class="practice-label">جرّب كتابة الحرف:</div>
     <div class="practice-row">
-      <input type="text" class="practice-input" id="pi_${currentIndex}" placeholder="æ±å­" autocomplete="off" dir="ltr" oninput="checkPractice(this,'${w.zh}')"/>
+      <input type="text" class="practice-input" id="pi_${currentIndex}" placeholder="汉字" autocomplete="off" dir="ltr" oninput="checkPractice(this,'${w.zh}')"/>
       <span class="practice-icon" id="pico_${currentIndex}"></span>
     </div>
   </div>
@@ -682,29 +682,29 @@ a.innerHTML=`<div class="card-container"><div class="card card-enter" id="theCar
 </div>
 <div class="card-face card-back">
   <div style="margin-bottom:14px">
-    <div class="back-label">Ø§ÙÙÙÙØ©</div>
+    <div class="back-label">الكلمة</div>
     <div class="back-hz">${w.zh}</div>
     <div class="back-py">${w.py}</div>
-    <div class="back-ar">${w.ar} â <span style="color:var(--${w.cat==='verb'?'verb':w.cat==='noun'?'noun':'adj'})">${getCatLabel(w.cat)}</span></div>
+    <div class="back-ar">${w.ar} — <span style="color:var(--${w.cat==='verb'?'verb':w.cat==='noun'?'noun':'adj'})">${getCatLabel(w.cat)}</span></div>
   </div>
   <div>
-    <div class="back-label">Ø¬ÙÙØ© ØªØ·Ø¨ÙÙÙØ©</div>
+    <div class="back-label">جملة تطبيقية</div>
     <div class="sent-box">
       <div class="sent-zh">${w.sentence.zh}</div>
       <div class="sent-py">${w.sentence.py}</div>
       <div class="sent-ar">${w.sentence.ar}</div>
     </div>
     <div class="tts-row" onclick="event.stopPropagation()">
-      <button class="tts-btn" onclick="speak('${w.zh}')">${SVG_SPEAKER} Ø§ÙÙÙÙØ©</button>
-      <button class="tts-btn" onclick="speak('${w.sentence.zh.replace(/'/g,"\\'")}')">${SVG_SPEAKER} Ø§ÙØ¬ÙÙØ©</button>
+      <button class="tts-btn" onclick="speak('${w.zh}')">${SVG_SPEAKER} الكلمة</button>
+      <button class="tts-btn" onclick="speak('${w.sentence.zh.replace(/'/g,"\\'")}')">${SVG_SPEAKER} الجملة</button>
     </div>
   </div>
   <div class="eval-wrap" onclick="event.stopPropagation()">
-    <div class="eval-label">âï¸ Ø§ÙØªØ¨ Ø¬ÙÙØ© Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ùã${w.zh}ã:</div>
+    <div class="eval-label">✍️ اكتب جملة باستخدام「${w.zh}」:</div>
     <div class="eval-input-row">
-      <input type="text" class="eval-input" id="evalInput_${currentIndex}" placeholder="Ø§ÙØªØ¨ Ø¬ÙÙØªÙ ÙÙØ§ Ø¨Ø§ÙØµÙÙÙ..." autocomplete="off" dir="ltr"
+      <input type="text" class="eval-input" id="evalInput_${currentIndex}" placeholder="اكتب جملتك هنا بالصيني..." autocomplete="off" dir="ltr"
         onkeydown="if(event.key==='Enter')evalSentence('${w.zh}','${w.py}',${currentIndex})"/>
-      <button class="eval-send" id="evalBtn_${currentIndex}" onclick="evalSentence('${w.zh}','${w.py}',${currentIndex})" title="ØªÙÙÙÙ">â¬</button>
+      <button class="eval-send" id="evalBtn_${currentIndex}" onclick="evalSentence('${w.zh}','${w.py}',${currentIndex})" title="تقييم">⬆</button>
     </div>
     <div id="evalResult_${currentIndex}"></div>
   </div>
@@ -721,9 +721,9 @@ let list=filteredWords;
 if(listSearch){const q=listSearch.toLowerCase();list=list.filter(w=>w.zh.includes(q)||w.py.toLowerCase().includes(q)||w.ar.includes(q));}
 let html=`<div style="display:flex;flex-direction:column;width:100%;max-width:460px;height:100%;min-height:0">
 <div class="wl-search">
-  <input type="text" class="wl-search-input" id="listSearchInput" placeholder="Ø§Ø¨Ø­Ø«... æç´¢ / pinyin / Ø¹Ø±Ø¨Ù" value="${listSearch}" oninput="listSearch=this.value;renderListItems();" dir="auto"/>
+  <input type="text" class="wl-search-input" id="listSearchInput" placeholder="ابحث... 搜索 / pinyin / عربي" value="${listSearch}" oninput="listSearch=this.value;renderListItems();" dir="auto"/>
 </div>
-<div class="wl-count"><span id="listCount">${list.length}</span> ÙÙÙØ©</div>
+<div class="wl-count"><span id="listCount">${list.length}</span> كلمة</div>
 <div class="word-list" id="wordListBody"></div>
 </div>`;
 a.innerHTML=html;
@@ -734,11 +734,11 @@ const body=document.getElementById('wordListBody');if(!body)return;
 let list=filteredWords;
 if(listSearch){const q=listSearch.toLowerCase();list=list.filter(w=>w.zh.includes(q)||w.py.toLowerCase().includes(q)||w.ar.includes(q));}
 const countEl=document.getElementById('listCount');if(countEl)countEl.textContent=list.length;
-if(!list.length){body.innerHTML='<div class="empty-state"><div class="emoji">ð</div><p>ÙØ§ ØªÙØ¬Ø¯ ÙØªØ§Ø¦Ø¬</p></div>';return;}
+if(!list.length){body.innerHTML='<div class="empty-state"><div class="emoji">🔍</div><p>لا توجد نتائج</p></div>';return;}
 let html='';
 list.forEach((w,i)=>{
   const realIdx=filteredWords.indexOf(w);
-  const st=known.has(w.zh)?'<span class="wl-status known">â</span>':unknown.has(w.zh)?'<span class="wl-status unknown">â</span>':'';
+  const st=known.has(w.zh)?'<span class="wl-status known">✓</span>':unknown.has(w.zh)?'<span class="wl-status unknown">✗</span>':'';
   html+=`<div class="wl-item" style="animation-delay:${Math.min(i*0.02,0.5)}s" onclick="openFromList(${realIdx})">
     <div class="wl-hz">${w.zh}</div>
     <div class="wl-info"><div class="wl-py">${w.py}</div><div class="wl-ar">${w.ar}</div></div>
@@ -748,7 +748,7 @@ list.forEach((w,i)=>{
 body.innerHTML=html;
 }
 function openFromList(idx){currentIndex=idx;isFlipped=false;setMode('cards');}
-function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.parentElement.querySelector('span');if(!v){inp.style.borderColor='rgba(0,0,0,0.08)';inp.style.boxShadow='none';inp.style.background='#fff';icon.textContent='';return;}if(v===correct.trim()){inp.style.borderColor='var(--jade)';inp.style.boxShadow='0 0 10px rgba(74,124,111,0.2)';inp.style.background='rgba(74,124,111,0.05)';icon.textContent='â';icon.style.color='var(--jade)';}else{inp.style.borderColor='var(--red)';inp.style.boxShadow='0 0 10px rgba(194,58,43,0.12)';inp.style.background='rgba(194,58,43,0.03)';icon.textContent='â';icon.style.color='var(--red)';}}
+function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.parentElement.querySelector('span');if(!v){inp.style.borderColor='rgba(0,0,0,0.08)';inp.style.boxShadow='none';inp.style.background='#fff';icon.textContent='';return;}if(v===correct.trim()){inp.style.borderColor='var(--jade)';inp.style.boxShadow='0 0 10px rgba(74,124,111,0.2)';inp.style.background='rgba(74,124,111,0.05)';icon.textContent='✓';icon.style.color='var(--jade)';}else{inp.style.borderColor='var(--red)';inp.style.boxShadow='0 0 10px rgba(194,58,43,0.12)';inp.style.background='rgba(194,58,43,0.03)';icon.textContent='✗';icon.style.color='var(--red)';}}
 
 // === AI Sentence Evaluation (DashScope Qwen) ===
 const DS_KEY='sk-936218c7914b49c1bf71e256a3054baf';
@@ -770,12 +770,12 @@ async function callAI(prompt,attempt=0){
     });
     clearTimeout(timeout);
     const data=await resp.json();
-    if(!resp.ok)throw new Error(data.error?.message||'Ø®Ø·Ø£ '+resp.status);
+    if(!resp.ok)throw new Error(data.error?.message||'خطأ '+resp.status);
     return data.choices?.[0]?.message?.content||'';
   }catch(e){
     clearTimeout(timeout);
     if(attempt<1)return callAI(prompt,attempt+1);
-    if(e.name==='AbortError')throw new Error('Ø§ÙØªÙØª Ø§ÙÙÙÙØ© â Ø­Ø§ÙÙ ÙØ±Ø© Ø«Ø§ÙÙØ©');
+    if(e.name==='AbortError')throw new Error('انتهت المهلة — حاول مرة ثانية');
     throw e;
   }
 }
@@ -787,38 +787,38 @@ async function evalSentence(zh,py,idx){
   const sentence=inp.value.trim();
   if(!sentence){inp.style.borderColor='var(--red)';inp.classList.add('shake');setTimeout(()=>{inp.classList.remove('shake');inp.style.borderColor='rgba(0,0,0,0.08)';},400);return;}
   
-  btn.disabled=true;btn.classList.add('loading');btn.textContent='â³';
-  res.innerHTML='<div style="text-align:center;color:var(--ink4);font-size:0.7rem;padding:8px">Ø¬Ø§Ø±Ù Ø§ÙØªÙÙÙÙ...</div>';
+  btn.disabled=true;btn.classList.add('loading');btn.textContent='⏳';
+  res.innerHTML='<div style="text-align:center;color:var(--ink4);font-size:0.7rem;padding:8px">جاري التقييم...</div>';
 
-  const prompt=`Ø£ÙØª ÙÙÙÙÙ Ø§Ø®ØªØ¨Ø§Ø± HSK4 Ø§ÙØ±Ø³ÙÙ (Ø§ÙØ¬Ø²Ø¡ Ø§ÙØ«Ø§ÙÙ: çå¾ç¨è¯é å¥).
-Ø§ÙÙØ·ÙÙØ¨ ÙÙ Ø§ÙØ·Ø§ÙØ¨: ÙØªØ§Ø¨Ø© Ø¬ÙÙØ© ØµÙÙÙØ© Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù Ø§ÙÙÙÙØ©ã${zh}ã(${py}).
-Ø¬ÙÙØ© Ø§ÙØ·Ø§ÙØ¨: "${sentence}"
+  const prompt=`أنت مقيّم اختبار HSK4 الرسمي (الجزء الثاني: 看图用词造句).
+المطلوب من الطالب: كتابة جملة صينية باستخدام الكلمة「${zh}」(${py}).
+جملة الطالب: "${sentence}"
 
-ÙÙÙÙ Ø§ÙØ¬ÙÙØ© ÙÙÙ ÙØ¹Ø§ÙÙØ± HSK4 Ø§ÙØ±Ø³ÙÙØ© Ø¨Ø§ÙØ¶Ø¨Ø·:
+قيّم الجملة وفق معايير HSK4 الرسمية بالضبط:
 
-1. ÙÙ Ø§Ø³ØªØ®Ø¯Ù Ø§ÙÙÙÙØ©ã${zh}ãÙÙ Ø§ÙØ¬ÙÙØ©Ø (Ø¥ÙØ²Ø§ÙÙ â Ø¨Ø¯ÙÙÙØ§ = ØµÙØ±)
-2. ØµØ­Ø© Ø§ÙÙÙØ§Ø¹Ø¯ Ø§ÙÙØ­ÙÙØ© (è¯­æ³) â ØªØ±ØªÙØ¨ Ø§ÙÙÙÙØ§ØªØ Ø§Ø³ØªØ®Ø¯Ø§Ù äº/ç/è¿/ç/å¾Ø Ø­Ø±ÙÙ Ø§ÙØ¬Ø±
-3. ØµØ­Ø© Ø§Ø³ØªØ®Ø¯Ø§Ù Ø§ÙÙÙÙØ© (ç¨è¯) â ÙÙ Ø§ÙÙØ¹ÙÙ ÙØ§ÙØ³ÙØ§Ù ØµØ­ÙØ­Ø
-4. Ø§ÙØªÙØ§Ù Ø§ÙÙØ¹ÙÙ â ÙÙ Ø§ÙØ¬ÙÙØ© ÙÙÙÙÙØ© ÙÙÙØ·ÙÙØ©Ø
-5. ÙØ³ØªÙÙ HSK4 â ÙÙ ØªØªÙØ§Ø³Ø¨ ÙØ¹ ÙØ³ØªÙÙ HSK4Ø
+1. هل استخدم الكلمة「${zh}」في الجملة؟ (إلزامي — بدونها = صفر)
+2. صحة القواعد النحوية (语法) — ترتيب الكلمات، استخدام 了/着/过/的/得، حروف الجر
+3. صحة استخدام الكلمة (用词) — هل المعنى والسياق صحيح؟
+4. اكتمال المعنى — هل الجملة مفهومة ومنطقية؟
+5. مستوى HSK4 — هل تتناسب مع مستوى HSK4؟
 
-Ø£Ø¹Ø·Ù Ø§ÙØ¯Ø±Ø¬Ø© ÙÙ 5:
-- 5/5: Ø¬ÙÙØ© ÙØ«Ø§ÙÙØ© Ø¨Ø¯ÙÙ Ø£Ø®Ø·Ø§Ø¡
-- 4/5: Ø®Ø·Ø£ Ø·ÙÙÙ ÙØ§ ÙØ¤Ø«Ø± Ø¹ÙÙ Ø§ÙÙØ¹ÙÙ
-- 3/5: Ø£Ø®Ø·Ø§Ø¡ ÙØ§Ø¶Ø­Ø© ÙÙÙ Ø§ÙÙØ¹ÙÙ ÙÙÙÙÙ
-- 2/5: Ø£Ø®Ø·Ø§Ø¡ ÙØ«ÙØ±Ø© ØªØ¤Ø«Ø± Ø¹ÙÙ Ø§ÙÙØ¹ÙÙ
-- 1/5: Ø§ÙØ¬ÙÙØ© ØºÙØ± ÙÙÙÙÙØ© Ø£Ù Ø§ÙÙÙÙØ© ÙØ³ØªØ®Ø¯ÙØ© Ø¨Ø´ÙÙ Ø®Ø§Ø·Ø¦
-- 0/5: Ø§ÙÙÙÙØ© ØºÙØ± ÙÙØ¬ÙØ¯Ø© ÙÙ Ø§ÙØ¬ÙÙØ©
+أعطِ الدرجة من 5:
+- 5/5: جملة مثالية بدون أخطاء
+- 4/5: خطأ طفيف لا يؤثر على المعنى
+- 3/5: أخطاء واضحة لكن المعنى مفهوم
+- 2/5: أخطاء كثيرة تؤثر على المعنى
+- 1/5: الجملة غير مفهومة أو الكلمة مستخدمة بشكل خاطئ
+- 0/5: الكلمة غير موجودة في الجملة
 
-Ø±Ø¯ Ø¨Ù JSON ÙÙØ· Ø¨Ø¯ÙÙ Ø£Ù ÙØµ Ø¥Ø¶Ø§ÙÙ:
-{"score":X,"word_used":true/false,"grammar_ok":true/false,"meaning_ok":true/false,"feedback":"ÙÙØ§Ø­Ø¸Ø© ÙØµÙØ±Ø© Ø¨Ø§ÙØ¹Ø±Ø¨Ù","correction":"Ø§ÙØ¬ÙÙØ© Ø§ÙØµØ­ÙØ­Ø© Ø¥Ø°Ø§ ÙÙÙ Ø®Ø·Ø£ Ø£Ù ÙØ§Ø±Øº Ø¥Ø°Ø§ ØµØ­ÙØ­Ø©","pinyin":"Ø¨ÙÙÙÙÙ Ø§ÙØ¬ÙÙØ© Ø§ÙÙØµØ­Ø­Ø© Ø£Ù ÙØ§Ø±Øº"}`;
+رد بـ JSON فقط بدون أي نص إضافي:
+{"score":X,"word_used":true/false,"grammar_ok":true/false,"meaning_ok":true/false,"feedback":"ملاحظة قصيرة بالعربي","correction":"الجملة الصحيحة إذا فيه خطأ أو فارغ إذا صحيحة","pinyin":"بينيين الجملة المصححة أو فارغ"}`;
 
   try{
     const raw=await callAI(prompt);
     let text=raw.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
     // Extract JSON from response
     const jsonMatch=text.match(/\{[\s\S]*\}/);
-    if(!jsonMatch)throw new Error('ÙÙ ÙØªÙ Ø§Ø³ØªÙØ§Ù ØªÙÙÙÙ ØµØ­ÙØ­');
+    if(!jsonMatch)throw new Error('لم يتم استلام تقييم صحيح');
     const ev=JSON.parse(jsonMatch[0]);
     
     const sc=ev.score||0;
@@ -827,10 +827,10 @@ async function evalSentence(zh,py,idx){
     
     let html=`<div class="eval-result ${bgCls}">`;
     html+=`<div class="eval-score ${cls}">`;
-    html+=sc>=4?'â':sc>=3?'â ï¸':'â';
+    html+=sc>=4?'✅':sc>=3?'⚠️':'❌';
     html+=` ${sc}/5</div>`;
     
-    if(!ev.word_used) html+=`<div class="eval-line" style="color:var(--red)">â  ÙÙ ØªØ³ØªØ®Ø¯Ù Ø§ÙÙÙÙØ©ã${zh}ãÙÙ Ø§ÙØ¬ÙÙØ©!</div>`;
+    if(!ev.word_used) html+=`<div class="eval-line" style="color:var(--red)">⚠ لم تستخدم الكلمة「${zh}」في الجملة!</div>`;
     html+=`<div class="eval-line">${ev.feedback}</div>`;
     
     if(ev.correction){
@@ -847,9 +847,9 @@ async function evalSentence(zh,py,idx){
     
   }catch(e){
     console.error('AI eval error:',e);
-    res.innerHTML=`<div class="eval-result fail"><div class="eval-line" style="color:var(--red)">Ø®Ø·Ø£: ${e.message}</div></div>`;
+    res.innerHTML=`<div class="eval-result fail"><div class="eval-line" style="color:var(--red)">خطأ: ${e.message}</div></div>`;
   }finally{
-    btn.disabled=false;btn.classList.remove('loading');btn.textContent='â¬';
+    btn.disabled=false;btn.classList.remove('loading');btn.textContent='⬆';
   }
 }
 function goNext(){if(!filteredWords.length)return;currentIndex=(currentIndex+1)%filteredWords.length;isFlipped=false;renderCard();updateProgress();}
@@ -861,31 +861,31 @@ function shuffleCards(){filteredWords.sort(()=>Math.random()-0.5);currentIndex=0
 function startQuiz(){quizWords=filteredWords.filter(w=>known.has(w.zh));quizWords.sort(()=>Math.random()-0.5);quizIndex=0;quizCorrect=0;quizWrong=0;quizMistakes=[];updateQuizStats();renderQuizCard();}
 function selectCat(c){selectedCat=c;document.querySelectorAll('.cat-choice-btn').forEach(b=>{b.style.borderColor=b.dataset.c===c?'var(--gold)':'rgba(0,0,0,0.08)';b.style.background=b.dataset.c===c?'rgba(184,148,62,0.1)':'transparent';});}
 
-function renderQuizCard(){const a=document.getElementById('cardArea');if(!quizWords.length){a.innerHTML='<div class="empty-state"><div class="emoji">ð</div><p>ÙØ§ ØªÙØ¬Ø¯ ÙÙÙØ§Øª ÙØ­Ø¯Ø¯Ø© Ø¨Ù "Ø£Ø¹Ø±ÙÙØ§" Ø¨Ø¹Ø¯!<br>Ø§Ø±Ø¬Ø¹ ÙÙØ¶Ø¹ Ø§ÙØ¨Ø·Ø§ÙØ§Øª ÙØ§Ø¶ØºØ· "â Ø£Ø¹Ø±Ù".</p></div>';return;}
+function renderQuizCard(){const a=document.getElementById('cardArea');if(!quizWords.length){a.innerHTML='<div class="empty-state"><div class="emoji">📝</div><p>لا توجد كلمات محددة بـ "أعرفها" بعد!<br>ارجع لوضع البطاقات واضغط "✓ أعرف".</p></div>';return;}
 if(quizIndex>=quizWords.length){renderQuizSummary();return;}
 const w=quizWords[quizIndex];quizAnswered=false;selectedCat=null;
 const pct=((quizIndex+1)/quizWords.length*100);
 document.getElementById('progressFill').style.width=pct+'%';
 document.getElementById('progressText').textContent=(quizIndex+1)+' / '+quizWords.length;
 a.innerHTML=`<div class="quiz-card card-enter">
-<div class="quiz-header"><span class="quiz-score-badge"><span class="correct-num">${quizCorrect}</span> â | <span class="wrong-num">${quizWrong}</span> â</span><span class="badge-topic">${w.topic}</span></div>
+<div class="quiz-header"><span class="quiz-score-badge"><span class="correct-num">${quizCorrect}</span> ✓ | <span class="wrong-num">${quizWrong}</span> ✗</span><span class="badge-topic">${w.topic}</span></div>
 <div class="quiz-chinese">${w.zh}</div>
 <div class="quiz-arabic-hint">${w.ar}</div>
-<div class="tts-row" style="margin-bottom:16px"><button class="tts-btn" onclick="speak('${w.zh}')">${SVG_SPEAKER} Ø§Ø³ØªÙØ¹</button></div>
+<div class="tts-row" style="margin-bottom:16px"><button class="tts-btn" onclick="speak('${w.zh}')">${SVG_SPEAKER} استمع</button></div>
 <div style="margin-bottom:10px;text-align:center">
-  <div style="font-size:0.6rem;color:var(--ink4);margin-bottom:6px;font-family:Reem Kufi,serif">â  Ø£Ø¹Ø¯ ÙØªØ§Ø¨Ø© Ø§ÙØ­Ø±Ù:</div>
-  <div class="quiz-input-wrap"><input type="text" class="quiz-input" id="quizInput" placeholder="Ø§ÙØªØ¨ æ±å­ ÙÙØ§..." autocomplete="off" dir="ltr" style="font-family:LXGW WenKai TC,Noto Sans SC,sans-serif;font-size:1.4rem"/></div>
+  <div style="font-size:0.6rem;color:var(--ink4);margin-bottom:6px;font-family:Reem Kufi,serif">① أعد كتابة الحرف:</div>
+  <div class="quiz-input-wrap"><input type="text" class="quiz-input" id="quizInput" placeholder="اكتب 汉字 هنا..." autocomplete="off" dir="ltr" style="font-family:LXGW WenKai TC,Noto Sans SC,sans-serif;font-size:1.4rem"/></div>
 </div>
 <div style="margin-bottom:12px;text-align:center">
-  <div style="font-size:0.6rem;color:var(--ink4);margin-bottom:6px;font-family:Reem Kufi,serif">â¡ Ø­Ø¯Ø¯ ÙÙØ¹ Ø§ÙÙÙÙØ©:</div>
+  <div style="font-size:0.6rem;color:var(--ink4);margin-bottom:6px;font-family:Reem Kufi,serif">② حدد نوع الكلمة:</div>
   <div style="display:flex;justify-content:center;gap:6px;direction:ltr">
-    <button class="cat-choice-btn" data-c="verb" onclick="selectCat('verb')" style="padding:6px 16px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.08);background:transparent;color:var(--ink2);font-family:Reem Kufi,serif;font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.2s">ÙØ¹Ù</button>
-    <button class="cat-choice-btn" data-c="noun" onclick="selectCat('noun')" style="padding:6px 16px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.08);background:transparent;color:var(--ink2);font-family:Reem Kufi,serif;font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.2s">Ø§Ø³Ù</button>
-    <button class="cat-choice-btn" data-c="adj" onclick="selectCat('adj')" style="padding:6px 16px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.08);background:transparent;color:var(--ink2);font-family:Reem Kufi,serif;font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.2s">ØµÙØ©</button>
+    <button class="cat-choice-btn" data-c="verb" onclick="selectCat('verb')" style="padding:6px 16px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.08);background:transparent;color:var(--ink2);font-family:Reem Kufi,serif;font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.2s">فعل</button>
+    <button class="cat-choice-btn" data-c="noun" onclick="selectCat('noun')" style="padding:6px 16px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.08);background:transparent;color:var(--ink2);font-family:Reem Kufi,serif;font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.2s">اسم</button>
+    <button class="cat-choice-btn" data-c="adj" onclick="selectCat('adj')" style="padding:6px 16px;border-radius:20px;border:1.5px solid rgba(0,0,0,0.08);background:transparent;color:var(--ink2);font-family:Reem Kufi,serif;font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.2s">صفة</button>
   </div>
 </div>
-<button class="quiz-submit-btn" id="quizSubmitBtn" onclick="checkQuizAnswer()">ØªØ­ÙÙ â</button>
-<button class="quiz-skip-btn" onclick="skipQuizQuestion()">ØªØ®Ø·ÙÙ â</button>
+<button class="quiz-submit-btn" id="quizSubmitBtn" onclick="checkQuizAnswer()">تحقق ✓</button>
+<button class="quiz-skip-btn" onclick="skipQuizQuestion()">تخطّي ←</button>
 <div id="quizFeedback"></div>
 </div>`;
 const inp=document.getElementById('quizInput');if(inp){inp.focus();inp.addEventListener('keydown',(e)=>{if(e.key==='Enter'){if(quizAnswered)quizNext();else checkQuizAnswer();}});}
@@ -899,26 +899,26 @@ const w=quizWords[quizIndex];const zhOk=ua===w.zh;const catOk=selectedCat===w.ca
 document.querySelectorAll('.cat-choice-btn').forEach(b=>{b.style.pointerEvents='none';b.style.opacity='0.6';});
 const correctCatBtn=document.querySelector('.cat-choice-btn[data-c="'+w.cat+'"]');if(correctCatBtn){correctCatBtn.style.borderColor='var(--correct)';correctCatBtn.style.background='rgba(74,124,111,0.1)';correctCatBtn.style.opacity='1';}
 if(!catOk&&selectedCat){const wrongBtn=document.querySelector('.cat-choice-btn[data-c="'+selectedCat+'"]');if(wrongBtn){wrongBtn.style.borderColor='var(--wrong)';wrongBtn.style.background='rgba(194,58,43,0.08)';}}
-if(allOk){quizCorrect++;inp.classList.add('correct');speak(w.zh);fb.innerHTML='<div class="quiz-feedback correct-fb"><div class="quiz-fb-icon">ð</div><div class="quiz-fb-text" style="color:var(--correct)">Ø¥Ø¬Ø§Ø¨Ø© ØµØ­ÙØ­Ø©!</div><div class="quiz-fb-answer"><span class="correct-answer" style="font-family:LXGW WenKai TC,sans-serif;font-size:1.4rem">'+w.zh+'</span> <span style="color:var(--gold)">'+w.py+'</span> â '+getCatLabel(w.cat)+'</div><button class="quiz-next-btn" onclick="quizNext()">Ø§ÙØªØ§ÙÙ â</button></div>';}
-else{quizWrong++;known.delete(w.zh);unknown.add(w.zh);saveState();updateCounts();let detail='';if(!zhOk)detail+='Ø§ÙØ­Ø±Ù: <span class="correct-answer" style="font-family:LXGW WenKai TC,sans-serif;font-size:1.2rem">'+w.zh+'</span> (ÙØªØ¨Øª: <span style="color:var(--wrong);text-decoration:line-through;font-family:LXGW WenKai TC,sans-serif">'+ua+'</span>)<br>';if(!catOk)detail+='Ø§ÙØªØµÙÙÙ: <span style="color:var(--correct)">'+getCatLabel(w.cat)+'</span> (Ø§Ø®ØªØ±Øª: <span style="color:var(--wrong);text-decoration:line-through">'+getCatLabel(selectedCat)+'</span>)';
+if(allOk){quizCorrect++;inp.classList.add('correct');speak(w.zh);fb.innerHTML='<div class="quiz-feedback correct-fb"><div class="quiz-fb-icon">🎉</div><div class="quiz-fb-text" style="color:var(--correct)">إجابة صحيحة!</div><div class="quiz-fb-answer"><span class="correct-answer" style="font-family:LXGW WenKai TC,sans-serif;font-size:1.4rem">'+w.zh+'</span> <span style="color:var(--gold)">'+w.py+'</span> — '+getCatLabel(w.cat)+'</div><button class="quiz-next-btn" onclick="quizNext()">التالي →</button></div>';}
+else{quizWrong++;known.delete(w.zh);unknown.add(w.zh);saveState();updateCounts();let detail='';if(!zhOk)detail+='الحرف: <span class="correct-answer" style="font-family:LXGW WenKai TC,sans-serif;font-size:1.2rem">'+w.zh+'</span> (كتبت: <span style="color:var(--wrong);text-decoration:line-through;font-family:LXGW WenKai TC,sans-serif">'+ua+'</span>)<br>';if(!catOk)detail+='التصنيف: <span style="color:var(--correct)">'+getCatLabel(w.cat)+'</span> (اخترت: <span style="color:var(--wrong);text-decoration:line-through">'+getCatLabel(selectedCat)+'</span>)';
 quizMistakes.push({word:w,userAnswer:ua,userCat:selectedCat,zhOk,catOk});if(!zhOk)inp.classList.add('wrong','shake');
-fb.innerHTML='<div class="quiz-feedback wrong-fb"><div class="quiz-fb-icon">ð</div><div class="quiz-fb-text" style="color:var(--wrong)">'+(zhOk?'Ø§ÙØ­Ø±Ù ØµØ­ÙØ­ ÙÙÙ Ø§ÙØªØµÙÙÙ Ø®Ø§Ø·Ø¦':catOk?'Ø§ÙØªØµÙÙÙ ØµØ­ÙØ­ ÙÙÙ Ø§ÙØ­Ø±Ù Ø®Ø§Ø·Ø¦':'Ø§ÙØ­Ø±Ù ÙØ§ÙØªØµÙÙÙ Ø®Ø§Ø·Ø¦ÙÙ')+'</div><div class="quiz-fb-answer" style="font-size:0.85rem">'+detail+'</div><div style="margin-top:6px;font-size:0.65rem;color:var(--wrong);opacity:0.7">âµ ØªÙ ÙÙÙ Ø§ÙÙÙÙØ© Ø¥ÙÙ "ÙØ§ Ø£Ø¹Ø±Ù"</div><div class="tts-row" style="margin-top:8px"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+SVG_SPEAKER+' Ø§Ø³ØªÙØ¹</button></div><button class="quiz-next-btn" onclick="quizNext()">Ø§ÙØªØ§ÙÙ â</button></div>';setTimeout(()=>document.querySelector('.quiz-next-btn')?.focus(),50);}
+fb.innerHTML='<div class="quiz-feedback wrong-fb"><div class="quiz-fb-icon">😅</div><div class="quiz-fb-text" style="color:var(--wrong)">'+(zhOk?'الحرف صحيح لكن التصنيف خاطئ':catOk?'التصنيف صحيح لكن الحرف خاطئ':'الحرف والتصنيف خاطئين')+'</div><div class="quiz-fb-answer" style="font-size:0.85rem">'+detail+'</div><div style="margin-top:6px;font-size:0.65rem;color:var(--wrong);opacity:0.7">⟵ تم نقل الكلمة إلى "لا أعرف"</div><div class="tts-row" style="margin-top:8px"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+SVG_SPEAKER+' استمع</button></div><button class="quiz-next-btn" onclick="quizNext()">التالي →</button></div>';setTimeout(()=>document.querySelector('.quiz-next-btn')?.focus(),50);}
 updateQuizStats();}
 
-function skipQuizQuestion(){if(quizAnswered)return;const w=quizWords[quizIndex];quizWrong++;known.delete(w.zh);unknown.add(w.zh);saveState();updateCounts();quizMistakes.push({word:w,userAnswer:'(ØªØ®Ø·ÙÙ)',userCat:null,zhOk:false,catOk:false});quizAnswered=true;updateQuizStats();
+function skipQuizQuestion(){if(quizAnswered)return;const w=quizWords[quizIndex];quizWrong++;known.delete(w.zh);unknown.add(w.zh);saveState();updateCounts();quizMistakes.push({word:w,userAnswer:'(تخطّي)',userCat:null,zhOk:false,catOk:false});quizAnswered=true;updateQuizStats();
 const fb=document.getElementById('quizFeedback');const inp=document.getElementById('quizInput');const btn=document.getElementById('quizSubmitBtn');
 if(inp){inp.disabled=true;inp.classList.add('wrong');}if(btn)btn.disabled=true;
 document.querySelectorAll('.cat-choice-btn').forEach(b=>{b.style.pointerEvents='none';b.style.opacity='0.6';});
 const ccb=document.querySelector('.cat-choice-btn[data-c="'+w.cat+'"]');if(ccb){ccb.style.borderColor='var(--correct)';ccb.style.background='rgba(74,124,111,0.1)';ccb.style.opacity='1';}
-fb.innerHTML='<div class="quiz-feedback wrong-fb"><div class="quiz-fb-icon">ð</div><div class="quiz-fb-text" style="color:var(--gold)">Ø§ÙØ¥Ø¬Ø§Ø¨Ø©:</div><div class="quiz-fb-answer"><span class="correct-answer" style="font-family:LXGW WenKai TC,sans-serif;font-size:1.4rem">'+w.zh+'</span> <span style="color:var(--gold)">'+w.py+'</span> â '+getCatLabel(w.cat)+'</div><div style="margin-top:6px;font-size:0.65rem;color:var(--wrong);opacity:0.7">âµ ØªÙ ÙÙÙ Ø§ÙÙÙÙØ© Ø¥ÙÙ "ÙØ§ Ø£Ø¹Ø±Ù"</div><div class="tts-row" style="margin-top:8px"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+SVG_SPEAKER+' Ø§Ø³ØªÙØ¹</button></div><button class="quiz-next-btn" onclick="quizNext()">Ø§ÙØªØ§ÙÙ â</button></div>';setTimeout(()=>document.querySelector('.quiz-next-btn')?.focus(),50);}
+fb.innerHTML='<div class="quiz-feedback wrong-fb"><div class="quiz-fb-icon">📖</div><div class="quiz-fb-text" style="color:var(--gold)">الإجابة:</div><div class="quiz-fb-answer"><span class="correct-answer" style="font-family:LXGW WenKai TC,sans-serif;font-size:1.4rem">'+w.zh+'</span> <span style="color:var(--gold)">'+w.py+'</span> — '+getCatLabel(w.cat)+'</div><div style="margin-top:6px;font-size:0.65rem;color:var(--wrong);opacity:0.7">⟵ تم نقل الكلمة إلى "لا أعرف"</div><div class="tts-row" style="margin-top:8px"><button class="tts-btn" onclick="speak(\''+w.zh+'\')">'+SVG_SPEAKER+' استمع</button></div><button class="quiz-next-btn" onclick="quizNext()">التالي →</button></div>';setTimeout(()=>document.querySelector('.quiz-next-btn')?.focus(),50);}
 
 function quizNext(){quizIndex++;renderQuizCard();}
 
 function renderQuizSummary(){const a=document.getElementById('cardArea');const t=quizWords.length;const pct=t>0?Math.round((quizCorrect/t)*100):0;
-let emoji='ð',msg='ÙÙØªØ§Ø²!';if(pct<30){emoji='ðª';msg='Ø§Ø³ØªÙØ±!';}else if(pct<60){emoji='ð';msg='Ø¬ÙØ¯Ø ÙØ§ØµÙ!';}else if(pct<80){emoji='ð';msg='Ø£Ø­Ø³ÙØª!';}else if(pct<100){emoji='ð';msg='Ø±Ø§Ø¦Ø¹!';}
+let emoji='🎉',msg='ممتاز!';if(pct<30){emoji='💪';msg='استمر!';}else if(pct<60){emoji='📚';msg='جيد، واصل!';}else if(pct<80){emoji='👏';msg='أحسنت!';}else if(pct<100){emoji='🌟';msg='رائع!';}
 document.getElementById('progressFill').style.width='100%';document.getElementById('progressText').textContent=t+' / '+t;
-let mHTML='';if(quizMistakes.length>0){mHTML='<div class="quiz-mistakes-list"><div class="quiz-mistakes-title">ØªØ­ØªØ§Ø¬ ÙØ±Ø§Ø¬Ø¹Ø© ('+quizMistakes.length+')</div>';quizMistakes.forEach(m=>{let err='';if(!m.zhOk)err+='<span style="color:var(--wrong);font-family:LXGW WenKai TC,sans-serif">'+m.userAnswer+'</span> ';if(!m.catOk&&m.userCat)err+='<span style="color:var(--wrong);font-size:0.65rem">'+getCatLabel(m.userCat)+'</span>';if(!err)err='(ØªØ®Ø·ÙÙ)';mHTML+='<div class="quiz-mistake-item"><span class="mistake-zh">'+m.word.zh+'</span><span class="mistake-correct">'+m.word.py+' Â· '+getCatLabel(m.word.cat)+'</span><span class="mistake-yours">'+err+'</span></div>';});mHTML+='</div>';}
-a.innerHTML='<div class="quiz-summary"><div class="quiz-summary-title">ÙØªÙØ¬Ø© Ø§ÙØ§Ø®ØªØ¨Ø§Ø±</div><div class="quiz-summary-emoji">'+emoji+'</div><div class="quiz-score-display" style="color:'+(pct>=60?'var(--correct)':'var(--wrong)')+'">%'+pct+'</div><div class="quiz-score-label">'+msg+'</div><div class="quiz-summary-details"><div class="quiz-detail"><div class="quiz-detail-num" style="color:var(--correct)">'+quizCorrect+'</div><div class="quiz-detail-label">ØµØ­ÙØ­</div></div><div class="quiz-detail"><div class="quiz-detail-num" style="color:var(--wrong)">'+quizWrong+'</div><div class="quiz-detail-label">Ø®Ø·Ø£</div></div><div class="quiz-detail"><div class="quiz-detail-num" style="color:var(--gold)">'+t+'</div><div class="quiz-detail-label">Ø¥Ø¬ÙØ§ÙÙ</div></div></div>'+mHTML+'<button class="quiz-restart-btn" onclick="startQuiz()">ð Ø¥Ø¹Ø§Ø¯Ø©</button></div>';}
+let mHTML='';if(quizMistakes.length>0){mHTML='<div class="quiz-mistakes-list"><div class="quiz-mistakes-title">تحتاج مراجعة ('+quizMistakes.length+')</div>';quizMistakes.forEach(m=>{let err='';if(!m.zhOk)err+='<span style="color:var(--wrong);font-family:LXGW WenKai TC,sans-serif">'+m.userAnswer+'</span> ';if(!m.catOk&&m.userCat)err+='<span style="color:var(--wrong);font-size:0.65rem">'+getCatLabel(m.userCat)+'</span>';if(!err)err='(تخطّي)';mHTML+='<div class="quiz-mistake-item"><span class="mistake-zh">'+m.word.zh+'</span><span class="mistake-correct">'+m.word.py+' · '+getCatLabel(m.word.cat)+'</span><span class="mistake-yours">'+err+'</span></div>';});mHTML+='</div>';}
+a.innerHTML='<div class="quiz-summary"><div class="quiz-summary-title">نتيجة الاختبار</div><div class="quiz-summary-emoji">'+emoji+'</div><div class="quiz-score-display" style="color:'+(pct>=60?'var(--correct)':'var(--wrong)')+'">%'+pct+'</div><div class="quiz-score-label">'+msg+'</div><div class="quiz-summary-details"><div class="quiz-detail"><div class="quiz-detail-num" style="color:var(--correct)">'+quizCorrect+'</div><div class="quiz-detail-label">صحيح</div></div><div class="quiz-detail"><div class="quiz-detail-num" style="color:var(--wrong)">'+quizWrong+'</div><div class="quiz-detail-label">خطأ</div></div><div class="quiz-detail"><div class="quiz-detail-num" style="color:var(--gold)">'+t+'</div><div class="quiz-detail-label">إجمالي</div></div></div>'+mHTML+'<button class="quiz-restart-btn" onclick="startQuiz()">🔄 إعادة</button></div>';}
 
 // Keyboard & Touch
 document.addEventListener('keydown',e=>{if(currentMode==='quiz')return;if(e.target.tagName==='INPUT')return;if(e.key==='ArrowLeft')goNext();else if(e.key==='ArrowRight')goPrev();else if(e.key===' '){e.preventDefault();flipCard();}else if(e.key==='1')markKnown();else if(e.key==='2')markUnknown();});
