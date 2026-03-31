@@ -906,24 +906,17 @@ body.innerHTML=html;
 function openFromList(idx){currentIndex=idx;isFlipped=false;setMode('cards');}
 function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.parentElement.querySelector('span');if(!v){inp.style.borderColor='rgba(0,0,0,0.08)';inp.style.boxShadow='none';inp.style.background='#fff';icon.textContent='';return;}if(v===correct.trim()){inp.style.borderColor='var(--jade)';inp.style.boxShadow='0 0 10px rgba(74,124,111,0.2)';inp.style.background='rgba(74,124,111,0.05)';icon.textContent='✓';icon.style.color='var(--jade)';}else{inp.style.borderColor='var(--red)';inp.style.boxShadow='0 0 10px rgba(194,58,43,0.12)';inp.style.background='rgba(194,58,43,0.03)';icon.textContent='✗';icon.style.color='var(--red)';}}
 
-// === Gemini Sentence Evaluation ===
-const GEMINI_KEY='AIzaSyDT_bln86Cdby9LuXOsvqTEbzxi3DCnxWI';
-const GEMINI_MODELS=['gemini-2.0-flash-lite','gemini-2.0-flash','gemini-1.5-flash'];
-async function callGemini(prompt,attempt=0){
-  const model=GEMINI_MODELS[attempt % GEMINI_MODELS.length];
-  const resp=await fetch('https://generativelanguage.googleapis.com/v1/models/'+model+':generateContent?key='+GEMINI_KEY,{
-    method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.1}})
+// === AI Sentence Evaluation (DashScope Qwen) ===
+const DS_KEY='sk-936218c7914b49c1bf71e256a3054baf';
+const DS_URL='https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions';
+async function callAI(prompt){
+  const resp=await fetch(DS_URL,{
+    method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+DS_KEY},
+    body:JSON.stringify({model:'qwen-flash',messages:[{role:'user',content:prompt}],temperature:0.1})
   });
   const data=await resp.json();
-  if(!resp.ok){
-    if(attempt<2){
-      await new Promise(r=>setTimeout(r,1500));
-      return callGemini(prompt,attempt+1);
-    }
-    throw new Error(data.error?.message||'API error');
-  }
-  return data;
+  if(!resp.ok)throw new Error(data.error?.message||'API error '+resp.status);
+  return data.choices?.[0]?.message?.content||'';
 }
 async function evalSentence(zh,py,idx){
   const inp=document.getElementById('evalInput_'+idx);
@@ -960,11 +953,12 @@ async function evalSentence(zh,py,idx){
 {"score":X,"word_used":true/false,"grammar_ok":true/false,"meaning_ok":true/false,"feedback":"ملاحظة قصيرة بالعربي","correction":"الجملة الصحيحة إذا فيه خطأ أو فارغ إذا صحيحة","pinyin":"بينيين الجملة المصححة أو فارغ"}`;
 
   try{
-    const data=await callGemini(prompt);
-    
-    let text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
-    text=text.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
-    const ev=JSON.parse(text);
+    const raw=await callAI(prompt);
+    let text=raw.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
+    // Extract JSON from response
+    const jsonMatch=text.match(/\{[\s\S]*\}/);
+    if(!jsonMatch)throw new Error('لم يتم استلام تقييم صحيح');
+    const ev=JSON.parse(jsonMatch[0]);
     
     const sc=ev.score||0;
     const cls=sc>=4?'high':sc>=3?'mid':'low';
@@ -991,7 +985,7 @@ async function evalSentence(zh,py,idx){
     else setTimeout(()=>speak(sentence),500);
     
   }catch(e){
-    console.error('Gemini error:',e);
+    console.error('AI eval error:',e);
     res.innerHTML=`<div class="eval-result fail"><div class="eval-line" style="color:var(--red)">خطأ: ${e.message}</div></div>`;
   }finally{
     btn.disabled=false;btn.classList.remove('loading');btn.textContent='⬆';
