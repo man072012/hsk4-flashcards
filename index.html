@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>بطاقات HSK4 التعليمية</title>
 <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Amiri:wght@400;700&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 <style>
 :root {
   --ink:#1a1a1a;--ink2:#2c2318;--ink3:#5c4a3a;--ink4:#8a7560;
@@ -59,6 +62,28 @@ body{
   color:var(--ink4);cursor:pointer;transition:all 0.3s;
 }
 .mode-toggle button.active{background:var(--red);color:#fff;box-shadow:0 2px 8px rgba(194,58,43,0.25);}
+
+/* === AUTH === */
+.auth-btn{
+  display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:16px;
+  border:1px solid rgba(0,0,0,0.08);background:var(--paper3);cursor:pointer;
+  font-family:'Reem Kufi',serif;font-size:0.62rem;color:var(--ink3);
+  transition:all 0.2s;white-space:nowrap;flex-shrink:0;
+}
+.auth-btn:hover{border-color:var(--gold);color:var(--ink);}
+.auth-btn svg{width:14px;height:14px;}
+.auth-avatar{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--gold);}
+.auth-name{max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--jade);display:inline-block;animation:syncPulse 2s ease infinite;}
+@keyframes syncPulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.sync-msg{
+  position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:999;
+  padding:6px 16px;border-radius:20px;font-family:'Reem Kufi',serif;font-size:0.7rem;
+  color:#fff;animation:fadeInOut 2.5s ease forwards;pointer-events:none;
+}
+.sync-msg.success{background:var(--jade);}
+.sync-msg.info{background:var(--gold);}
+@keyframes fadeInOut{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}15%{opacity:1;transform:translateX(-50%) translateY(0)}75%{opacity:1}100%{opacity:0}}
 
 /* === FILTERS STRIP === */
 .filters-strip{
@@ -356,6 +381,12 @@ body{
     <button id="modeList" onclick="setMode('list')">قائمة</button>
     <button id="modeQuiz" onclick="setMode('quiz')">اختبار</button>
   </div>
+  <div id="authArea">
+    <button class="auth-btn" id="loginBtn" onclick="googleSignIn()">
+      <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      دخول
+    </button>
+  </div>
 </div>
 
 <!-- FILTERS -->
@@ -387,6 +418,114 @@ body{
 </div>
 
 <script>
+// === Firebase Init ===
+firebase.initializeApp({
+  apiKey:"AIzaSyCzaXYSuqZgZ9c7B-iwBCWx5MCSEZe_tdw",
+  authDomain:"hsk4-study-guide.firebaseapp.com",
+  projectId:"hsk4-study-guide",
+  storageBucket:"hsk4-study-guide.firebasestorage.app",
+  messagingSenderId:"644710253955",
+  appId:"1:644710253955:web:0c59946b4e6290dea7a2b6"
+});
+const fbAuth=firebase.auth();
+const fbDb=firebase.firestore();
+let fbUser=null;
+
+function showSyncMsg(text,type='success'){
+  const el=document.createElement('div');el.className='sync-msg '+type;el.textContent=text;
+  document.body.appendChild(el);setTimeout(()=>el.remove(),2600);
+}
+
+function updateAuthUI(){
+  const area=document.getElementById('authArea');
+  if(fbUser){
+    const name=fbUser.displayName?.split(' ')[0]||'مستخدم';
+    const photo=fbUser.photoURL;
+    area.innerHTML=`<button class="auth-btn" onclick="googleSignOut()">
+      ${photo?'<img class="auth-avatar" src="'+photo+'" alt="">':''}
+      <span class="auth-name">${name}</span>
+      <span class="sync-dot"></span>
+    </button>`;
+  }else{
+    area.innerHTML=`<button class="auth-btn" id="loginBtn" onclick="googleSignIn()">
+      <svg viewBox="0 0 24 24" width="14" height="14"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      دخول
+    </button>`;
+  }
+}
+
+async function googleSignIn(){
+  try{
+    const provider=new firebase.auth.GoogleAuthProvider();
+    await fbAuth.signInWithPopup(provider);
+  }catch(e){console.error('Sign-in error:',e);if(e.code!=='auth/popup-closed-by-user')showSyncMsg('فشل تسجيل الدخول','info');}
+}
+
+async function googleSignOut(){
+  if(!confirm('تسجيل الخروج؟'))return;
+  try{await fbAuth.signOut();showSyncMsg('تم تسجيل الخروج','info');}catch(e){console.error(e);}
+}
+
+async function saveToCloud(){
+  if(!fbUser)return;
+  try{
+    await fbDb.collection('flashcards').doc(fbUser.uid).set({
+      known:[...known],unknown:[...unknown],
+      updatedAt:new Date().toISOString()
+    },{merge:true});
+  }catch(e){console.warn('Cloud save failed:',e);}
+}
+
+async function loadFromCloud(){
+  if(!fbUser)return null;
+  try{
+    const snap=await fbDb.collection('flashcards').doc(fbUser.uid).get();
+    if(snap.exists)return snap.data();
+  }catch(e){console.warn('Cloud load failed:',e);}
+  return null;
+}
+
+async function syncOnLogin(){
+  const cloud=await loadFromCloud();
+  if(!cloud){
+    // No cloud data → upload local
+    await saveToCloud();
+    showSyncMsg('✓ تم رفع التقدم للسحابة');
+    return;
+  }
+  // Merge: union of known/unknown from both sources
+  const cloudKnown=new Set(cloud.known||[]);
+  const cloudUnknown=new Set(cloud.unknown||[]);
+  const localTime=localStorage.getItem('hsk4_updated')||'';
+  const cloudTime=cloud.updatedAt||'';
+  
+  if(cloudTime>localTime){
+    // Cloud is newer → use cloud as base, add local additions
+    cloudKnown.forEach(w=>known.add(w));
+    cloudUnknown.forEach(w=>{if(!known.has(w))unknown.add(w);});
+    showSyncMsg('✓ تم تحميل التقدم من السحابة');
+  }else{
+    // Local is newer → keep local, upload
+    known.forEach(w=>cloudKnown.add(w));
+    unknown.forEach(w=>{if(!cloudKnown.has(w))cloudUnknown.add(w);});
+  }
+  // Clean conflicts: if word is in both known and unknown, keep in known
+  unknown.forEach(w=>{if(known.has(w))unknown.delete(w);});
+  saveState();updateCounts();
+  await saveToCloud();
+}
+
+// Listen for auth state changes
+fbAuth.onAuthStateChanged(async(user)=>{
+  fbUser=user;
+  updateAuthUI();
+  if(user){
+    await syncOnLogin();
+    if(currentMode==='cards'){renderCard();updateProgress();}
+    else if(currentMode==='list')renderList();
+  }
+});
+
 const words = [
   {zh:"尝",py:"cháng",ar:"يُجرّب / يتذوّق",cat:"verb",topic:"التصرفات",sentence:{zh:"你尝一下这个菜，味道很好。",py:"Nǐ cháng yíxià zhège cài, wèidào hěn hǎo.",ar:"جرّب هذا الطبق، طعمه لذيذ جداً."}},
   {zh:"讨论",py:"tǎolùn",ar:"يُناقش",cat:"verb",topic:"التصرفات",sentence:{zh:"我们一起讨论这个问题吧。",py:"Wǒmen yìqǐ tǎolùn zhège wèntí ba.",ar:"لنناقش هذه المشكلة معاً."}},
@@ -524,7 +663,7 @@ let currentMode='cards',currentFilter='all',currentTopic='all',filteredWords=[..
 let quizWords=[],quizIndex=0,quizCorrect=0,quizWrong=0,quizMistakes=[],quizAnswered=false;
 let selectedCat=null;
 try{const s=localStorage.getItem('hsk4_known');if(s)known=new Set(JSON.parse(s));const u=localStorage.getItem('hsk4_unknown');if(u)unknown=new Set(JSON.parse(u));}catch(e){}
-function saveState(){try{localStorage.setItem('hsk4_known',JSON.stringify([...known]));localStorage.setItem('hsk4_unknown',JSON.stringify([...unknown]));}catch(e){}}
+function saveState(){try{localStorage.setItem('hsk4_known',JSON.stringify([...known]));localStorage.setItem('hsk4_unknown',JSON.stringify([...unknown]));localStorage.setItem('hsk4_updated',new Date().toISOString());}catch(e){}saveToCloud();}
 
 // Audio
 function getWordIndex(text){for(let i=0;i<words.length;i++){if(words[i].zh===text)return{type:'w',idx:i};if(words[i].sentence.zh===text)return{type:'s',idx:i};}return null;}
