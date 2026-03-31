@@ -96,10 +96,10 @@ body{
 /* === CARD HERO AREA === */
 .card-hero{
   flex:1;display:flex;align-items:center;justify-content:center;
-  padding:8px 20px;position:relative;z-index:10;
-  min-height:0; /* allow flex shrink */
+  padding:4px 8px;position:relative;z-index:10;
+  min-height:0;overflow:hidden;
 }
-.card-container{perspective:1400px;width:100%;max-width:380px;}
+.card-container{perspective:1400px;width:100%;max-width:380px;padding:0 12px;}
 .card{
   position:relative;width:100%;transform-style:preserve-3d;
   transition:transform 0.7s cubic-bezier(0.4,0.2,0.2,1);cursor:pointer;
@@ -285,6 +285,53 @@ body{
 .mistake-correct{font-size:0.8rem;color:var(--jade);font-weight:600}.mistake-yours{font-size:0.75rem;color:var(--red);text-decoration:line-through;opacity:0.7}
 .quiz-restart-btn{margin-top:16px;padding:12px 36px;border-radius:12px;border:none;background:var(--red);color:#fff;font-family:'Reem Kufi',serif;font-size:0.9rem;font-weight:700;cursor:pointer;}
 
+/* === WORD LIST === */
+.word-list{
+  flex:1;overflow-y:auto;padding:0 12px 12px;min-height:0;
+  scrollbar-width:thin;scrollbar-color:var(--paper2) transparent;
+}
+.word-list::-webkit-scrollbar{width:3px}
+.word-list::-webkit-scrollbar-thumb{background:var(--paper2);border-radius:3px}
+.wl-item{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;
+  border-radius:10px;margin-bottom:4px;cursor:pointer;
+  transition:all 0.2s;background:var(--paper3);border:1px solid rgba(0,0,0,0.03);
+  animation:listIn 0.3s ease both;
+}
+.wl-item:hover{background:var(--paper2);transform:translateX(-2px);box-shadow:0 2px 8px var(--shadow);}
+.wl-item:active{transform:scale(0.98);}
+@keyframes listIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.wl-hz{
+  font-family:'LXGW WenKai TC','Noto Sans SC',sans-serif;
+  font-size:1.6rem;font-weight:700;color:var(--ink);min-width:50px;text-align:center;
+  line-height:1.2;
+}
+.wl-info{flex:1;min-width:0;}
+.wl-py{font-size:0.72rem;color:var(--gold);font-style:italic;font-family:'Amiri',serif;}
+.wl-ar{font-size:0.78rem;color:var(--ink2);font-family:'Amiri',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wl-badges{display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0;}
+.wl-cat{
+  padding:2px 8px;border-radius:3px;font-family:'Reem Kufi',serif;
+  font-size:0.5rem;font-weight:700;color:#fff;
+}
+.wl-cat.verb{background:var(--red)}.wl-cat.noun{background:var(--blue)}.wl-cat.adj{background:var(--jade)}
+.wl-status{font-size:0.7rem;}
+.wl-status.known{color:var(--jade)}.wl-status.unknown{color:var(--red)}
+.wl-search{
+  display:flex;gap:6px;padding:0 12px 8px;flex-shrink:0;
+}
+.wl-search-input{
+  flex:1;padding:7px 12px;border-radius:20px;border:1px solid rgba(0,0,0,0.06);
+  background:var(--paper3);font-family:'Amiri','LXGW WenKai TC',serif;font-size:0.8rem;
+  color:var(--ink);outline:none;transition:border-color 0.2s;
+}
+.wl-search-input:focus{border-color:var(--gold);}
+.wl-search-input::placeholder{color:var(--ink4);}
+.wl-count{
+  font-family:'Reem Kufi',serif;font-size:0.6rem;color:var(--ink4);
+  padding:0 12px 6px;
+}
+
 .empty-state{text-align:center;padding:40px 20px;color:var(--ink4)}.empty-state .emoji{font-size:2.5rem;margin-bottom:10px}
 .hidden{display:none !important}
 @media(max-width:380px){.hz,.quiz-chinese{font-size:2.8rem!important}.card-front{padding:24px 16px 16px;min-height:240px}.bn-action{padding:8px 12px;font-size:0.7rem}}
@@ -306,7 +353,8 @@ body{
   </div>
   <div class="mode-toggle">
     <button class="active" id="modeCards" onclick="setMode('cards')">بطاقات</button>
-    <button id="modeQuiz" onclick="setMode('quiz')">اختبار 汉字</button>
+    <button id="modeList" onclick="setMode('list')">قائمة</button>
+    <button id="modeQuiz" onclick="setMode('quiz')">اختبار</button>
   </div>
 </div>
 
@@ -320,7 +368,7 @@ body{
 <div class="topics-strip" id="topicFilters"></div>
 
 <!-- PROGRESS -->
-<div class="progress-strip">
+<div class="progress-strip" id="progressStrip">
   <div class="progress-track"><div class="progress-bar" id="progressFill"></div></div>
   <div class="progress-label" id="progressText">1/130</div>
   <div id="totalCount" style="display:none">0</div>
@@ -484,12 +532,20 @@ function speak(text,lang='zh-CN'){const match=getWordIndex(text);if(match){const
 function speakFB(text,lang){if('speechSynthesis' in window){window.speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=0.85;u.pitch=1;const v=window.speechSynthesis.getVoices();const p=v.find(x=>x.lang.startsWith('zh')&&(x.name.includes('Microsoft')||x.name.includes('Xiaoxiao')||x.name.includes('Google')))||v.find(x=>x.lang.startsWith('zh'));if(p)u.voice=p;window.speechSynthesis.speak(u);}}
 if('speechSynthesis' in window){speechSynthesis.getVoices();speechSynthesis.onvoiceschanged=()=>speechSynthesis.getVoices();}
 
-function setMode(mode){currentMode=mode;document.getElementById('modeCards').classList.toggle('active',mode==='cards');document.getElementById('modeQuiz').classList.toggle('active',mode==='quiz');document.getElementById('statsBar').classList.toggle('hidden',mode==='quiz');document.getElementById('quizStatsBar').classList.toggle('hidden',mode==='cards');document.getElementById('navArea').classList.toggle('hidden',mode==='quiz');if(mode==='quiz'){startQuiz();}else{renderCard();updateProgress();}}
+function setMode(mode){currentMode=mode;
+document.getElementById('modeCards').classList.toggle('active',mode==='cards');
+document.getElementById('modeList').classList.toggle('active',mode==='list');
+document.getElementById('modeQuiz').classList.toggle('active',mode==='quiz');
+document.getElementById('statsBar').classList.toggle('hidden',mode==='quiz');
+document.getElementById('quizStatsBar').classList.toggle('hidden',mode!=='quiz');
+document.getElementById('navArea').classList.toggle('hidden',mode!=='cards');
+document.getElementById('progressStrip').classList.toggle('hidden',mode==='list');
+if(mode==='quiz'){startQuiz();}else if(mode==='list'){renderList();}else{renderCard();updateProgress();}}
 
 function getTopics(){const t=new Set();words.forEach(w=>t.add(w.topic));return[...t];}
 function buildTopicFilters(){const c=document.getElementById('topicFilters');const topics=getTopics();let h='<button class="tbtn active" data-topic="all" onclick="setTopic(\'all\')">الكل</button>';topics.forEach(t=>{h+='<button class="tbtn" data-topic="'+t+'" onclick="setTopic(\''+t+'\')">'+t+'</button>';});c.innerHTML=h;}
 function setTopic(topic){currentTopic=topic;document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('active'));document.querySelector('.tbtn[data-topic="'+topic+'"]').classList.add('active');applyFilters();}
-function applyFilters(){filteredWords=words.filter(w=>{const c=currentFilter==='all'||w.cat===currentFilter;const t=currentTopic==='all'||w.topic===currentTopic;return c&&t;});currentIndex=0;isFlipped=false;updateCounts();if(currentMode==='cards'){renderCard();updateProgress();}else{startQuiz();}}
+function applyFilters(){filteredWords=words.filter(w=>{const c=currentFilter==='all'||w.cat===currentFilter;const t=currentTopic==='all'||w.topic===currentTopic;return c&&t;});currentIndex=0;isFlipped=false;updateCounts();if(currentMode==='cards'){renderCard();updateProgress();}else if(currentMode==='list'){renderList();}else{startQuiz();}}
 function setFilter(cat){currentFilter=cat;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));document.querySelector('.fbtn[data-cat="'+cat+'"]').classList.add('active');applyFilters();}
 function updateCounts(){document.getElementById('countAll').textContent='('+words.length+')';document.getElementById('countVerb').textContent='('+words.filter(w=>w.cat==='verb').length+')';document.getElementById('countNoun').textContent='('+words.filter(w=>w.cat==='noun').length+')';document.getElementById('countAdj').textContent='('+words.filter(w=>w.cat==='adj').length+')';document.getElementById('totalCount').textContent=filteredWords.length;document.getElementById('knownCount').textContent=known.size;document.getElementById('unknownCount').textContent=unknown.size;}
 function updateQuizStats(){document.getElementById('quizTotal').textContent=quizWords.length;document.getElementById('quizCorrectStat').textContent=quizCorrect;document.getElementById('quizWrongStat').textContent=quizWrong;}
@@ -545,6 +601,41 @@ a.innerHTML=`<div class="card-container"><div class="card card-enter" id="theCar
 }
 
 function flipCard(){const c=document.getElementById('theCard');if(c){isFlipped=!isFlipped;c.classList.toggle('flipped',isFlipped);}}
+
+let listSearch='';
+function renderList(){
+const a=document.getElementById('cardArea');
+let list=filteredWords;
+if(listSearch){const q=listSearch.toLowerCase();list=list.filter(w=>w.zh.includes(q)||w.py.toLowerCase().includes(q)||w.ar.includes(q));}
+let html=`<div style="display:flex;flex-direction:column;width:100%;max-width:460px;height:100%;min-height:0">
+<div class="wl-search">
+  <input type="text" class="wl-search-input" id="listSearchInput" placeholder="ابحث... 搜索 / pinyin / عربي" value="${listSearch}" oninput="listSearch=this.value;renderListItems();" dir="auto"/>
+</div>
+<div class="wl-count"><span id="listCount">${list.length}</span> كلمة</div>
+<div class="word-list" id="wordListBody"></div>
+</div>`;
+a.innerHTML=html;
+renderListItems();
+}
+function renderListItems(){
+const body=document.getElementById('wordListBody');if(!body)return;
+let list=filteredWords;
+if(listSearch){const q=listSearch.toLowerCase();list=list.filter(w=>w.zh.includes(q)||w.py.toLowerCase().includes(q)||w.ar.includes(q));}
+const countEl=document.getElementById('listCount');if(countEl)countEl.textContent=list.length;
+if(!list.length){body.innerHTML='<div class="empty-state"><div class="emoji">🔍</div><p>لا توجد نتائج</p></div>';return;}
+let html='';
+list.forEach((w,i)=>{
+  const realIdx=filteredWords.indexOf(w);
+  const st=known.has(w.zh)?'<span class="wl-status known">✓</span>':unknown.has(w.zh)?'<span class="wl-status unknown">✗</span>':'';
+  html+=`<div class="wl-item" style="animation-delay:${Math.min(i*0.02,0.5)}s" onclick="openFromList(${realIdx})">
+    <div class="wl-hz">${w.zh}</div>
+    <div class="wl-info"><div class="wl-py">${w.py}</div><div class="wl-ar">${w.ar}</div></div>
+    <div class="wl-badges"><span class="wl-cat ${w.cat}">${getCatLabel(w.cat)}</span>${st}</div>
+  </div>`;
+});
+body.innerHTML=html;
+}
+function openFromList(idx){currentIndex=idx;isFlipped=false;setMode('cards');}
 function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.parentElement.querySelector('span');if(!v){inp.style.borderColor='rgba(0,0,0,0.08)';inp.style.boxShadow='none';inp.style.background='#fff';icon.textContent='';return;}if(v===correct.trim()){inp.style.borderColor='var(--jade)';inp.style.boxShadow='0 0 10px rgba(74,124,111,0.2)';inp.style.background='rgba(74,124,111,0.05)';icon.textContent='✓';icon.style.color='var(--jade)';}else{inp.style.borderColor='var(--red)';inp.style.boxShadow='0 0 10px rgba(194,58,43,0.12)';inp.style.background='rgba(194,58,43,0.03)';icon.textContent='✗';icon.style.color='var(--red)';}}
 function goNext(){if(!filteredWords.length)return;currentIndex=(currentIndex+1)%filteredWords.length;isFlipped=false;renderCard();updateProgress();}
 function goPrev(){if(!filteredWords.length)return;currentIndex=(currentIndex-1+filteredWords.length)%filteredWords.length;isFlipped=false;renderCard();updateProgress();}
