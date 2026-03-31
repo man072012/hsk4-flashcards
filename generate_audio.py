@@ -1,21 +1,10 @@
 #!/usr/bin/env python3
 """
-HSK4 Flashcards - مولّد الملفات الصوتية
-========================================
-يستخدم صوت Microsoft Xiaoxiao Neural (أفضل صوت صيني)
-عبر مكتبة edge-tts (مجانية بدون API key)
-
-التشغيل:
-  pip install edge-tts
-  python3 generate_audio.py
-
-الملفات المولّدة:
-  audio/w_0.mp3 → w_81.mp3  (82 كلمة)
-  audio/s_0.mp3 → s_81.mp3  (82 جملة)
+HSK4 Flashcards - مولّد الملفات الصوتية (130 كلمة)
+pip install edge-tts
+python3 generate_audio.py
 """
-import asyncio
-import edge_tts
-import os
+import asyncio, edge_tts, os
 
 VOICE = "zh-CN-XiaoxiaoNeural"
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "audio")
@@ -102,48 +91,82 @@ words = [
     {"zh":"响", "sentence":{"zh":"手机突然响了。"}},
     {"zh":"占线", "sentence":{"zh":"我打电话给他，但是占线。"}},
     {"zh":"来得及", "sentence":{"zh":"别着急，来得及。"}},
-    {"zh":"来不及", "sentence":{"zh":"快走吧，来不及了！"}}
+    {"zh":"来不及", "sentence":{"zh":"快走吧，来不及了！"}},
+    {"zh":"挂", "sentence":{"zh":"他想把画挂在墙上。"}},
+    {"zh":"躺", "sentence":{"zh":"她在沙发上躺着。"}},
+    {"zh":"试", "sentence":{"zh":"你要不要试试这条裙子？"}},
+    {"zh":"算", "sentence":{"zh":"我来算一下一共花了多少钱。"}},
+    {"zh":"擦", "sentence":{"zh":"看，我把盘子擦干净了。"}},
+    {"zh":"抬", "sentence":{"zh":"我们把沙发抬到客厅去吧。"}},
+    {"zh":"赢", "sentence":{"zh":"这次比赛我们赢了！"}},
+    {"zh":"祝", "sentence":{"zh":"祝你生日快乐！"}},
+    {"zh":"养成", "sentence":{"zh":"应该养成每天刷牙的好习惯。"}},
+    {"zh":"估计", "sentence":{"zh":"估计半小时后到。"}},
+    {"zh":"等", "sentence":{"zh":"她在等朋友的电话。"}},
+    {"zh":"毕业", "sentence":{"zh":"祝贺你顺利毕业！"}},
+    {"zh":"聊天儿", "sentence":{"zh":"她们一边喝茶一边聊天儿。"}},
+    {"zh":"后悔", "sentence":{"zh":"我真后悔告诉他这件事。"}},
+    {"zh":"干杯", "sentence":{"zh":"来，为我们的健康干杯！"}},
+    {"zh":"联系", "sentence":{"zh":"晚上我们再电话联系。"}},
+    {"zh":"肚子", "sentence":{"zh":"你怎么了，肚子疼。"}},
+    {"zh":"密码", "sentence":{"zh":"你好，我的密码忘了怎么办？"}},
+    {"zh":"笑话", "sentence":{"zh":"他讲的笑话真有意思。"}},
+    {"zh":"杂志", "sentence":{"zh":"他坐在沙发上看杂志。"}},
+    {"zh":"京剧", "sentence":{"zh":"京剧一直很受欢迎。"}},
+    {"zh":"护士", "sentence":{"zh":"我姐姐在医院上班，她是护士。"}},
+    {"zh":"洗衣机", "sentence":{"zh":"他的洗衣机好像出问题了。"}},
+    {"zh":"饮料", "sentence":{"zh":"他运动的时候喜欢喝这种饮料。"}},
+    {"zh":"包子", "sentence":{"zh":"这家店的包子非常好吃。"}},
+    {"zh":"长城", "sentence":{"zh":"下周末我准备去爬长城。"}},
+    {"zh":"短信", "sentence":{"zh":"你给他发条短信吧。"}},
+    {"zh":"胳膊", "sentence":{"zh":"我的胳膊有点儿疼。"}},
+    {"zh":"看法", "sentence":{"zh":"对于这件事，您有什么看法？"}},
+    {"zh":"公里", "sentence":{"zh":"他每天早上都要跑两公里。"}},
+    {"zh":"西红柿", "sentence":{"zh":"西红柿是水果吗？"}},
+    {"zh":"页", "sentence":{"zh":"这本书一共有多少页？"}},
+    {"zh":"遍", "sentence":{"zh":"这本书她读过很多遍了。"}},
+    {"zh":"激动", "sentence":{"zh":"毕业了，他们很激动。"}},
+    {"zh":"香", "sentence":{"zh":"这些花闻起来很香。"}},
+    {"zh":"凉快", "sentence":{"zh":"走在海边，感觉很凉快。"}},
+    {"zh":"活泼", "sentence":{"zh":"这个小女孩儿很活泼。"}},
+    {"zh":"仔细", "sentence":{"zh":"你再仔细找找。"}},
+    {"zh":"流利", "sentence":{"zh":"她汉语说得很流利。"}},
+    {"zh":"严重", "sentence":{"zh":"我就是有点儿感冒，不太严重。"}},
+    {"zh":"厉害", "sentence":{"zh":"全都答对了，你真厉害！"}},
+    {"zh":"正式", "sentence":{"zh":"他今天穿得十分正式。"}},
+    {"zh":"圆", "sentence":{"zh":"这个西瓜又大又圆。"}},
+    {"zh":"俩", "sentence":{"zh":"我俩逛街买了很多东西。"}},
+    {"zh":"只", "sentence":{"zh":"山上有一只老虎。"}},
+    {"zh":"朵", "sentence":{"zh":"这朵花又大又漂亮。"}},
+    {"zh":"棵", "sentence":{"zh":"那棵树的叶子掉光了。"}},
+    {"zh":"到底", "sentence":{"zh":"答案到底是什么呢？"}}
 ]
-async def generate_audio():
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
 
+async def generate_audio():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     total = len(words) * 2
     done = 0
-
     print(f"🔊 توليد {len(words)} كلمة + {len(words)} جملة = {total} ملف صوتي")
     print(f"   الصوت: {VOICE}")
     print(f"   المجلد: {OUTPUT_DIR}/\n")
-
-    for index, word in enumerate(words):
-        # 1. توليد صوت الكلمة
-        word_text = word['zh']
-        word_file = os.path.join(OUTPUT_DIR, f"w_{index}.mp3")
-        if not os.path.exists(word_file) or os.path.getsize(word_file) < 100:
-            communicate = edge_tts.Communicate(word_text, VOICE)
-            await communicate.save(word_file)
+    for i, w in enumerate(words):
+        wpath = os.path.join(OUTPUT_DIR, f"w_{i}.mp3")
+        if not os.path.exists(wpath) or os.path.getsize(wpath) < 100:
+            comm = edge_tts.Communicate(w['zh'], VOICE)
+            await comm.save(wpath)
         done += 1
-
-        # 2. توليد صوت الجملة
-        sentence_text = word['sentence']['zh']
-        sentence_file = os.path.join(OUTPUT_DIR, f"s_{index}.mp3")
-        if not os.path.exists(sentence_file) or os.path.getsize(sentence_file) < 100:
-            communicate_sentence = edge_tts.Communicate(sentence_text, VOICE)
-            await communicate_sentence.save(sentence_file)
+        spath = os.path.join(OUTPUT_DIR, f"s_{i}.mp3")
+        if not os.path.exists(spath) or os.path.getsize(spath) < 100:
+            comm = edge_tts.Communicate(w['sentence']['zh'], VOICE)
+            await comm.save(spath)
         done += 1
-
-        if (index + 1) % 10 == 0 or index == len(words) - 1:
-            print(f"  ✓ {done}/{total}  ({word_text})")
-
-    # إحصائيات
+        if (i + 1) % 10 == 0 or i == len(words) - 1:
+            print(f"  ✓ {done}/{total}  ({w['zh']})")
     files = [f for f in os.listdir(OUTPUT_DIR) if f.endswith('.mp3')]
     total_size = sum(os.path.getsize(os.path.join(OUTPUT_DIR, f)) for f in files)
     print(f"\n✅ تم! {len(files)} ملف صوتي ({total_size/1024:.0f} KB)")
-    print(f"\n📌 الخطوات التالية:")
-    print(f"   git add audio/")
-    print(f"   git commit -m 'Add Xiaoxiao TTS audio files'")
-    print(f"   git push origin main")
+    print(f"   git add audio/ && git commit -m \'Add TTS audio\' && git push origin main")
 
 if __name__ == "__main__":
     asyncio.run(generate_audio())
-    print("\n🎉 تم الانتهاء من توليد جميع الملفات الصوتية بنجاح!")
+    print("\n🎉 تم!")
