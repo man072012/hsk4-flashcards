@@ -752,10 +752,9 @@ function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.pare
 
 // === AI Sentence Evaluation (DashScope Qwen) ===
 const DS_KEY='sk-936218c7914b49c1bf71e256a3054baf';
-const CORS_PROXY='https://corsproxy.io/?';
 const DS_URLS=[
-  CORS_PROXY+'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
-  CORS_PROXY+'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions'
+  'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+  'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions'
 ];
 async function callAI(prompt,attempt=0){
   const url=DS_URLS[attempt % DS_URLS.length];
