@@ -415,8 +415,6 @@ body{
   .logo{font-size:0.78rem}
   .logo .seal{width:22px;height:22px;font-size:9px}
   .topbar-stats{font-size:0.58rem;gap:6px}
-  .auth-btn{padding:3px 8px;font-size:0.58rem}
-  .auth-avatar{width:18px;height:18px}
   .mode-toggle button{font-size:0.62rem;padding:4px 0}
   .filters-strip{padding:6px 10px 4px;gap:4px}
   .fbtn{padding:4px 10px;font-size:0.62rem}
@@ -473,12 +471,7 @@ body{
       <div><span class="s-unknown" id="quizWrongStat">0</span>✗</div>
       <div id="quizTotal">0</div>
     </div>
-    <div id="authArea">
-      <button class="auth-btn" id="loginBtn" onclick="googleSignIn()">
-        <svg viewBox="0 0 24 24" width="14" height="14"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        دخول
-      </button>
-    </div>
+  
   </div>
   <div class="topbar-row2">
     <div class="mode-toggle">
@@ -517,133 +510,7 @@ body{
   <button class="bn-action bn-dont" id="dontKnowBtn">✗ لا أعرف</button>
 </div>
 
-<!-- Firebase loaded dynamically to avoid blocking in China -->
 <script>
-// === Firebase (loaded lazily after app init) ===
-let fbAuth=null,fbDb=null,fbUser=null,firebaseReady=false;
-
-function showSyncMsg(text,type='success'){
-  const el=document.createElement('div');el.className='sync-msg '+type;el.textContent=text;
-  document.body.appendChild(el);setTimeout(()=>el.remove(),2600);
-}
-
-function updateAuthUI(){
-  const area=document.getElementById('authArea');
-  if(fbUser){
-    const name=fbUser.displayName?.split(' ')[0]||'مستخدم';
-    const photo=fbUser.photoURL;
-    area.innerHTML=`<button class="auth-btn" onclick="googleSignOut()">
-      ${photo?'<img class="auth-avatar" src="'+photo+'" alt="">':''}
-      <span class="auth-name">${name}</span>
-      <span class="sync-dot"></span>
-    </button>`;
-  }else{
-    area.innerHTML=`<button class="auth-btn" id="loginBtn" onclick="googleSignIn()">
-      <svg viewBox="0 0 24 24" width="14" height="14"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      دخول
-    </button>`;
-  }
-}
-
-async function googleSignIn(){
-  if(!firebaseReady){showSyncMsg('تسجيل الدخول غير متاح (Firebase محجوب)','info');return;}
-  const provider=new firebase.auth.GoogleAuthProvider();
-  try{
-    // Try popup first (works on most browsers)
-    await fbAuth.signInWithPopup(provider);
-  }catch(e){
-    if(e.code==='auth/popup-blocked'||e.code==='auth/cancelled-popup-request'){
-      // Popup blocked → use redirect
-      try{await fbAuth.signInWithRedirect(provider);}catch(e2){console.error(e2);showSyncMsg('خطأ: '+e2.code,'info');}
-    }else if(e.code==='auth/popup-closed-by-user'){
-      return;
-    }else if(e.code==='auth/unauthorized-domain'){
-      showSyncMsg('أضف الدومين في Firebase Console','info');
-    }else{
-      console.error('Sign-in error:',e);
-      showSyncMsg('خطأ: '+(e.code||e.message),'info');
-    }
-  }
-}
-
-async function googleSignOut(){
-  if(!firebaseReady||!fbAuth)return;
-  if(!confirm('تسجيل الخروج؟'))return;
-  try{await fbAuth.signOut();showSyncMsg('تم تسجيل الخروج','info');}catch(e){console.error(e);}
-}
-
-async function saveToCloud(){
-  if(!firebaseReady||!fbUser||!fbDb)return;
-  try{
-    await fbDb.collection('flashcards').doc(fbUser.uid).set({
-      known:[...known],unknown:[...unknown],
-      updatedAt:new Date().toISOString()
-    },{merge:true});
-  }catch(e){console.warn('Cloud save failed:',e);}
-}
-
-async function loadFromCloud(){
-  if(!firebaseReady||!fbUser||!fbDb)return null;
-  try{
-    const snap=await fbDb.collection('flashcards').doc(fbUser.uid).get();
-    if(snap.exists)return snap.data();
-  }catch(e){console.warn('Cloud load failed:',e);}
-  return null;
-}
-
-async function syncOnLogin(){
-  const cloud=await loadFromCloud();
-  if(!cloud){
-    // No cloud data → upload local
-    await saveToCloud();
-    showSyncMsg('✓ تم رفع التقدم للسحابة');
-    return;
-  }
-  // Merge: union of known/unknown from both sources
-  const cloudKnown=new Set(cloud.known||[]);
-  const cloudUnknown=new Set(cloud.unknown||[]);
-  const localTime=localStorage.getItem('hsk4_updated')||'';
-  const cloudTime=cloud.updatedAt||'';
-  
-  if(cloudTime>localTime){
-    // Cloud is newer → use cloud as base, add local additions
-    cloudKnown.forEach(w=>known.add(w));
-    cloudUnknown.forEach(w=>{if(!known.has(w))unknown.add(w);});
-    showSyncMsg('✓ تم تحميل التقدم من السحابة');
-  }else{
-    // Local is newer → keep local, upload
-    known.forEach(w=>cloudKnown.add(w));
-    unknown.forEach(w=>{if(!cloudKnown.has(w))cloudUnknown.add(w);});
-  }
-  // Clean conflicts: if word is in both known and unknown, keep in known
-  unknown.forEach(w=>{if(known.has(w))unknown.delete(w);});
-  saveState();updateCounts();
-  await saveToCloud();
-}
-
-// Listen for auth state changes
-if(firebaseReady&&fbAuth){
-  fbAuth.onAuthStateChanged(async(user)=>{
-    fbUser=user;
-    updateAuthUI();
-    if(user){
-      await syncOnLogin();
-      if(currentMode==='cards'){renderCard();updateProgress();}
-      else if(currentMode==='list')renderList();
-    }
-  });
-  fbAuth.getRedirectResult().catch(e=>{
-    if(e.code&&e.code!=='auth/popup-closed-by-user'){
-      console.error('Redirect error:',e);
-      showSyncMsg('خطأ: '+e.code,'info');
-    }
-  });
-}else{
-  // Firebase not available - hide auth button
-  const authArea=document.getElementById('authArea');
-  if(authArea)authArea.style.display='none';
-}
-
 const words = [
   {zh:"尝",py:"cháng",ar:"يُجرّب / يتذوّق",cat:"verb",topic:"التصرفات",sentence:{zh:"你尝一下这个菜，味道很好。",py:"Nǐ cháng yíxià zhège cài, wèidào hěn hǎo.",ar:"جرّب هذا الطبق، طعمه لذيذ جداً."}},
   {zh:"讨论",py:"tǎolùn",ar:"يُناقش",cat:"verb",topic:"التصرفات",sentence:{zh:"我们一起讨论这个问题吧。",py:"Wǒmen yìqǐ tǎolùn zhège wèntí ba.",ar:"لنناقش هذه المشكلة معاً."}},
@@ -781,7 +648,7 @@ let currentMode='cards',currentFilter='all',currentTopic='all',filteredWords=[..
 let quizWords=[],quizIndex=0,quizCorrect=0,quizWrong=0,quizMistakes=[],quizAnswered=false;
 let selectedCat=null;
 try{const s=localStorage.getItem('hsk4_known');if(s)known=new Set(JSON.parse(s));const u=localStorage.getItem('hsk4_unknown');if(u)unknown=new Set(JSON.parse(u));}catch(e){}
-function saveState(){try{localStorage.setItem('hsk4_known',JSON.stringify([...known]));localStorage.setItem('hsk4_unknown',JSON.stringify([...unknown]));localStorage.setItem('hsk4_updated',new Date().toISOString());}catch(e){}saveToCloud();}
+function saveState(){try{localStorage.setItem('hsk4_known',JSON.stringify([...known]));localStorage.setItem('hsk4_unknown',JSON.stringify([...unknown]));localStorage.setItem('hsk4_updated',new Date().toISOString());}catch(e){}}
 
 // Audio
 function getWordIndex(text){for(let i=0;i<words.length;i++){if(words[i].zh===text)return{type:'w',idx:i};if(words[i].sentence.zh===text)return{type:'s',idx:i};}return null;}
@@ -1072,44 +939,6 @@ document.getElementById('shuffleBtn').addEventListener('click',shuffleCards);
 // Init
 buildTopicFilters();updateCounts();renderCard();updateProgress();
 
-// === Lazy Firebase Loading (non-blocking) ===
-function loadScript(url){return new Promise((resolve,reject)=>{
-  const s=document.createElement('script');s.src=url;
-  const t=setTimeout(()=>{reject(new Error('timeout'));},5000);
-  s.onload=()=>{clearTimeout(t);resolve();};
-  s.onerror=()=>{clearTimeout(t);reject(new Error('load failed'));};
-  document.head.appendChild(s);
-});}
-async function initFirebase(){
-  try{
-    await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js');
-    await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js');
-    await loadScript('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js');
-    firebase.initializeApp({
-      apiKey:"AIzaSyCzaXYSuqZgZ9c7B-iwBCWx5MCSEZe_tdw",
-      authDomain:"hsk4-study-guide.firebaseapp.com",
-      projectId:"hsk4-study-guide",
-      storageBucket:"hsk4-study-guide.firebasestorage.app",
-      messagingSenderId:"644710253955",
-      appId:"1:644710253955:web:0c59946b4e6290dea7a2b6"
-    });
-    fbAuth=firebase.auth();
-    fbDb=firebase.firestore();
-    firebaseReady=true;
-    fbAuth.onAuthStateChanged(async(user)=>{
-      fbUser=user;updateAuthUI();
-      if(user){await syncOnLogin();if(currentMode==='cards'){renderCard();updateProgress();}else if(currentMode==='list')renderList();}
-    });
-    fbAuth.getRedirectResult().catch(e=>{if(e.code&&e.code!=='auth/popup-closed-by-user')showSyncMsg('خطأ: '+e.code,'info');});
-    console.log('Firebase ready');
-  }catch(e){
-    console.warn('Firebase unavailable (may be blocked):',e);
-    const authArea=document.getElementById('authArea');
-    if(authArea)authArea.style.display='none';
-  }
-}
-// Start loading Firebase after 500ms (app already working)
-setTimeout(initFirebase,500);
 </script>
 </body>
 </html>
