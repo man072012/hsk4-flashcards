@@ -457,8 +457,22 @@ function updateAuthUI(){
 async function googleSignIn(){
   try{
     const provider=new firebase.auth.GoogleAuthProvider();
-    await fbAuth.signInWithPopup(provider);
-  }catch(e){console.error('Sign-in error:',e);if(e.code!=='auth/popup-closed-by-user')showSyncMsg('فشل تسجيل الدخول','info');}
+    // Mobile = redirect, Desktop = popup
+    const isMobile=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if(isMobile){
+      await fbAuth.signInWithRedirect(provider);
+    }else{
+      await fbAuth.signInWithPopup(provider);
+    }
+  }catch(e){
+    console.error('Sign-in error:',e);
+    if(e.code==='auth/popup-closed-by-user')return;
+    if(e.code==='auth/unauthorized-domain'){
+      showSyncMsg('أضف man072012.github.io في Firebase Console','info');
+    }else{
+      showSyncMsg('خطأ: '+e.code,'info');
+    }
+  }
 }
 
 async function googleSignOut(){
@@ -523,6 +537,13 @@ fbAuth.onAuthStateChanged(async(user)=>{
     await syncOnLogin();
     if(currentMode==='cards'){renderCard();updateProgress();}
     else if(currentMode==='list')renderList();
+  }
+});
+// Handle redirect result (mobile sign-in)
+fbAuth.getRedirectResult().catch(e=>{
+  if(e.code&&e.code!=='auth/popup-closed-by-user'){
+    console.error('Redirect error:',e);
+    showSyncMsg('خطأ: '+e.code,'info');
   }
 });
 
