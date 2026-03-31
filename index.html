@@ -908,7 +908,7 @@ function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.pare
 
 // === Gemini Sentence Evaluation ===
 const GEMINI_KEY='AIzaSyDT_bln86Cdby9LuXOsvqTEbzxi3DCnxWI';
-const GEMINI_MODELS=['gemini-2.0-flash-lite','gemini-2.0-flash','gemini-1.5-flash-latest'];
+const GEMINI_MODELS=['gemini-2.0-flash-lite','gemini-2.0-flash','gemini-1.5-flash'];
 async function callGemini(prompt,attempt=0){
   const model=GEMINI_MODELS[attempt % GEMINI_MODELS.length];
   const resp=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent?key='+GEMINI_KEY,{
