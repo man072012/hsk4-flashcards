@@ -66,28 +66,6 @@ body{
 }
 .mode-toggle button.active{background:var(--red);color:#fff;box-shadow:0 2px 8px rgba(194,58,43,0.25);}
 
-/* === AUTH === */
-.auth-btn{
-  display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:16px;
-  border:1px solid rgba(0,0,0,0.08);background:var(--paper3);cursor:pointer;
-  font-family:'Reem Kufi','PingFang SC','Microsoft YaHei',sans-serif;font-size:0.62rem;color:var(--ink3);
-  transition:all 0.2s;white-space:nowrap;flex-shrink:0;
-}
-.auth-btn:hover{border-color:var(--gold);color:var(--ink);}
-.auth-btn svg{width:14px;height:14px;}
-.auth-avatar{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--gold);}
-.auth-name{max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--jade);display:inline-block;animation:syncPulse 2s ease infinite;}
-@keyframes syncPulse{0%,100%{opacity:1}50%{opacity:0.3}}
-.sync-msg{
-  position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:999;
-  padding:6px 16px;border-radius:20px;font-family:'Reem Kufi','PingFang SC','Microsoft YaHei',sans-serif;font-size:0.7rem;
-  color:#fff;animation:fadeInOut 2.5s ease forwards;pointer-events:none;
-}
-.sync-msg.success{background:var(--jade);}
-.sync-msg.info{background:var(--gold);}
-@keyframes fadeInOut{0%{opacity:0;transform:translateX(-50%) translateY(-10px)}15%{opacity:1;transform:translateX(-50%) translateY(0)}75%{opacity:1}100%{opacity:0}}
-
 /* === FILTERS STRIP === */
 .filters-strip{
   display:flex;gap:5px;padding:8px 12px 4px;overflow-x:auto;flex-shrink:0;
