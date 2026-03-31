@@ -7,7 +7,8 @@
 <!-- Fonts: try Google first, fallback handled by CSS -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Amiri:wght@400;700&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Amiri:wght@400;700&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Amiri:wght@400;700&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.loli.net/css2?family=Reem+Kufi:wght@400;500;600;700&family=Amiri:wght@400;700&family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"></noscript>
 <style>
 :root {
   --ink:#1a1a1a;--ink2:#2c2318;--ink3:#5c4a3a;--ink4:#8a7560;
@@ -751,15 +752,31 @@ function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.pare
 
 // === AI Sentence Evaluation (DashScope Qwen) ===
 const DS_KEY='sk-936218c7914b49c1bf71e256a3054baf';
-const DS_URL='https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions';
-async function callAI(prompt){
-  const resp=await fetch(DS_URL,{
-    method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+DS_KEY},
-    body:JSON.stringify({model:'qwen-flash',messages:[{role:'user',content:prompt}],temperature:0.1})
-  });
-  const data=await resp.json();
-  if(!resp.ok)throw new Error(data.error?.message||'API error '+resp.status);
-  return data.choices?.[0]?.message?.content||'';
+const DS_URLS=[
+  'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
+  'https://dashscope-intl.aliyuncs.com/compatible-mode/v1/chat/completions'
+];
+async function callAI(prompt,attempt=0){
+  const url=DS_URLS[attempt % DS_URLS.length];
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),15000);
+  try{
+    const resp=await fetch(url,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+DS_KEY},
+      body:JSON.stringify({model:'qwen-flash',messages:[{role:'user',content:prompt}],temperature:0.1}),
+      signal:controller.signal
+    });
+    clearTimeout(timeout);
+    const data=await resp.json();
+    if(!resp.ok)throw new Error(data.error?.message||'خطأ '+resp.status);
+    return data.choices?.[0]?.message?.content||'';
+  }catch(e){
+    clearTimeout(timeout);
+    if(attempt<1)return callAI(prompt,attempt+1);
+    if(e.name==='AbortError')throw new Error('انتهت المهلة — حاول مرة ثانية');
+    throw e;
+  }
 }
 async function evalSentence(zh,py,idx){
   const inp=document.getElementById('evalInput_'+idx);
