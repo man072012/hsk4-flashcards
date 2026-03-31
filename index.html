@@ -134,7 +134,7 @@ body{
 .card-face{
   backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;
   box-shadow:0 8px 40px var(--shadow),0 2px 8px rgba(0,0,0,0.04);
-  position:relative;overflow:hidden;
+  position:relative;
   background:var(--paper3);
   border:1px solid rgba(0,0,0,0.04);
 }
@@ -149,13 +149,14 @@ body{
   border-top:1.5px solid var(--ink4);border-left:1.5px solid var(--ink4);opacity:0.12;
 }
 .card-front{
-  position:relative;padding:28px 20px 16px;
+  position:relative;padding:28px 20px 16px;overflow:hidden;
   justify-content:center;align-items:center;text-align:center;
   min-height:250px;
 }
 .card-back{
   position:absolute;top:0;left:0;width:100%;min-height:100%;
   padding:24px 20px;transform:rotateY(180deg);direction:rtl;
+  overflow-y:auto;max-height:100%;
 }
 
 /* Badges */
@@ -220,6 +221,51 @@ body{
 .sent-zh{font-family:'LXGW WenKai TC','Noto Sans SC',sans-serif;font-size:1rem;font-weight:500;color:var(--ink);direction:ltr;text-align:left;line-height:1.6;margin-bottom:3px;}
 .sent-py{font-size:0.7rem;color:var(--gold);font-style:italic;direction:ltr;text-align:left;margin-bottom:4px;opacity:0.8;}
 .sent-ar{font-size:0.78rem;color:var(--ink3);line-height:1.5;}
+
+/* === SENTENCE EVAL === */
+.eval-wrap{
+  margin-top:12px;border-top:1px solid rgba(0,0,0,0.05);padding-top:10px;
+}
+.eval-label{font-family:'Reem Kufi',serif;font-size:0.6rem;color:var(--red);font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+.eval-input-row{display:flex;gap:6px;direction:ltr;align-items:center;}
+.eval-input{
+  flex:1;padding:8px 10px;border-radius:8px;border:1.5px solid rgba(0,0,0,0.08);
+  background:#fff;color:var(--ink);font-family:'LXGW WenKai TC','Noto Sans SC',sans-serif;
+  font-size:0.9rem;outline:none;transition:all 0.3s;direction:ltr;text-align:left;
+}
+.eval-input:focus{border-color:var(--gold);box-shadow:0 0 10px rgba(184,148,62,0.12);}
+.eval-input::placeholder{color:var(--ink4);font-size:0.7rem;font-family:'Amiri',serif;direction:rtl;text-align:right;}
+.eval-send{
+  width:36px;height:36px;border-radius:50%;border:none;background:var(--gold);
+  color:#fff;font-size:1rem;cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.eval-send:hover{background:var(--gold2);transform:scale(1.08);}
+.eval-send:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+.eval-send.loading{animation:spin 0.8s linear infinite;}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.eval-result{
+  margin-top:8px;padding:10px 12px;border-radius:10px;
+  font-size:0.75rem;line-height:1.7;direction:rtl;
+  animation:feedbackIn 0.3s ease;
+}
+.eval-result.pass{background:rgba(74,124,111,0.06);border:1px solid rgba(74,124,111,0.15);border-right:3px solid var(--jade);}
+.eval-result.fail{background:rgba(194,58,43,0.04);border:1px solid rgba(194,58,43,0.1);border-right:3px solid var(--red);}
+.eval-result.partial{background:rgba(184,148,62,0.06);border:1px solid rgba(184,148,62,0.15);border-right:3px solid var(--gold);}
+.eval-score{
+  display:inline-flex;align-items:center;gap:3px;padding:2px 10px;border-radius:12px;
+  font-family:'Reem Kufi',serif;font-weight:700;font-size:0.7rem;margin-bottom:6px;
+}
+.eval-score.high{background:rgba(74,124,111,0.12);color:var(--jade);}
+.eval-score.mid{background:rgba(184,148,62,0.12);color:var(--gold);}
+.eval-score.low{background:rgba(194,58,43,0.1);color:var(--red);}
+.eval-line{margin-bottom:4px;color:var(--ink3);}
+.eval-line b{color:var(--ink);}
+.eval-corrected{
+  display:block;direction:ltr;text-align:left;padding:4px 8px;margin-top:4px;
+  border-radius:6px;background:rgba(74,124,111,0.05);
+  font-family:'LXGW WenKai TC',sans-serif;font-size:0.85rem;color:var(--jade);font-weight:600;
+}
 
 /* === BOTTOM NAV === */
 .bottom-nav{
@@ -396,6 +442,10 @@ body{
   .wl-py{font-size:0.65rem}
   .wl-ar{font-size:0.7rem}
   .wl-item{padding:8px 10px;gap:8px}
+  .eval-input{font-size:0.8rem;padding:6px 8px}
+  .eval-send{width:32px;height:32px;font-size:0.85rem}
+  .eval-result{font-size:0.68rem;padding:8px 10px}
+  .eval-corrected{font-size:0.78rem}
 }
 @media(max-width:340px){
   .hz,.quiz-chinese{font-size:2.4rem!important}
@@ -805,6 +855,15 @@ a.innerHTML=`<div class="card-container"><div class="card card-enter" id="theCar
       <button class="tts-btn" onclick="speak('${w.sentence.zh.replace(/'/g,"\\'")}')">${SVG_SPEAKER} الجملة</button>
     </div>
   </div>
+  <div class="eval-wrap" onclick="event.stopPropagation()">
+    <div class="eval-label">✍️ اكتب جملة باستخدام「${w.zh}」:</div>
+    <div class="eval-input-row">
+      <input type="text" class="eval-input" id="evalInput_${currentIndex}" placeholder="اكتب جملتك هنا بالصيني..." autocomplete="off" dir="ltr"
+        onkeydown="if(event.key==='Enter')evalSentence('${w.zh}','${w.py}',${currentIndex})"/>
+      <button class="eval-send" id="evalBtn_${currentIndex}" onclick="evalSentence('${w.zh}','${w.py}',${currentIndex})" title="تقييم">⬆</button>
+    </div>
+    <div id="evalResult_${currentIndex}"></div>
+  </div>
 </div>
 </div></div>`;
 }
@@ -846,6 +905,87 @@ body.innerHTML=html;
 }
 function openFromList(idx){currentIndex=idx;isFlipped=false;setMode('cards');}
 function checkPractice(inp,correct){const v=inp.value.trim();const icon=inp.parentElement.querySelector('span');if(!v){inp.style.borderColor='rgba(0,0,0,0.08)';inp.style.boxShadow='none';inp.style.background='#fff';icon.textContent='';return;}if(v===correct.trim()){inp.style.borderColor='var(--jade)';inp.style.boxShadow='0 0 10px rgba(74,124,111,0.2)';inp.style.background='rgba(74,124,111,0.05)';icon.textContent='✓';icon.style.color='var(--jade)';}else{inp.style.borderColor='var(--red)';inp.style.boxShadow='0 0 10px rgba(194,58,43,0.12)';inp.style.background='rgba(194,58,43,0.03)';icon.textContent='✗';icon.style.color='var(--red)';}}
+
+// === Gemini Sentence Evaluation ===
+const GEMINI_KEY='AIzaSyANxGqmq56e2ObhQq7frmtu9DJoVcDjSM8';
+async function evalSentence(zh,py,idx){
+  const inp=document.getElementById('evalInput_'+idx);
+  const btn=document.getElementById('evalBtn_'+idx);
+  const res=document.getElementById('evalResult_'+idx);
+  if(!inp||!btn)return;
+  const sentence=inp.value.trim();
+  if(!sentence){inp.style.borderColor='var(--red)';inp.classList.add('shake');setTimeout(()=>{inp.classList.remove('shake');inp.style.borderColor='rgba(0,0,0,0.08)';},400);return;}
+  
+  btn.disabled=true;btn.classList.add('loading');btn.textContent='⏳';
+  res.innerHTML='<div style="text-align:center;color:var(--ink4);font-size:0.7rem;padding:8px">جاري التقييم...</div>';
+
+  const prompt=`أنت مقيّم اختبار HSK4 الرسمي (الجزء الثاني: 看图用词造句).
+المطلوب من الطالب: كتابة جملة صينية باستخدام الكلمة「${zh}」(${py}).
+جملة الطالب: "${sentence}"
+
+قيّم الجملة وفق معايير HSK4 الرسمية بالضبط:
+
+1. هل استخدم الكلمة「${zh}」في الجملة؟ (إلزامي — بدونها = صفر)
+2. صحة القواعد النحوية (语法) — ترتيب الكلمات، استخدام 了/着/过/的/得، حروف الجر
+3. صحة استخدام الكلمة (用词) — هل المعنى والسياق صحيح؟
+4. اكتمال المعنى — هل الجملة مفهومة ومنطقية؟
+5. مستوى HSK4 — هل تتناسب مع مستوى HSK4؟
+
+أعطِ الدرجة من 5:
+- 5/5: جملة مثالية بدون أخطاء
+- 4/5: خطأ طفيف لا يؤثر على المعنى
+- 3/5: أخطاء واضحة لكن المعنى مفهوم
+- 2/5: أخطاء كثيرة تؤثر على المعنى
+- 1/5: الجملة غير مفهومة أو الكلمة مستخدمة بشكل خاطئ
+- 0/5: الكلمة غير موجودة في الجملة
+
+رد بـ JSON فقط بدون أي نص إضافي:
+{"score":X,"word_used":true/false,"grammar_ok":true/false,"meaning_ok":true/false,"feedback":"ملاحظة قصيرة بالعربي","correction":"الجملة الصحيحة إذا فيه خطأ أو فارغ إذا صحيحة","pinyin":"بينيين الجملة المصححة أو فارغ"}`;
+
+  try{
+    const resp=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+GEMINI_KEY,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.1}})
+    });
+    const data=await resp.json();
+    if(!resp.ok)throw new Error(data.error?.message||'API error');
+    
+    let text=data.candidates?.[0]?.content?.parts?.[0]?.text||'';
+    text=text.replace(/```json\s*/g,'').replace(/```\s*/g,'').trim();
+    const ev=JSON.parse(text);
+    
+    const sc=ev.score||0;
+    const cls=sc>=4?'high':sc>=3?'mid':'low';
+    const bgCls=sc>=4?'pass':sc>=3?'partial':'fail';
+    
+    let html=`<div class="eval-result ${bgCls}">`;
+    html+=`<div class="eval-score ${cls}">`;
+    html+=sc>=4?'✅':sc>=3?'⚠️':'❌';
+    html+=` ${sc}/5</div>`;
+    
+    if(!ev.word_used) html+=`<div class="eval-line" style="color:var(--red)">⚠ لم تستخدم الكلمة「${zh}」في الجملة!</div>`;
+    html+=`<div class="eval-line">${ev.feedback}</div>`;
+    
+    if(ev.correction){
+      html+=`<span class="eval-corrected">${ev.correction}</span>`;
+      if(ev.pinyin) html+=`<div style="direction:ltr;text-align:left;font-size:0.65rem;color:var(--gold);margin-top:2px;font-style:italic">${ev.pinyin}</div>`;
+    }
+    
+    html+=`</div>`;
+    res.innerHTML=html;
+    
+    // Speak the corrected sentence
+    if(ev.correction) setTimeout(()=>speak(ev.correction),500);
+    else setTimeout(()=>speak(sentence),500);
+    
+  }catch(e){
+    console.error('Gemini error:',e);
+    res.innerHTML=`<div class="eval-result fail"><div class="eval-line" style="color:var(--red)">خطأ: ${e.message}</div></div>`;
+  }finally{
+    btn.disabled=false;btn.classList.remove('loading');btn.textContent='⬆';
+  }
+}
 function goNext(){if(!filteredWords.length)return;currentIndex=(currentIndex+1)%filteredWords.length;isFlipped=false;renderCard();updateProgress();}
 function goPrev(){if(!filteredWords.length)return;currentIndex=(currentIndex-1+filteredWords.length)%filteredWords.length;isFlipped=false;renderCard();updateProgress();}
 function markKnown(){if(!filteredWords.length)return;known.add(filteredWords[currentIndex].zh);unknown.delete(filteredWords[currentIndex].zh);saveState();updateCounts();goNext();}
